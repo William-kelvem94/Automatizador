@@ -1,0 +1,74 @@
+========================================
+🚀 EXEMPLO PRÁTICO - COMO USAR
+========================================
+
+PASSO 1: Execute executar.bat
+=====================================
+- Clique duplo no arquivo "executar.bat"
+- Aguarde a janela abrir
+
+PASSO 2: Configure na aba "⚙️ Configuração"
+===========================================
+🌐 URL: https://www.gmail.com
+📧 E-mail: seuemail@gmail.com
+🔒 Senha: suasenhasecreta
+⏰ Horários: 08:00, 12:00, 18:00, 22:00
+
+PASSO 3: Clique "💾 Salvar Configuração"
+========================================
+- Configuração fica salva automaticamente
+- Não precisa configurar novamente
+
+PASSO 4: Teste na aba "🧪 Teste"
+===============================
+- Clique "🧪 Executar Teste de Login"
+- Veja o Chrome abrir automaticamente
+- Assista o login ser executado
+- Veja os logs em tempo real
+
+PASSO 5: Agende na aba "⏰ Agendamento"
+=====================================
+- Clique "▶️ Iniciar Agendador"
+- Status muda para "▶️ Agendador executando"
+- Programa fica rodando em background
+- Executa login nos horários configurados
+
+========================================
+🎯 RESULTADO ESPERADO
+========================================
+
+✅ Chrome abre automaticamente
+✅ Preenche email e senha
+✅ Clica no botão de login
+✅ Login realizado com sucesso
+✅ Logs mostram tudo que aconteceu
+✅ Agendador executa nos horários certos
+
+========================================
+🔧 PERSONALIZAÇÃO
+========================================
+
+Para outros sites, apenas mude:
+- URL do site desejado
+- Seletor dos campos (use "🔍 Mapear Campos")
+- Seus dados de login
+- Horários que quiser
+
+========================================
+💡 DICAS
+========================================
+
+• Use o mapeamento automático primeiro
+• Sempre teste antes de agendar
+• Verifique os logs se algo der errado
+• O programa salva tudo automaticamente
+• Pode deixar rodando 24/7
+
+========================================
+🚨 IMPORTANTE
+========================================
+
+• Instale o Chrome primeiro
+• Execute install.bat se der erro
+• Suas credenciais ficam seguras no config.ini
+• Logs ficam em automator.log

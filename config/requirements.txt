@@ -1,0 +1,5 @@
+selenium==4.15.2
+apscheduler==3.10.4
+webdriver-manager==4.0.1
+python-dotenv==1.0.0
+tkinter

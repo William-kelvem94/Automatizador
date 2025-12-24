@@ -1,0 +1,60 @@
+========================================
+🚀 INSTRUÇÕES RÁPIDAS - 5 PASSOS
+========================================
+
+PASSO 1: CLIQUE DUAS VEZES em "executar.bat"
+===========================================
+✅ Uma janela vai abrir (leva alguns segundos)
+
+PASSO 2: ABA "⚙️ Configuração"
+===============================
+✅ Preencha:
+   🌐 URL: https://site-que-voce-quer.com
+   📧 E-mail: seuemail@site.com
+   🔒 Senha: sua-senha-secreta
+   ⏰ Horários: 08:00, 12:00, 18:00, 22:00
+
+✅ Clique: "💾 Salvar Configuração"
+
+PASSO 3: ABA "🧪 Teste"
+=======================
+✅ Clique: "🧪 Executar Teste de Login"
+✅ Veja o Chrome abrir e fazer login
+✅ Veja os logs em tempo real
+
+PASSO 4: ABA "⏰ Agendamento"
+===========================
+✅ Clique: "▶️ Iniciar Agendador"
+✅ Status fica verde: "▶️ Agendador executando"
+✅ Pronto! Executa automaticamente nos horários
+
+========================================
+🎉 PRONTO! SEU ROBÔ ESTÁ FUNCIONANDO!
+========================================
+
+• Deixa o computador ligado
+• O programa roda em background
+• Executa login nos horários certos
+• Logs ficam em "automator.log"
+
+========================================
+❓ PROBLEMAS? SOLUÇÕES RÁPIDAS:
+========================================
+
+🔴 "Python não encontrado":
+   ✅ Execute: install.bat
+
+🔴 "Janela não abre":
+   ✅ Execute: C:\Python311\python.exe gui.py
+
+🔴 "Login falha":
+   ✅ Use "🔍 Mapear Campos" na aba Configuração
+
+========================================
+💡 DICAS FINAIS:
+========================================
+
+• Sempre teste antes de agendar
+• Configure horários realistas
+• Verifique logs se der erro
+• Feche a janela principal, agendador continua rodando

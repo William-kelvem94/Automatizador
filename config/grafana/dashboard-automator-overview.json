@@ -1,0 +1,187 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Automator Web IA - Enterprise Overview",
+    "tags": ["automator", "enterprise", "overview"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "System Resources",
+        "type": "row",
+        "gridPos": {"h": 1, "w": 24, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "CPU Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "automator_cpu_usage_percent",
+            "legendFormat": "CPU Usage %"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 1}
+      },
+      {
+        "id": 3,
+        "title": "Memory Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "automator_memory_usage_percent",
+            "legendFormat": "Memory Usage %"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 1}
+      },
+      {
+        "id": 4,
+        "title": "Disk Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "automator_disk_usage_percent",
+            "legendFormat": "Disk Usage %"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 9}
+      },
+      {
+        "id": 5,
+        "title": "Network Activity",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(automator_network_bytes_sent_total[5m])",
+            "legendFormat": "Bytes Sent/sec"
+          },
+          {
+            "expr": "rate(automator_network_bytes_recv_total[5m])",
+            "legendFormat": "Bytes Received/sec"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 9}
+      },
+      {
+        "id": 6,
+        "title": "Application Metrics",
+        "type": "row",
+        "gridPos": {"h": 1, "w": 24, "x": 0, "y": 17}
+      },
+      {
+        "id": 7,
+        "title": "Tasks Overview",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(automator_tasks_created_total)",
+            "legendFormat": "Tasks Created"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "red", "value": 80}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 18}
+      },
+      {
+        "id": 8,
+        "title": "Active Tasks",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "automator_tasks_active",
+            "legendFormat": "Active Tasks"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 18}
+      },
+      {
+        "id": 9,
+        "title": "API Requests",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(rate(automator_api_requests_total[5m]))",
+            "legendFormat": "Requests/sec"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 18}
+      },
+      {
+        "id": 10,
+        "title": "Error Rate",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "rate(automator_errors_total[5m])",
+            "legendFormat": "Errors/sec"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "orange", "value": 0.1},
+                {"color": "red", "value": 1}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 4, "w": 6, "x": 18, "y": 18}
+      },
+      {
+        "id": 11,
+        "title": "Task Execution Performance",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(automator_tasks_execution_duration_seconds_bucket[5m]))",
+            "legendFormat": "95th Percentile"
+          },
+          {
+            "expr": "histogram_quantile(0.50, rate(automator_tasks_execution_duration_seconds_bucket[5m]))",
+            "legendFormat": "Median"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 22}
+      },
+      {
+        "id": 12,
+        "title": "API Response Time",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(automator_api_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "95th Percentile"
+          },
+          {
+            "expr": "histogram_quantile(0.50, rate(automator_api_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "Median"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 22}
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s",
+    "schemaVersion": 27,
+    "version": 0,
+    "links": []
+  }
+}

@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: automator-config
+  namespace: automator-webia
+  labels:
+    app: automator-webia
+    component: config
+data:
+  # Configurações da aplicação
+  AUTOMATOR_ENV: "production"
+  AUTOMATOR_VERSION: "8.0.0"
+  LOG_LEVEL: "INFO"
+
+  # Configurações de banco
+  DB_POOL_MIN_CONNECTIONS: "5"
+  DB_POOL_MAX_CONNECTIONS: "20"
+  DB_COMMAND_TIMEOUT: "60"
+
+  # Configurações de cache
+  REDIS_MAX_CONNECTIONS: "20"
+  CACHE_TTL: "3600"
+
+  # Configurações de IA
+  AI_REQUEST_TIMEOUT: "30"
+  AI_MAX_CONCURRENT_REQUESTS: "10"
+
+  # Configurações de monitoramento
+  METRICS_ENABLED: "true"
+  HEALTH_CHECK_INTERVAL: "30"
+
+  # Configurações de segurança
+  JWT_SECRET_KEY: "${JWT_SECRET_KEY}"
+  ENCRYPTION_KEY: "${ENCRYPTION_KEY}"
+  API_KEY: "${API_KEY}"
+
+  # Configurações de rate limiting
+  RATE_LIMIT_REQUESTS_PER_MINUTE: "100"
+  RATE_LIMIT_BURST: "20"
+
+  # Configurações de backup
+  BACKUP_RETENTION_DAYS: "30"
+  BACKUP_COMPRESSION: "true"
+
+  # Configurações de CDN
+  CDN_ENABLED: "true"
+  CDN_PROVIDER: "cloudflare"
+  CDN_CACHE_TTL: "3600"

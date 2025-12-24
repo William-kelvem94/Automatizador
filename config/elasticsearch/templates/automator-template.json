@@ -1,0 +1,165 @@
+{
+  "index_patterns": ["automator-webia-*"],
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 1,
+    "refresh_interval": "30s",
+    "index.codec": "best_compression",
+    "analysis": {
+      "analyzer": {
+        "automator_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "stop",
+            "porter_stem"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "@timestamp": {
+        "type": "date",
+        "format": "strict_date_optional_time||yyyy-MM-dd'T'HH:mm:ss.SSSZZ"
+      },
+      "service": {
+        "type": "keyword"
+      },
+      "version": {
+        "type": "keyword"
+      },
+      "environment": {
+        "type": "keyword"
+      },
+      "category": {
+        "type": "keyword"
+      },
+      "logger_name": {
+        "type": "keyword"
+      },
+      "log_level": {
+        "type": "keyword"
+      },
+      "log_message": {
+        "type": "text",
+        "analyzer": "automator_analyzer",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "message": {
+        "type": "text",
+        "analyzer": "automator_analyzer"
+      },
+
+      "task_id": {
+        "type": "keyword"
+      },
+      "task_type": {
+        "type": "keyword"
+      },
+      "workflow_id": {
+        "type": "keyword"
+      },
+      "execution_time": {
+        "type": "float"
+      },
+      "success": {
+        "type": "boolean"
+      },
+
+      "user_id": {
+        "type": "keyword"
+      },
+      "session_id": {
+        "type": "keyword"
+      },
+      "ip_address": {
+        "type": "ip"
+      },
+      "user_agent": {
+        "type": "text",
+        "analyzer": "automator_analyzer"
+      },
+
+      "api_endpoint": {
+        "type": "keyword"
+      },
+      "http_method": {
+        "type": "keyword"
+      },
+      "http_status": {
+        "type": "integer"
+      },
+      "response_time": {
+        "type": "float"
+      },
+
+      "error_type": {
+        "type": "keyword"
+      },
+      "error_message": {
+        "type": "text",
+        "analyzer": "automator_analyzer"
+      },
+      "stack_trace": {
+        "type": "text"
+      },
+
+      "security_event": {
+        "type": "keyword"
+      },
+      "incident_type": {
+        "type": "keyword"
+      },
+      "severity": {
+        "type": "keyword"
+      },
+      "risk_level": {
+        "type": "keyword"
+      },
+
+      "cpu_usage": {
+        "type": "float"
+      },
+      "memory_usage": {
+        "type": "float"
+      },
+      "disk_usage": {
+        "type": "float"
+      },
+      "network_bytes_sent": {
+        "type": "long"
+      },
+      "network_bytes_recv": {
+        "type": "long"
+      },
+
+      "tags": {
+        "type": "keyword"
+      },
+
+      "custom_fields": {
+        "type": "object",
+        "dynamic": true
+      }
+    }
+  },
+
+  "aliases": {
+    "automator-current": {},
+    "automator-all": {
+      "filter": {
+        "term": {
+          "service": "automator-webia"
+        }
+      }
+    }
+  }
+}

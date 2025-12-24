@@ -1,15 +1,15 @@
 @echo off
 chcp 65001 >nul
-title 🚀 Automatizador IA - Sistema Inteligente v4.0
+title 🚀 Automatizador Web IA v7.0 - Versão Organizada
 
 cls
 echo.
 echo ============================================
-echo         🚀 AUTOMATIZADOR IA
+echo         🚀 AUTOMATIZADOR WEB IA v7.0
 echo ============================================
-echo           Sistema Inteligente v4.0
+echo         Versão Organizada - Clean Architecture
 echo.
-echo [INFO] Iniciando interface revolucionaria...
+echo [INFO] Iniciando interface PySide6 moderna...
 echo [INFO] Aguarde, a janela vai abrir em alguns segundos...
 echo.
 

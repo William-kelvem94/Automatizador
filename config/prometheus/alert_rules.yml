@@ -1,0 +1,238 @@
+groups:
+  # ===== ALERTAS DE SISTEMA =====
+  - name: system_alerts
+    rules:
+      - alert: HighCPUUsage
+        expr: automator_cpu_usage_percent > 85
+        for: 5m
+        labels:
+          severity: warning
+          category: system
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is {{ $value }}% on {{ $labels.instance }}"
+          runbook: "https://docs.automator.webia.com/runbooks/high-cpu"
+
+      - alert: HighMemoryUsage
+        expr: automator_memory_usage_percent > 90
+        for: 3m
+        labels:
+          severity: critical
+          category: system
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage is {{ $value }}% on {{ $labels.instance }}"
+          runbook: "https://docs.automator.webia.com/runbooks/high-memory"
+
+      - alert: HighDiskUsage
+        expr: automator_disk_usage_percent > 85
+        for: 10m
+        labels:
+          severity: warning
+          category: system
+        annotations:
+          summary: "High disk usage detected"
+          description: "Disk usage is {{ $value }}% on {{ $labels.instance }}"
+          runbook: "https://docs.automator.webia.com/runbooks/high-disk"
+
+      - alert: SystemDown
+        expr: up{job="automator-webia"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          category: system
+        annotations:
+          summary: "Automator Web IA is down"
+          description: "Automator Web IA has been down for more than 1 minute"
+          runbook: "https://docs.automator.webia.com/runbooks/system-down"
+
+  # ===== ALERTAS DE APLICAÇÃO =====
+  - name: application_alerts
+    rules:
+      - alert: HighErrorRate
+        expr: rate(automator_errors_total[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+          category: application
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is {{ $value }} errors/second"
+          runbook: "https://docs.automator.webia.com/runbooks/high-error-rate"
+
+      - alert: APISlowResponse
+        expr: histogram_quantile(0.95, rate(automator_api_request_duration_seconds_bucket[5m])) > 2
+        for: 3m
+        labels:
+          severity: warning
+          category: api
+        annotations:
+          summary: "API response time is high"
+          description: "95th percentile API response time is {{ $value }}s"
+          runbook: "https://docs.automator.webia.com/runbooks/slow-api"
+
+      - alert: TaskExecutionFailed
+        expr: rate(automator_tasks_executed_total{result="failure"}[5m]) / rate(automator_tasks_executed_total[5m]) > 0.2
+        for: 5m
+        labels:
+          severity: warning
+          category: tasks
+        annotations:
+          summary: "High task failure rate"
+          description: "Task failure rate is {{ $value | humanizePercentage }}"
+          runbook: "https://docs.automator.webia.com/runbooks/task-failures"
+
+      - alert: TooManyActiveTasks
+        expr: automator_tasks_active > 50
+        for: 2m
+        labels:
+          severity: warning
+          category: tasks
+        annotations:
+          summary: "Too many active tasks"
+          description: "Number of active tasks is {{ $value }}"
+          runbook: "https://docs.automator.webia.com/runbooks/too-many-tasks"
+
+  # ===== ALERTAS DE SEGURANÇA =====
+  - name: security_alerts
+    rules:
+      - alert: AuthenticationFailures
+        expr: rate(automator_auth_attempts_total{result="failure"}[5m]) > 5
+        for: 2m
+        labels:
+          severity: warning
+          category: security
+        annotations:
+          summary: "High authentication failure rate"
+          description: "Authentication failure rate is {{ $value }} failures/minute"
+          runbook: "https://docs.automator.webia.com/runbooks/auth-failures"
+
+      - alert: SecurityIncidents
+        expr: rate(automator_security_incidents_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          category: security
+        annotations:
+          summary: "Security incident detected"
+          description: "Security incident rate is {{ $value }} incidents/minute"
+          runbook: "https://docs.automator.webia.com/runbooks/security-incident"
+
+      - alert: VulnerabilitiesDetected
+        expr: automator_vulnerabilities_found > 10
+        for: 1m
+        labels:
+          severity: high
+          category: security
+        annotations:
+          summary: "High number of vulnerabilities detected"
+          description: "Number of active vulnerabilities is {{ $value }}"
+          runbook: "https://docs.automator.webia.com/runbooks/vulnerabilities"
+
+      - alert: BruteForceAttempt
+        expr: rate(automator_auth_attempts_total{result="failure"}[1m]) > 10
+        for: 1m
+        labels:
+          severity: critical
+          category: security
+        annotations:
+          summary: "Potential brute force attack"
+          description: "High rate of authentication failures: {{ $value }} failures/minute"
+          runbook: "https://docs.automator.webia.com/runbooks/brute-force"
+
+  # ===== ALERTAS DE PERFORMANCE =====
+  - name: performance_alerts
+    rules:
+      - alert: SlowTaskExecution
+        expr: histogram_quantile(0.95, rate(automator_tasks_execution_duration_seconds_bucket[5m])) > 60
+        for: 5m
+        labels:
+          severity: warning
+          category: performance
+        annotations:
+          summary: "Task execution is slow"
+          description: "95th percentile task execution time is {{ $value }}s"
+          runbook: "https://docs.automator.webia.com/runbooks/slow-tasks"
+
+      - alert: HighCacheMissRate
+        expr: rate(automator_cache_misses_total[5m]) / (rate(automator_cache_hits_total[5m]) + rate(automator_cache_misses_total[5m])) > 0.3
+        for: 5m
+        labels:
+          severity: info
+          category: performance
+        annotations:
+          summary: "High cache miss rate"
+          description: "Cache miss rate is {{ $value | humanizePercentage }}"
+          runbook: "https://docs.automator.webia.com/runbooks/cache-misses"
+
+      - alert: DatabaseConnectionPoolExhausted
+        expr: automator_db_connections_active / automator_db_connections_total > 0.9
+        for: 2m
+        labels:
+          severity: warning
+          category: database
+        annotations:
+          summary: "Database connection pool nearly exhausted"
+          description: "Database connection pool usage is {{ $value | humanizePercentage }}"
+          runbook: "https://docs.automator.webia.com/runbooks/db-pool-exhausted"
+
+  # ===== ALERTAS DE INFRAESTRUTURA =====
+  - name: infrastructure_alerts
+    rules:
+      - alert: ServiceUnavailable
+        expr: up{job=~"automator-.*"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          category: infrastructure
+        annotations:
+          summary: "Infrastructure service is down"
+          description: "{{ $labels.job }} service is unavailable"
+          runbook: "https://docs.automator.webia.com/runbooks/service-down"
+
+      - alert: HighNetworkUsage
+        expr: rate(automator_network_bytes_sent[5m]) + rate(automator_network_bytes_recv[5m]) > 100000000
+        for: 3m
+        labels:
+          severity: info
+          category: infrastructure
+        annotations:
+          summary: "High network usage detected"
+          description: "Network usage is {{ $value | humanizeBytes }}/second"
+          runbook: "https://docs.automator.webia.com/runbooks/high-network"
+
+  # ===== ALERTAS DE NEGÓCIO =====
+  - name: business_alerts
+    rules:
+      - alert: LowTaskSuccessRate
+        expr: rate(automator_tasks_executed_total{result="success"}[1h]) / rate(automator_tasks_executed_total[1h]) < 0.95
+        for: 15m
+        labels:
+          severity: warning
+          category: business
+        annotations:
+          summary: "Task success rate is low"
+          description: "Hourly task success rate is {{ $value | humanizePercentage }}"
+          runbook: "https://docs.automator.webia.com/runbooks/low-success-rate"
+
+      - alert: NoNewTasks
+        expr: rate(automator_tasks_created_total[15m]) == 0
+        for: 15m
+        labels:
+          severity: info
+          category: business
+        annotations:
+          summary: "No new tasks created recently"
+          description: "No tasks have been created in the last 15 minutes"
+          runbook: "https://docs.automator.webia.com/runbooks/no-new-tasks"
+
+      - alert: APIUsageSpike
+        expr: rate(automator_api_requests_total[5m]) > rate(automator_api_requests_total[1h]) * 2
+        for: 2m
+        labels:
+          severity: info
+          category: business
+        annotations:
+          summary: "API usage spike detected"
+          description: "API request rate spiked to {{ $value }} requests/minute"
+          runbook: "https://docs.automator.webia.com/runbooks/api-spike"

@@ -1,0 +1,231 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: automator-webia-ingress
+  namespace: automator-webia
+  annotations:
+    # Cert-manager para TLS automático
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/acme-challenge-type: "http01"
+
+    # CDN/CloudFlare
+    external-dns.alpha.kubernetes.io/hostname: "api.automator.webia.com"
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+
+    # Rate limiting
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+
+    # Security headers
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      add_header X-Frame-Options "SAMEORIGIN" always;
+      add_header X-XSS-Protection "1; mode=block" always;
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header Referrer-Policy "no-referrer-when-downgrade" always;
+      add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 'unsafe-inline'" always;
+
+    # Compression
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://app.automator.webia.com"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization"
+
+    # Proxy settings
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+
+    # CDN caching
+    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
+    nginx.ingress.kubernetes.io/enable-owasp-core-rules: "true"
+
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - api.automator.webia.com
+    - graphql.automator.webia.com
+    secretName: automator-tls
+  rules:
+  # API Gateway (porta principal)
+  - host: api.automator.webia.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: automator-gateway
+            port:
+              number: 80
+
+  # GraphQL API
+  - host: graphql.automator.webia.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: automator-graphql
+            port:
+              number: 80
+
+---
+# Ingress para Web UI (se implementada)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: automator-web-ui-ingress
+  namespace: automator-webia
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    external-dns.alpha.kubernetes.io/hostname: "app.automator.webia.com"
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    nginx.ingress.kubernetes.io/rate-limit: "1000"
+    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.automator.webia.com
+    secretName: automator-web-ui-tls
+  rules:
+  - host: app.automator.webia.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: automator-web-ui  # Service para web UI (quando implementada)
+            port:
+              number: 80
+
+---
+# NetworkPolicy para isolamento
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: automator-webia-network-policy
+  namespace: automator-webia
+spec:
+  podSelector:
+    matchLabels:
+      app: automator-webia
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  # Permitir tráfego do ingress
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-nginx
+    ports:
+    - protocol: TCP
+      port: 8000
+    - protocol: TCP
+      port: 8002
+    - protocol: TCP
+      port: 8003
+
+  # Permitir comunicação entre pods da aplicação
+  - from:
+    - podSelector:
+        matchLabels:
+          app: automator-webia
+    ports:
+    - protocol: TCP
+
+  egress:
+  # Permitir acesso aos bancos de dados
+  - to:
+    - podSelector:
+        matchLabels:
+          component: database
+    ports:
+    - protocol: TCP
+      port: 5432
+
+  # Permitir acesso ao Redis
+  - to:
+    - podSelector:
+        matchLabels:
+          component: cache
+    ports:
+    - protocol: TCP
+      port: 6379
+
+  # Permitir DNS
+  - to: []
+    ports:
+    - protocol: UDP
+      port: 53
+
+  # Permitir HTTP/HTTPS para APIs externas (OpenAI, etc.)
+  - to: []
+    ports:
+    - protocol: TCP
+      port: 80
+    - protocol: TCP
+      port: 443
+
+  # Permitir acesso aos serviços de monitoramento
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+    ports:
+    - protocol: TCP
+
+---
+# CDN Configuration (CloudFlare example)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cdn-config
+  namespace: automator-webia
+data:
+  cloudflare-config.yaml: |
+    apiVersion: externaldns.k8s.io/v1alpha1
+    kind: CloudFlareProvider
+    metadata:
+      name: cloudflare-provider
+    spec:
+      apiKey:
+        secretKeyRef:
+          name: automator-secrets
+          key: cdn-api-key
+      email:
+        secretKeyRef:
+          name: automator-secrets
+          key: cdn-email
+      zoneId:
+        secretKeyRef:
+          name: automator-secrets
+          key: cdn-zone-id
+
+---
+# Service Monitor para Prometheus
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: automator-webia-monitor
+  namespace: automator-webia
+  labels:
+    team: backend
+spec:
+  selector:
+    matchLabels:
+      app: automator-webia
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 15s
+    scrapeTimeout: 10s
+    relabelings:
+    - sourceLabels: [__meta_kubernetes_pod_name]
+      targetLabel: pod
+    - sourceLabels: [__meta_kubernetes_namespace]
+      targetLabel: namespace

@@ -1,0 +1,180 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgresql
+  namespace: automator-webia
+  labels:
+    app: automator-webia
+    component: database
+    version: "15"
+spec:
+  serviceName: postgresql
+  replicas: 1  # Para HA, usar 2+ com patroni ou similar
+  selector:
+    matchLabels:
+      app: automator-webia
+      component: database
+  template:
+    metadata:
+      labels:
+        app: automator-webia
+        component: database
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9187"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: postgresql
+        image: postgres:15-alpine
+        ports:
+        - containerPort: 5432
+          name: postgresql
+        env:
+        - name: POSTGRES_DB
+          value: "automator_db"
+        - name: POSTGRES_USER
+          value: "automator"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: automator-secrets
+              key: postgres-password
+        - name: PGDATA
+          value: "/var/lib/postgresql/data/pgdata"
+        - name: POSTGRES_INITDB_ARGS
+          value: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+        volumeMounts:
+        - name: postgresql-data
+          mountPath: /var/lib/postgresql/data
+        - name: postgresql-config
+          mountPath: /etc/postgresql/postgresql.conf
+          subPath: postgresql.conf
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "2Gi"
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+        livenessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - automator
+            - -d
+            - automator_db
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - automator
+            - -d
+            - automator_db
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 70  # postgres user
+          runAsGroup: 70
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+
+      - name: postgres-exporter
+        image: prometheuscommunity/postgres-exporter:v0.12.1
+        ports:
+        - containerPort: 9187
+          name: metrics
+        env:
+        - name: DATA_SOURCE_NAME
+          value: "postgresql://automator:$(POSTGRES_PASSWORD)@localhost:5432/automator_db?sslmode=disable"
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 65534  # nobody
+          readOnlyRootFilesystem: true
+
+  volumeClaimTemplates:
+  - metadata:
+      name: postgresql-data
+      namespace: automator-webia
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: "50Gi"
+      storageClassName: "fast-ssd"  # Configurar storage class apropriada
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql
+  namespace: automator-webia
+  labels:
+    app: automator-webia
+    component: database
+spec:
+  ports:
+  - port: 5432
+    targetPort: 5432
+    name: postgresql
+  selector:
+    app: automator-webia
+    component: database
+  clusterIP: None  # Headless service for StatefulSet
+
+---
+# ConfigMap para configuração do PostgreSQL
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-config
+  namespace: automator-webia
+data:
+  postgresql.conf: |
+    # PostgreSQL configuration for high performance
+    listen_addresses = '*'
+    max_connections = 200
+    shared_buffers = 512MB
+    effective_cache_size = 1GB
+    maintenance_work_mem = 128MB
+    checkpoint_completion_target = 0.9
+    wal_buffers = 16MB
+    default_statistics_target = 100
+    random_page_cost = 1.1
+    effective_io_concurrency = 200
+    work_mem = 4MB
+    min_wal_size = 1GB
+    max_wal_size = 4GB
+    max_worker_processes = 4
+    max_parallel_workers_per_gather = 2
+    max_parallel_workers = 4
+    max_parallel_maintenance_workers = 2
+
+    # Logging
+    log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h '
+    log_statement = 'ddl'
+    log_duration = on
+    log_min_duration_statement = 1000
+
+    # Security
+    ssl = on
+    ssl_cert_file = '/etc/ssl/certs/tls.crt'
+    ssl_key_file = '/etc/ssl/private/tls.key'

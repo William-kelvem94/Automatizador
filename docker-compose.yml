@@ -1,0 +1,523 @@
+# ===== AUTOMATOR WEB IA v8.0 - ENTERPRISE DOCKER COMPOSE =====
+# Orquestração completa com monitoramento, banco de dados e cache
+
+version: '3.8'
+
+services:
+  # ===== APLICAÇÃO PRINCIPAL =====
+  automator-webia:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    image: automator/webia:8.0.0
+    container_name: automator-webia-app
+    restart: unless-stopped
+
+    # Rede e portas
+    ports:
+      - "8000:8000"    # FastAPI
+      - "3000:3000"    # Web UI (se habilitado)
+
+    # Ambiente
+    environment:
+      - AUTOMATOR_ENV=production
+      - AUTOMATOR_VERSION=8.0.0
+      - DATABASE_URL=postgresql://automator:automator_pass@postgres:5432/automator_db
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=${SECRET_KEY:-change-me-in-production}
+      - ALLOWED_HOSTS=*
+
+    # Volumes para persistência
+    volumes:
+      - automator_data:/app/data
+      - automator_logs:/app/logs
+      - automator_cache:/app/cache
+
+    # Dependências
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+    # Recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+
+    # Labels
+    labels:
+      - "com.automator.service=app"
+      - "com.automator.version=8.0.0"
+      - "com.automator.monitoring=true"
+
+  # ===== BANCO DE DADOS - POSTGRESQL =====
+  postgres:
+    image: postgres:15-alpine
+    container_name: automator-postgres
+    restart: unless-stopped
+
+    environment:
+      - POSTGRES_DB=automator_db
+      - POSTGRES_USER=automator
+      - POSTGRES_PASSWORD=automator_pass
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+
+    # Volumes
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+
+    # Portas (apenas para desenvolvimento)
+    ports:
+      - "5432:5432"
+
+    # Health check
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U automator -d automator_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    # Recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+
+    # Segurança
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/run
+      - /var/log
+
+  # ===== CACHE - REDIS =====
+  redis:
+    image: redis:7-alpine
+    container_name: automator-redis
+    restart: unless-stopped
+
+    # Configuração
+    command: >
+      redis-server
+      --appendonly yes
+      --appendfsync everysec
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+      --tcp-keepalive 300
+      --timeout 300
+
+    # Volumes
+    volumes:
+      - redis_data:/data
+      - ./config/redis.conf:/etc/redis/redis.conf:ro
+
+    # Portas (apenas para desenvolvimento)
+    ports:
+      - "6379:6379"
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+    # Recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+        reservations:
+          cpus: '0.1'
+          memory: 256M
+
+    # Segurança
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+
+  # ===== MONITORAMENTO - PROMETHEUS =====
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: automator-prometheus
+    restart: unless-stopped
+
+    # Configuração
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+
+    # Portas
+    ports:
+      - "9090:9090"
+
+    # Comando
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+
+    # Recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+        reservations:
+          cpus: '0.1'
+          memory: 256M
+
+  # ===== VISUALIZAÇÃO - GRAFANA =====
+  grafana:
+    image: grafana/grafana:latest
+    container_name: automator-grafana
+    restart: unless-stopped
+
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
+
+    # Volumes
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./config/grafana/dashboards:/var/lib/grafana/dashboards:ro
+
+    # Portas
+    ports:
+      - "3001:3000"
+
+    # Dependências
+    depends_on:
+      - prometheus
+
+    # Recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+  # ===== LOGS - ELASTICSEARCH =====
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: automator-elasticsearch
+    restart: unless-stopped
+
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.watcher.enabled=false
+      - xpack.ml.enabled=false
+
+    # Volumes
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+
+    # Portas
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+    # Recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+
+    # Health check
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ===== LOGS - LOGSTASH =====
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.11.0
+    container_name: automator-logstash
+    restart: unless-stopped
+
+    # Configuração
+    volumes:
+      - ./config/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+
+    # Portas
+    ports:
+      - "5044:5044"  # Beats
+      - "5000:5000"  # TCP input
+      - "9600:9600"  # Monitoring
+
+    # Dependências
+    depends_on:
+      - elasticsearch
+
+    # Recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 256M
+
+  # ===== LOGS - KIBANA =====
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: automator-kibana
+    restart: unless-stopped
+
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+
+    # Portas
+    ports:
+      - "5601:5601"
+
+    # Dependências
+    depends_on:
+      - elasticsearch
+
+    # Recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 256M
+
+  # ===== REVERSE PROXY - NGINX =====
+  nginx:
+    image: nginx:alpine
+    container_name: automator-nginx
+    restart: unless-stopped
+
+    # Configuração
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./config/ssl:/etc/ssl/certs:ro
+
+    # Portas
+    ports:
+      - "80:80"
+      - "443:443"
+
+    # Dependências
+    depends_on:
+      - automator-webia
+
+    # Recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+        reservations:
+          cpus: '0.05'
+          memory: 64M
+
+# ===== VOLUMES =====
+volumes:
+  automator_data:
+    driver: local
+  automator_logs:
+    driver: local
+  automator_cache:
+    driver: local
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
+
+# ===== NETWORKS =====
+networks:
+  default:
+    name: automator-network
+    driver: bridge
+
+# ===== CONFIGURAÇÕES AVANÇADAS =====
+
+# Configuração do Docker Compose para produção
+x-deploy: &deploy-template
+  replicas: 1
+  update_config:
+    parallelism: 1
+    delay: 10s
+    order: start-first
+  restart_policy:
+    condition: on-failure
+    delay: 5s
+    max_attempts: 3
+    window: 120s
+
+# Configuração de logging
+x-logging: &logging-template
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+# Aplicar configurações padrão
+services:
+  automator-webia:
+    <<: *deploy-template
+    logging: *logging-template
+
+  postgres:
+    <<: *deploy-template
+    logging: *logging-template
+
+  redis:
+    <<: *deploy-template
+    logging: *logging-template
+
+  prometheus:
+    <<: *deploy-template
+    logging: *logging-template
+
+  grafana:
+    <<: *deploy-template
+    logging: *logging-template
+
+  elasticsearch:
+    <<: *deploy-template
+    logging: *logging-template
+
+  logstash:
+    <<: *deploy-template
+    logging: *logging-template
+
+  kibana:
+    <<: *deploy-template
+    logging: *logging-template
+
+  nginx:
+    <<: *deploy-template
+    logging: *logging-template
+
+  # ===== API GATEWAY =====
+  automator-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    container_name: automator-gateway
+    restart: unless-stopped
+    command: ["python", "-c", "from src.presentation.apis.api_gateway import run_gateway_server; run_gateway_server('0.0.0.0', 8003)"]
+
+    # Ambiente
+    environment:
+      - AUTOMATOR_ENV=production
+      - AUTOMATOR_VERSION=8.0.0
+
+    # Dependências
+    depends_on:
+      - automator-webia
+
+    # Recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+    # Labels
+    labels:
+      - "com.automator.service=gateway"
+      - "com.automator.version=8.0.0"
+      - "com.automator.monitoring=true"
+
+  # ===== GRAPHQL API =====
+  automator-graphql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    container_name: automator-graphql
+    restart: unless-stopped
+    command: ["python", "-c", "from src.presentation.apis.graphql_server import run_graphql_server; run_graphql_server('0.0.0.0', 8002)"]
+
+    # Ambiente
+    environment:
+      - AUTOMATOR_ENV=production
+      - AUTOMATOR_VERSION=8.0.0
+
+    # Volumes para logs
+    volumes:
+      - automator_logs:/app/logs
+
+    # Dependências
+    depends_on:
+      - automator-webia
+
+    # Recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+    # Labels
+    labels:
+      - "com.automator.service=graphql"
+      - "com.automator.version=8.0.0"
+      - "com.automator.monitoring=true"

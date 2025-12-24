@@ -1,0 +1,167 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-cluster
+  namespace: automator-webia
+  labels:
+    app: automator-webia
+    component: cache
+    version: "7"
+spec:
+  serviceName: redis-cluster
+  replicas: 3  # Redis cluster com 3 nodes
+  selector:
+    matchLabels:
+      app: automator-webia
+      component: cache
+  template:
+    metadata:
+      labels:
+        app: automator-webia
+        component: cache
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9121"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379
+          name: redis
+        command:
+        - redis-server
+        - /etc/redis/redis.conf
+        env:
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: automator-secrets
+              key: redis-password
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+        - name: redis-config
+          mountPath: /etc/redis
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+        livenessProbe:
+          tcpSocket:
+            port: 6379
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 999  # redis user
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+
+      - name: redis-exporter
+        image: oliver006/redis_exporter:v1.54.0
+        ports:
+        - containerPort: 9121
+          name: metrics
+        env:
+        - name: REDIS_ADDR
+          value: "redis://localhost:6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: automator-secrets
+              key: redis-password
+        resources:
+          limits:
+            cpu: "50m"
+            memory: "64Mi"
+          requests:
+            cpu: "10m"
+            memory: "16Mi"
+
+  volumeClaimTemplates:
+  - metadata:
+      name: redis-data
+      namespace: automator-webia
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: "10Gi"
+      storageClassName: "fast-ssd"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-cluster
+  namespace: automator-webia
+  labels:
+    app: automator-webia
+    component: cache
+spec:
+  ports:
+  - port: 6379
+    targetPort: 6379
+    name: redis
+  selector:
+    app: automator-webia
+    component: cache
+  clusterIP: None
+
+---
+# ConfigMap para configuração do Redis
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config
+  namespace: automator-webia
+data:
+  redis.conf: |
+    # Redis configuration for high performance caching
+    bind 0.0.0.0
+    port 6379
+    timeout 300
+    tcp-keepalive 300
+    daemonize no
+    supervised no
+
+    # Memory management
+    maxmemory 256mb
+    maxmemory-policy allkeys-lru
+    maxmemory-samples 5
+
+    # Persistence (para cache, desabilitar RDB/AOF)
+    save ""
+    appendonly no
+
+    # Security
+    requirepass ${REDIS_PASSWORD}
+
+    # Performance
+    tcp-backlog 511
+    databases 16
+
+    # Logging
+    loglevel notice
+    logfile ""
+
+    # Disable dangerous commands
+    rename-command FLUSHDB ""
+    rename-command FLUSHALL ""
+    rename-command SHUTDOWN SHUTDOWN_RENAMED
+    rename-command CONFIG CONFIG_RENAMED

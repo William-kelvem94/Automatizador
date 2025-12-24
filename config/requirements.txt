@@ -1,9 +1,93 @@
-selenium==4.15.2
-apscheduler==3.10.4
-webdriver-manager==4.0.1
-python-dotenv==1.0.0
+# === AUTOMATIZADOR WEB IA v7.0 - DEPENDÊNCIAS ENTERPRISE ===
 
-# Desenvolvimento
-pyinstaller>=6.0.0
-pillow>=9.0.0
-requests>=2.25.0
+# ===== INTERFACE PROFISSIONAL =====
+PySide6>=6.6.0
+PySide6-Qt6>=6.6.0
+PySide6-Fluent-Widgets>=1.5.6
+qt-material>=2.14
+darkdetect>=0.8.0
+
+# ===== AUTOMAÇÃO WEB AVANÇADA =====
+playwright>=1.45.0
+selenium>=4.20.0
+undetected-chromedriver>=3.5.4
+webdriver-manager>=4.0.1
+
+# ===== BANCO DE DADOS & CACHE =====
+psycopg2-binary>=2.9.9
+sqlalchemy>=2.0.23
+alembic>=1.13.0
+redis>=5.0.1
+
+# ===== APIs & MICROSERVIÇOS =====
+fastapi>=0.108.0
+uvicorn>=0.25.0
+strawberry-graphql>=0.235.0
+httpx>=0.26.0
+aiohttp>=3.9.1
+
+# ===== INTELIGÊNCIA ARTIFICIAL =====
+openai>=1.3.0
+anthropic>=0.7.8
+transformers>=4.36.2
+torch>=2.1.2
+scikit-learn>=1.4.0
+opencv-python>=4.8.1
+pillow>=10.1.0
+
+# ===== PROCESSAMENTO ASSÍNCRONO =====
+asyncio  # built-in
+aiofiles>=23.2.1
+aiomysql>=0.1.1
+aio-pika>=9.4.0
+
+# ===== VALIDAÇÃO & SERIALIZAÇÃO =====
+pydantic>=2.6.0
+pydantic-settings>=2.1.0
+email-validator>=2.1.0
+
+# ===== SEGURANÇA =====
+cryptography>=41.0.7
+bcrypt>=4.1.2
+python-jose>=3.3.0
+passlib>=1.7.4
+python-multipart>=0.0.6
+
+# ===== LOGGING & MONITORAMENTO =====
+loguru>=0.7.2
+structlog>=23.2.0
+sentry-sdk>=1.38.0
+prometheus-client>=0.19.0
+
+# ===== DESENVOLVIMENTO & TESTES =====
+pytest>=7.4.3
+pytest-asyncio>=0.21.1
+pytest-cov>=4.1.0
+pytest-mock>=3.12.0
+black>=23.12.1
+isort>=5.13.2
+mypy>=1.7.1
+flake8>=6.1.0
+pre-commit>=3.6.0
+
+# ===== UTILITÁRIOS =====
+python-dotenv>=1.0.0
+click>=8.1.7
+rich>=13.7.0
+typer>=0.9.0
+jinja2>=3.1.2
+
+# ===== DEPLOYMENT & CONTAINERS =====
+docker>=7.0.0
+kubernetes>=28.1.0
+pyinstaller>=6.3.0
+
+# ===== DEPENDÊNCIAS DE SISTEMA =====
+pywin32>=306; sys_platform == "win32"
+python-magic>=0.4.27; sys_platform != "win32"
+
+# ===== VERSÕES FIXAS PARA ESTABILIDADE =====
+requests>=2.31.0
+numpy>=1.26.2
+pandas>=2.1.4
+matplotlib>=3.8.2

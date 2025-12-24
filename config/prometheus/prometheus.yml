@@ -1,0 +1,207 @@
+# Prometheus Configuration for Automator Web IA v8.0
+# Configuração enterprise com alta disponibilidade e escalabilidade
+
+global:
+  scrape_interval: 15s        # Intervalo padrão de coleta
+  scrape_timeout: 10s         # Timeout para coleta
+  evaluation_interval: 15s    # Intervalo de avaliação de regras
+
+  # Configurações externas (para produção)
+  external_labels:
+    environment: "${ENVIRONMENT:-production}"
+    region: "${REGION:-us-east-1}"
+    cluster: "automator-webia"
+
+# Configurações de alertas
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+      timeout: 10s
+
+# Carregar regras de alerta
+rule_files:
+  - "alert_rules.yml"
+
+# Configurações de scrape
+scrape_configs:
+
+  # ===== APLICAÇÃO PRINCIPAL =====
+  - job_name: 'automator-webia'
+    static_configs:
+      - targets: ['automator-webia:8000']
+        labels:
+          service: 'automator-webia'
+          component: 'app'
+          version: '8.0.0'
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: '/metrics'
+    honor_labels: true
+
+    # Configurações de service discovery
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+      - source_labels: [__meta_docker_container_name]
+        target_label: container_name
+        regex: '/(.+)'
+        replacement: '$1'
+
+    # Configurações de TLS (para produção)
+    # tls_config:
+    #   ca_file: /etc/prometheus/ssl/ca.crt
+    #   cert_file: /etc/prometheus/ssl/client.crt
+    #   key_file: /etc/prometheus/ssl/client.key
+    #   insecure_skip_verify: false
+
+  # ===== POSTGRESQL =====
+  - job_name: 'automator-postgres'
+    static_configs:
+      - targets: ['postgres:9187']
+        labels:
+          service: 'postgres'
+          component: 'database'
+    scrape_interval: 30s
+    metrics_path: '/metrics'
+
+  # ===== REDIS =====
+  - job_name: 'automator-redis'
+    static_configs:
+      - targets: ['redis:9121']
+        labels:
+          service: 'redis'
+          component: 'cache'
+    scrape_interval: 30s
+    metrics_path: '/metrics'
+
+  # ===== NODE EXPORTER (Sistema) =====
+  - job_name: 'automator-nodes'
+    static_configs:
+      - targets:
+        - 'automator-webia:9100'
+        - 'postgres:9100'
+        - 'redis:9100'
+        - 'elasticsearch:9100'
+        labels:
+          service: 'node'
+          component: 'system'
+    scrape_interval: 30s
+
+  # ===== ELASTICSEARCH =====
+  - job_name: 'automator-elasticsearch'
+    static_configs:
+      - targets: ['elasticsearch:9114']
+        labels:
+          service: 'elasticsearch'
+          component: 'logging'
+    scrape_interval: 30s
+    metrics_path: '/metrics'
+
+  # ===== LOGSTASH =====
+  - job_name: 'automator-logstash'
+    static_configs:
+      - targets: ['logstash:9600']
+        labels:
+          service: 'logstash'
+          component: 'logging'
+    scrape_interval: 30s
+    metrics_path: '/metrics'
+
+  # ===== NGINX =====
+  - job_name: 'automator-nginx'
+    static_configs:
+      - targets: ['nginx:9113']
+        labels:
+          service: 'nginx'
+          component: 'proxy'
+    scrape_interval: 30s
+    metrics_path: '/metrics'
+
+  # ===== CADVISOR (Containers) =====
+  - job_name: 'automator-cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+        labels:
+          service: 'cadvisor'
+          component: 'monitoring'
+    scrape_interval: 30s
+    metrics_path: '/metrics'
+
+  # ===== PROMETHEUS PRÓPRIO =====
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'prometheus'
+          component: 'monitoring'
+    scrape_interval: 30s
+
+  # ===== GRAFANA =====
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3001']
+        labels:
+          service: 'grafana'
+          component: 'visualization'
+    scrape_interval: 60s
+    metrics_path: '/metrics'
+
+  # ===== ALERTMANAGER =====
+  - job_name: 'alertmanager'
+    static_configs:
+      - targets: ['alertmanager:9093']
+        labels:
+          service: 'alertmanager'
+          component: 'alerting'
+    scrape_interval: 60s
+
+# ===== CONFIGURAÇÕES DE REMOTE WRITE (OPCIONAL) =====
+# remote_write:
+#   - url: "https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push"
+#     basic_auth:
+#       username: "${GRAFANA_USERNAME}"
+#       password: "${GRAFANA_API_KEY}"
+
+# ===== CONFIGURAÇÕES DE REMOTE READ (OPCIONAL) =====
+# remote_read:
+#   - url: "https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom"
+#     basic_auth:
+#       username: "${GRAFANA_USERNAME}"
+#       password: "${GRAFANA_API_KEY}"
+
+# ===== STORAGE =====
+storage:
+  tsdb:
+    # Configurações de retenção
+    retention:
+      time: 30d     # 30 dias de retenção
+      size: 100GB  # Máximo 100GB
+
+    # Configurações de WAL
+    wal_compression: true
+
+    # Configurações de chunks
+    max_block_chunk_segment_size: 512MB
+    min_block_duration: 2h
+    max_block_duration: 36h
+
+# ===== LIMITES DE RECURSOS =====
+limits:
+  # Configurações de query
+  max_samples: 50000000
+  max_series: 1000000
+  max_concurrent_queries: 20
+
+  # Configurações de séries temporais
+  max_series_per_query: 100000
+  max_samples_per_query: 50000000
+
+# ===== CONFIGURAÇÕES DE TRACING (OPCIONAL) =====
+# tracing:
+#   endpoint: "tempo:14268"
+#   client_type: "grpc"
+#   insecure: true
+#   headers:
+#     "x-scope-orgid": "tenant1"

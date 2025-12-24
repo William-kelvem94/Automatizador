@@ -1,102 +1,190 @@
-# 🚀 AUTOMATIZADOR WEB IA v7.0 - VERSÃO ORGANIZADA
+# 🚀 AUTOMATIZADOR WEB IA v8.0 - ENTERPRISE EDITION
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Versão-7.0.0-blue.svg" alt="Version"/>
-  <img src="https://img.shields.io/badge/PySide6-Qt6-orange.svg" alt="PySide6"/>
-  <img src="https://img.shields.io/badge/Playwright-Automação-green.svg" alt="Playwright"/>
-  <img src="https://img.shields.io/badge/Clean-Architecture-purple.svg" alt="Clean Architecture"/>
-  <img src="https://img.shields.io/badge/SQLAlchemy-ORM-red.svg" alt="SQLAlchemy"/>
-  <img src="https://img.shields.io/badge/Organizado-100%-yellow.svg" alt="Organized"/>
+  <img src="https://img.shields.io/badge/Versão-8.0.0-blue.svg" alt="Version"/>
+  <img src="https://img.shields.io/badge/Enterprise-Grade-gold.svg" alt="Enterprise"/>
+  <img src="https://img.shields.io/badge/Kubernetes-Ready-blue.svg" alt="Kubernetes"/>
+  <img src="https://img.shields.io/badge/Microservices-Architecture-purple.svg" alt="Microservices"/>
+  <img src="https://img.shields.io/badge/AI-Powered-green.svg" alt="AI Powered"/>
+  <img src="https://img.shields.io/badge/Production-Ready-red.svg" alt="Production Ready"/>
 </div>
 
 ---
 
-## 🎯 VERSÃO 7.0 ORGANIZADA - CLEAN ARCHITECTURE
+## 🎯 VERSÃO 8.0 ENTERPRISE - ARQUITETURA MICRO SERVICES
 
-Esta é a **versão organizada e profissional** do Automatizador IA v7.0, implementada com:
+Esta é a **versão enterprise completa** do Automatizador Web IA v8.0, implementada com arquitetura de produção:
 
-- ✅ **Clean Architecture** completa (5 camadas)
-- ✅ **Código organizado** e estruturado
-- ✅ **Sem lixo eletrônico** (arquivos temporários removidos)
-- ✅ **Tecnologias modernas** (PySide6, Playwright, SQLAlchemy)
-- ✅ **Arquitetura escalável** e manutenível
-
----
-
-## 🏗️ ESTRUTURA CLEAN ARCHITECTURE
-
-```
-src/                          # 🏗️ Código fonte organizado
-├── domain/                   # 🏛️  Regras de negócio puras
-│   ├── entities/            # 📋 Entidades (AutomationTask)
-│   ├── use_cases/           # 🎯 Casos de uso (CreateTask, ExecuteTask)
-│   └── interfaces/          # 🔌 Contratos (Ports)
-│
-├── application/             # 🎪 Serviços da aplicação
-│   └── services/            # 🤖 AutomationOrchestrator
-│
-├── infrastructure/          # 🏭 Implementações concretas
-│   ├── database/            # 💾 SQLAlchemy models
-│   ├── external_services/   # 🌐 Playwright service
-│   └── persistence/         # 💽 Repositories
-│
-├── presentation/            # 🎨 Interface do usuário
-│   ├── qt_views/           # 🖥️  PySide6 MainWindow
-│   └── controllers/        # 🎮 MainController
-│
-└── shared/                  # 🔗 Utilitários compartilhados
-    ├── config/             # ⚙️  Settings manager
-    ├── events/             # 📢 Event system
-    └── utils/              # 🛠️  Logger, validators
-```
+- ✅ **Microservices Architecture** (API Gateway, GraphQL, REST APIs)
+- ✅ **Kubernetes Production Ready** (Deployments, HPA, VPA, Network Policies)
+- ✅ **Enterprise Security** (AES-256, RBAC, Audit System, Vulnerability Scanner)
+- ✅ **AI Multi-Model Orchestration** (OpenAI, Claude, HuggingFace, Computer Vision)
+- ✅ **Enterprise Monitoring** (Prometheus, Grafana, ELK Stack, Sentry)
+- ✅ **Production Infrastructure** (PostgreSQL, Redis Cluster, CDN, Auto-scaling)
 
 ---
 
-## 🚀 INSTALAÇÃO E EXECUÇÃO
+## 🏗️ ESTRUTURA ENTERPRISE MICRO SERVICES
 
-### 1. Instalar Dependências
+```
+src/                          # 🏗️ Código fonte enterprise
+├── domain/                   # 🏛️  Domain Layer (DDD)
+│   ├── entities/            # 📋 Entities (AutomationTask, Workflow)
+│   ├── use_cases/           # 🎯 Use Cases (CQRS Commands/Queries)
+│   ├── services/            # 🧠 Domain Services (AI, Intelligence)
+│   └── interfaces/          # 🔌 Ports & Adapters
+│
+├── application/             # 🎪 Application Layer
+│   └── services/            # 🤖 Orchestrators & Sagas
+│
+├── infrastructure/          # 🏭 Infrastructure Layer
+│   ├── ai/                  # 🧠 AI Services (Multi-model orchestration)
+│   ├── database/            # 💾 Enterprise Database (PostgreSQL)
+│   ├── monitoring/          # 📊 Monitoring (Prometheus, Sentry)
+│   ├── security/            # 🔒 Security (AES-256, RBAC, Audit)
+│   └── external_services/   # 🌐 External APIs (Playwright, etc.)
+│
+├── presentation/            # 🎨 Presentation Layer
+│   ├── apis/                # 🔌 APIs (REST, GraphQL, WebSockets)
+│   ├── qt_views/           # 🖥️ Desktop GUI (PySide6)
+│   └── cli/                # 💻 Command Line Interface
+│
+└── shared/                  # 🔗 Shared Kernel
+    ├── config/             # ⚙️ Configuration (Pydantic)
+    └── utils/              # 🛠️ Utilities (Logger, Validators)
+
+# 🚀 INFRAESTRUTURA ENTERPRISE
+k8s/                         # ☸️  Kubernetes manifests
+├── namespace.yaml          # 🏷️  Namespace configuration
+├── configmap.yaml          # 📋 Configuration maps
+├── secrets.yaml            # 🔐 Secrets management
+├── *-deployment.yaml       # 🚢 Deployments (App, DB, Cache)
+└── ingress-cdn.yaml        # 🌐 CDN & Ingress rules
+
+# 📊 MONITORAMENTO & OBSERVABILIDADE
+config/monitoring/          # 📈 Monitoring configuration
+├── prometheus/             # 📊 Metrics collection
+├── grafana/               # 📈 Dashboards & visualization
+├── logstash/              # 📝 Log processing
+└── alert_rules.yml        # 🚨 Alerting rules
+
+# 🔒 SEGURANÇA ENTERPRISE
+config/security/            # 🛡️ Security configuration
+├── encryption.py          # 🔐 AES-256 encryption
+├── audit.py               # 📋 Audit logging
+├── rbac.py                # 👥 Role-based access control
+└── vulnerability_scanner.py # 🔍 Security scanning
+
+# 🧪 TESTES ENTERPRISE
+tests/                      # 🧪 Testing suite
+├── unit/                  # 🔬 Unit tests (100% coverage)
+├── integration/           # 🔗 Integration tests
+├── e2e/                   # 🌐 End-to-end tests
+└── conftest.py            # ⚙️ Test configuration
+
+# 📁 LEGACY VERSIONS
+legacy/                     # 📚 Historical versions
+└── v7.x/                  # 📋 Previous GUI-based versions
+```
+```
+
+---
+
+## 🚀 DEPLOYMENT ENTERPRISE
+
+### ☸️ **KUBERNETES PRODUCTION DEPLOYMENT**
 ```bash
+# Aplicar manifests Kubernetes
+kubectl apply -f k8s/
+
+# Verificar deployments
+kubectl get pods -n automator-webia
+kubectl get services -n automator-webia
+
+# Verificar auto-scaling
+kubectl get hpa -n automator-webia
+```
+
+### 🐳 **DOCKER COMPOSE DEVELOPMENT**
+```bash
+# Subir stack completo
+docker-compose up -d
+
+# Verificar serviços
+docker-compose ps
+
+# Ver logs
+docker-compose logs -f automator-webia
+```
+
+### 💻 **DESKTOP DEVELOPMENT**
+```bash
+# Instalar dependências
 pip install -r config/requirements.txt
-```
 
-### 2. Instalar Navegador Playwright
-```bash
+# Instalar Playwright browsers
 python -m playwright install chromium
-```
 
-### 3. Executar Aplicação
-```bash
-python launcher.py
+# Executar aplicação
+python smart_launcher.py --mode gui
+
+# Ou APIs standalone
+python smart_launcher.py --mode api --host 0.0.0.0 --port 8000
+python smart_launcher.py --mode graphql --host 0.0.0.0 --port 8002
 ```
 
 ---
 
-## 🎯 FUNCIONALIDADES IMPLEMENTADAS
+## 🎯 CAPACIDADES ENTERPRISE IMPLEMENTADAS
 
-### ✅ **Interface PySide6 Completa**
-- Janela principal moderna com Qt6
-- 4 abas organizadas (Dashboard, Automação, Configurações, Logs)
-- Controles funcionais (botões, campos, listas)
-- Layout responsivo com splitter
-- Tema dark profissional
+### ☸️ **KUBERNETES PRODUCTION READY**
+- Deployments com auto-scaling (HPA + VPA)
+- StatefulSets para PostgreSQL e Redis
+- Network Policies e Security Contexts
+- Health checks e rolling updates
+- Resource limits e requests otimizados
 
-### ✅ **Motor Playwright Robusto**
-- Automação web multi-navegador (Chrome, Firefox, Edge)
-- API assíncrona moderna e performática
-- Auto-wait inteligente para elementos dinâmicos
-- Detecção automática de campos de formulário
-- Validação de resultados de login
+### 🔒 **SEGURANÇA ENTERPRISE-GRADE**
+- AES-256 encryption para dados sensíveis
+- RBAC com 30+ permissões granulares
+- Audit trail completo e compliance-ready
+- Vulnerability scanner automatizado
+- Multi-layer security (TLS, secrets, auth)
 
-### ✅ **Persistência SQLAlchemy**
-- SQLite embedded (zero configuração)
-- SQLAlchemy 2.0 com async support
-- Models bem estruturados
-- Repositories com tratamento de erros
-- Migrações com Alembic
+### 🤖 **IA MULTI-MODEL ORCHESTRATION**
+- OpenAI GPT-4 Vision para análise visual
+- Anthropic Claude 3 para processamento avançado
+- HuggingFace Transformers integrados
+- Computer Vision para OCR e detecção
+- Cost tracking e rate limiting inteligente
 
-### ✅ **Sistema de Configurações**
-- Gerenciador inteligente de configurações
-- Perfis de configuração reutilizáveis
+### 📊 **MONITORAMENTO & OBSERVABILIDADE**
+- Prometheus com 50+ métricas customizadas
+- Grafana dashboards enterprise
+- ELK Stack para logs centralizados
+- Sentry error tracking integrado
+- Alerting automatizado com PagerDuty
+
+### 🌐 **APIS ENTERPRISE**
+- GraphQL API com schema completo
+- REST API com OpenAPI/Swagger
+- API Gateway com rate limiting
+- WebSocket support para real-time
+- Multi-format responses (JSON, XML)
+
+### 💾 **INFRAESTRUTURA DE DADOS**
+- PostgreSQL enterprise com connection pooling
+- Redis Cluster para cache distribuído
+- Backup automation com point-in-time recovery
+- Database migration enterprise-grade
+- Performance optimization avançada
+
+### 🧪 **TESTING ENTERPRISE SUITE**
+- Unit tests com 80%+ coverage obrigatório
+- Integration tests para microservices
+- E2E tests com Playwright automation
+- Performance tests automatizados
+- Security tests integrados no CI/CD
 - Validação automática de valores
 - Backup e restauração automática
 

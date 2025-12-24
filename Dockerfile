@@ -79,10 +79,19 @@ RUN apt-get update && apt-get install -y \
     npm \
     && rm -rf /var/lib/apt/lists/*
 
-# Instalar Playwright browsers de forma otimizada
-RUN pip install playwright==1.45.0 && \
-    playwright install chromium --with-deps && \
-    playwright install-deps
+# Instalar Playwright browsers de forma simplificada
+RUN apt-get update && apt-get install -y \
+    fonts-liberation \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libdrm2 \
+    libxkbcommon0 \
+    libxss1 \
+    libxtst6 \
+    xdg-utils \
+    && rm -rf /var/lib/apt/lists/* && \
+    pip install playwright==1.45.0 && \
+    playwright install chromium --with-deps || playwright install chromium
 
 # =============================================================================
 # STAGE 3: PYINSTALLER BUILD - Criação do executável standalone
@@ -124,7 +133,7 @@ RUN pyinstaller \
 # =============================================================================
 # STAGE 4: RUNTIME OPTIMIZATION - Imagem final ultra-otimizada
 # =============================================================================
-FROM debian:bookworm-slim as runtime
+FROM ubuntu:22.04 AS runtime
 
 # Labels atualizados
 LABEL maintainer="Automator IA Enterprise <enterprise@automator.webia.com>"
@@ -247,7 +256,6 @@ COPY --chown=${APP_USER}:${APP_GROUP} \
     docs/ \
     README.md \
     CHANGELOG.md \
-    LICENSE \
     /app/
 
 # Configurar permissões

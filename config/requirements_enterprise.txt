@@ -1,0 +1,157 @@
+# ===== AUTOMATOR WEB IA v9.0 - REQUIREMENTS ENTERPRISE =====
+# Otimizado para performance, segurança e manutenção
+
+# -----------------------------------------------------------------------------
+# CORE DEPENDENCIES (SEMPRE INSTALADO - 5 PACOTES)
+# -----------------------------------------------------------------------------
+
+# Interface Gráfica (Obrigatório)
+PySide6>=6.6.0
+PySide6-Qt6>=6.6.0
+
+# ORM & Database (Obrigatório)
+sqlalchemy>=2.0.23
+
+# Logging (Obrigatório)
+loguru>=0.7.2
+
+# Validation (Obrigatório)
+pydantic>=2.6.0
+
+# -----------------------------------------------------------------------------
+# OPTIONAL DEPENDENCIES (CARREGADO SOB DEMANDA)
+# -----------------------------------------------------------------------------
+
+# ===== AI & MACHINE LEARNING =====
+torch>=2.1.2; extra == "ai"
+transformers>=4.36.0; extra == "ai"
+openai>=1.3.0; extra == "ai"
+anthropic>=0.7.8; extra == "ai"
+scikit-learn>=1.4.0; extra == "ai"
+numpy>=1.26.2; extra == "ai"
+
+# ===== COMPUTER VISION =====
+opencv-python>=4.8.1; extra == "vision"
+Pillow>=10.1.0; extra == "vision"
+scikit-image>=0.21.0; extra == "vision"
+
+# ===== WEB & API =====
+fastapi>=0.108.0; extra == "web"
+uvicorn>=0.25.0; extra == "web"
+strawberry-graphql>=0.235.0; extra == "web"
+httpx>=0.26.0; extra == "web"
+aiohttp>=3.9.1; extra == "web"
+
+# ===== DATABASE EXTENDED =====
+psycopg2-binary>=2.9.9; extra == "database"
+redis>=5.0.1; extra == "database"
+alembic>=1.13.0; extra == "database"
+
+# ===== AUTOMATION ENGINES =====
+playwright>=1.45.0; extra == "automation"
+selenium>=4.20.0; extra == "automation"
+webdriver-manager>=4.0.1; extra == "automation"
+undetected-chromedriver>=3.5.4; extra == "automation"
+
+# ===== MONITORING & OBSERVABILITY =====
+prometheus-client>=0.19.0; extra == "monitoring"
+sentry-sdk>=1.38.0; extra == "monitoring"
+grafana-api>=1.0.3; extra == "monitoring"
+opentelemetry-distro>=0.44b0; extra == "monitoring"
+opentelemetry-instrumentation>=0.44b0; extra == "monitoring"
+
+# ===== SECURITY =====
+cryptography>=41.0.7; extra == "security"
+bcrypt>=4.1.2; extra == "security"
+python-jose>=3.3.0; extra == "security"
+passlib>=1.7.4; extra == "security"
+python-multipart>=0.0.6; extra == "security"
+
+# ===== ENTERPRISE FEATURES =====
+kubernetes>=28.1.0; extra == "enterprise"
+docker>=7.0.0; extra == "enterprise"
+boto3>=1.34.0; extra == "enterprise"
+azure-storage-blob>=12.19.0; extra == "enterprise"
+
+# ===== DEVELOPMENT & TESTING =====
+pytest>=7.4.3; extra == "dev"
+pytest-asyncio>=0.21.1; extra == "dev"
+pytest-cov>=4.1.0; extra == "dev"
+pytest-mock>=3.12.0; extra == "dev"
+black>=23.12.1; extra == "dev"
+isort>=5.13.2; extra == "dev"
+mypy>=1.7.1; extra == "dev"
+flake8>=6.1.0; extra == "dev"
+pre-commit>=3.6.0; extra == "dev"
+locust>=2.17.0; extra == "dev"
+
+# ===== BUILD & DEPLOYMENT =====
+pyinstaller>=6.3.0; extra == "build"
+cx-Freeze>=6.15; extra == "build"
+py2exe>=0.13; extra == "build"  # Windows only
+
+# -----------------------------------------------------------------------------
+# SYSTEM DEPENDENCIES (CONDITIONAL)
+# -----------------------------------------------------------------------------
+
+# Windows specific
+pywin32>=306; sys_platform == "win32"
+winshell>=0.6; sys_platform == "win32"
+
+# Linux specific
+python-magic>=0.4.27; sys_platform != "win32"
+
+# -----------------------------------------------------------------------------
+# VERSION PINNING (STABILITY)
+# -----------------------------------------------------------------------------
+
+# Core utilities (sempre necessário)
+python-dotenv>=1.0.0
+click>=8.1.7
+rich>=13.7.0
+typer>=0.9.0
+pathlib2>=2.3.7; python_version < "3.4"
+
+# Async & concurrency
+aiofiles>=23.2.1
+aiomysql>=0.1.1
+aio-pika>=9.4.0
+
+# Data processing
+pandas>=2.1.4; extra == "ai"
+matplotlib>=3.8.2; extra == "ai"
+
+# Networking
+requests>=2.31.0
+urllib3>=2.0.0
+
+# Date & time
+python-dateutil>=2.8.2
+
+# -----------------------------------------------------------------------------
+# COMPATIBILITY MATRIX
+# -----------------------------------------------------------------------------
+
+# Python version constraints
+# python_requires = ">=3.11,<3.13"
+
+# Platform constraints
+# platforms = ["Windows", "Linux", "macOS"]
+
+# Classifier constraints
+# classifiers = [
+#     "Development Status :: 5 - Production/Stable",
+#     "Intended Audience :: Developers",
+#     "Intended Audience :: Information Technology",
+#     "License :: OSI Approved :: MIT License",
+#     "Operating System :: Microsoft :: Windows",
+#     "Operating System :: POSIX :: Linux",
+#     "Operating System :: MacOS",
+#     "Programming Language :: Python :: 3",
+#     "Programming Language :: Python :: 3.11",
+#     "Programming Language :: Python :: 3.12",
+#     "Topic :: Internet :: WWW/HTTP",
+#     "Topic :: Software Development :: Libraries :: Python Modules",
+#     "Topic :: System :: Distributed Computing",
+#     "Topic :: System :: Monitoring",
+# ]

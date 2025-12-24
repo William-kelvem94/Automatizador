@@ -1,0 +1,17 @@
+# Core Dependencies
+PySide6>=6.6.0
+playwright>=1.45.0
+sqlalchemy>=2.0.23
+loguru>=0.7.2
+pydantic>=2.6.0
+
+# Optional Dependencies (lazy-loaded)
+torch>=2.1.2; extra == "ai"
+transformers>=4.36.0; extra == "ai"
+opencv-python>=4.8.1; extra == "vision"
+fastapi>=0.108.0; extra == "web"
+redis>=5.0.1; extra == "cache"
+
+# Dev Dependencies
+pytest>=7.4.3; extra == "dev"
+black>=23.12.1; extra == "dev"

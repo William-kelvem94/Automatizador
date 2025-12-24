@@ -26,11 +26,12 @@ for path in [str(project_root), str(src_dir)]:
     if path not in sys.path:
         sys.path.insert(0, path)
 
-# Imports da aplicação
-from src.shared.utils.logger import get_logger
+# Imports da aplicação (lazy loading para performance)
+from src.shared.utils.lazy_importer import lazy_import
 
-# Logger
-logger = get_logger(__name__)
+# Logger (lazy loaded para performance)
+logger_module = lazy_import("src.shared.utils.logger")
+logger = logger_module.get_logger(__name__) if logger_module else None
 
 class SmartLauncher:
     """Launcher inteligente para múltiplos ambientes"""

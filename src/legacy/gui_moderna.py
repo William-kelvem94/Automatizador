@@ -19,8 +19,15 @@ class ModernLoginAutomatorGUI:
     """Interface gráfica moderna e profissional"""
 
     def __init__(self):
+        # Detectar suporte a emoji
+        self.emoji_support = self._check_emoji_support()
+
         self.root = tk.Tk()
-        self.root.title("🚀 Automatizador de Login - Sistema Inteligente v3.0")
+
+        self.root.title(self.get_text_with_fallback(
+            "🚀 Automatizador de Login - Sistema Inteligente v3.0",
+            "Automatizador de Login - Sistema Inteligente v3.0"
+        ))
         self.root.geometry("1000x700")
         self.root.configure(bg="#f0f2f5")
         self.root.resizable(True, True)
@@ -56,6 +63,23 @@ class ModernLoginAutomatorGUI:
         self.is_testing = False
         self.is_scheduling = False
         self.current_operation = None
+
+    def _check_emoji_support(self):
+        """Verifica se o sistema suporta emojis"""
+        try:
+            # Tenta codificar um emoji
+            '🚀'.encode('utf-8').decode('utf-8')
+            return True
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            return False
+
+    def get_text_with_fallback(self, text_with_emoji, fallback_text):
+        """Retorna texto com emoji se suportado, senão texto alternativo"""
+        return text_with_emoji if self.emoji_support else fallback_text
+
+    def get_emoji_text(self, emoji, fallback):
+        """Helper para obter texto com emoji ou fallback"""
+        return self.get_text_with_fallback(emoji, fallback)
 
     def setup_styles(self):
         """Configurar estilos modernos"""
@@ -134,7 +158,7 @@ class ModernLoginAutomatorGUI:
 
         # Container principal
         main_container = tk.Frame(self.root, bg=self.colors['light'])
-        main_container.pack(fill=tk.BOTH, expand=True, padx=20, pady=(0, 20))
+        main_container.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
 
         # Layout em grid responsivo
         main_container.grid_columnconfigure(0, weight=1)
@@ -171,7 +195,7 @@ class ModernLoginAutomatorGUI:
         logo_frame.pack(side=tk.LEFT, padx=20, pady=15)
 
         # Logo grande
-        logo_label = tk.Label(logo_frame, text="🔐",
+        logo_label = tk.Label(logo_frame, text=self.get_text_with_fallback("🔐", "[LOCK]"),
                              font=('Segoe UI', 32), bg=self.colors['primary'], fg=self.colors['white'])
         logo_label.pack(side=tk.LEFT)
 
@@ -222,11 +246,11 @@ class ModernLoginAutomatorGUI:
 
         # Seção 1: Site
         site_frame = tk.Frame(content_frame, bg=self.colors['white'])
-        site_frame.pack(fill=tk.X, pady=(0, 20))
+        site_frame.pack(fill=tk.X, pady=20)
 
         site_label = tk.Label(site_frame, text="🌐 SITE DE LOGIN",
                              font=('Segoe UI', 11, 'bold'), bg=self.colors['white'], fg=self.colors['text'])
-        site_label.pack(anchor=tk.W, pady=(0, 10))
+        site_label.pack(anchor=tk.W, pady=10)
 
         # URL com ícone
         url_frame = tk.Frame(site_frame, bg=self.colors['white'])
@@ -244,15 +268,15 @@ class ModernLoginAutomatorGUI:
 
         # Seção 2: Credenciais
         cred_frame = tk.Frame(content_frame, bg=self.colors['white'])
-        cred_frame.pack(fill=tk.X, pady=(0, 20))
+        cred_frame.pack(fill=tk.X, pady=20)
 
         cred_label = tk.Label(cred_frame, text="🔐 CREDENCIAIS DE ACESSO",
                              font=('Segoe UI', 11, 'bold'), bg=self.colors['white'], fg=self.colors['text'])
-        cred_label.pack(anchor=tk.W, pady=(0, 10))
+        cred_label.pack(anchor=tk.W, pady=10)
 
         # Email
         email_frame = tk.Frame(cred_frame, bg=self.colors['white'])
-        email_frame.pack(fill=tk.X, pady=(0, 10))
+        email_frame.pack(fill=tk.X, pady=10)
 
         email_icon = tk.Label(email_frame, text="📧", font=('Segoe UI', 12),
                              bg=self.colors['white'], fg=self.colors['primary'])
@@ -280,15 +304,15 @@ class ModernLoginAutomatorGUI:
 
         # Botões de ação
         buttons_frame = tk.Frame(content_frame, bg=self.colors['white'])
-        buttons_frame.pack(fill=tk.X, pady=(20, 0))
+        buttons_frame.pack(fill=tk.X, pady=20)
 
         # Botão salvar
-        save_btn = tk.Button(buttons_frame, text="💾 SALVAR CONFIGURAÇÃO",
+        save_btn = tk.Button(buttons_frame, text=self.get_emoji_text("💾 ", "[SAVE] ") + "SALVAR CONFIGURAÇÃO",
                             command=self.save_config,
                             bg=self.colors['success'], fg=self.colors['white'],
                             font=('Segoe UI', 9, 'bold'), relief=tk.FLAT,
                             padx=20, pady=10, cursor="hand2")
-        save_btn.pack(fill=tk.X, pady=(0, 8))
+        save_btn.pack(fill=tk.X, pady=8)
 
         # Botão testar
         test_btn = tk.Button(buttons_frame, text="🧪 TESTAR CONFIGURAÇÃO",
@@ -296,10 +320,10 @@ class ModernLoginAutomatorGUI:
                             bg=self.colors['primary'], fg=self.colors['white'],
                             font=('Segoe UI', 9, 'bold'), relief=tk.FLAT,
                             padx=20, pady=10, cursor="hand2")
-        test_btn.pack(fill=tk.X, pady=(0, 8))
+        test_btn.pack(fill=tk.X, pady=8)
 
         # Botão limpar
-        clear_btn = tk.Button(buttons_frame, text="🧹 LIMPAR CAMPOS",
+        clear_btn = tk.Button(buttons_frame, text=self.get_emoji_text("🧹 ", "[CLEAR] ") + "LIMPAR CAMPOS",
                              command=self.clear_config,
                              bg=self.colors['warning'], fg=self.colors['dark'],
                              font=('Segoe UI', 9, 'bold'), relief=tk.FLAT,
@@ -312,19 +336,23 @@ class ModernLoginAutomatorGUI:
         """Criar painel de operações moderno"""
         # Container para os cards
         container = tk.Frame(parent, bg=self.colors['light'])
-        container.pack(fill=tk.BOTH, expand=True)
+        container.grid(row=0, column=0, sticky="nsew", padx=0, pady=0)
+
+        # Configurar grid do container
+        container.grid_rowconfigure(2, weight=1)  # Logs expandem
+        container.grid_columnconfigure(0, weight=1)
 
         # Card 1: Operações Principais
-        main_ops_card = self.create_operations_card(container, "🎯 OPERAÇÕES PRINCIPAIS")
-        main_ops_card.pack(fill=tk.X, pady=(0, 10))
+        main_ops_card = self.create_operations_card(container, self.get_emoji_text("🎯 ", "[TARGET] ") + "OPERAÇÕES PRINCIPAIS")
+        main_ops_card.grid(row=0, column=0, sticky="ew", pady=(0, 10))
 
         # Card 2: Agendamento
-        schedule_card = self.create_schedule_card(container, "⏰ AGENDAMENTO AUTOMÁTICO")
-        schedule_card.pack(fill=tk.X, pady=(0, 10))
+        schedule_card = self.create_schedule_card(container, self.get_emoji_text("⏰ ", "[SCHEDULE] ") + "AGENDAMENTO AUTOMÁTICO")
+        schedule_card.grid(row=1, column=0, sticky="ew", pady=(0, 10))
 
         # Card 3: Logs
-        logs_card = self.create_logs_card(container, "📋 LOGS DO SISTEMA")
-        logs_card.pack(fill=tk.BOTH, expand=True)
+        logs_card = self.create_logs_card(container, self.get_emoji_text("📋 ", "[LOGS] ") + "LOGS DO SISTEMA")
+        logs_card.grid(row=2, column=0, sticky="nsew")
 
         return container
 
@@ -369,7 +397,7 @@ class ModernLoginAutomatorGUI:
         return card
 
     def create_schedule_card(self, parent, title):
-        """Criar card de agendamento"""
+        """Criar card de agendamento avançado"""
         card = tk.Frame(parent, bg=self.colors['white'],
                        relief="solid", bd=1, highlightbackground=self.colors['border'])
 
@@ -397,6 +425,58 @@ class ModernLoginAutomatorGUI:
         self.schedule_status_label = tk.Label(status_frame, text="PARADO",
                                             font=('Segoe UI', 9, 'bold'), bg=self.colors['white'], fg=self.colors['danger'])
         self.schedule_status_label.pack(side=tk.LEFT, padx=(10, 0))
+
+        # Configurações de agendamento
+        config_frame = tk.Frame(content, bg=self.colors['white'])
+        config_frame.pack(fill=tk.X, pady=(0, 10))
+
+        # Horários
+        time_frame = tk.Frame(config_frame, bg=self.colors['white'])
+        time_frame.pack(fill=tk.X, pady=(0, 5))
+
+        time_label = tk.Label(time_frame, text="Horários (HH:MM):",
+                             font=('Segoe UI', 9, 'bold'), bg=self.colors['white'], fg=self.colors['text'])
+        time_label.pack(anchor=tk.W)
+
+        self.schedule_times_var = tk.StringVar(value="08:00,12:00,18:00,22:00")
+        time_entry = tk.Entry(time_frame, textvariable=self.schedule_times_var,
+                             font=('Consolas', 9), relief=tk.SOLID, bd=1)
+        time_entry.pack(fill=tk.X, pady=(2, 0))
+
+        # Dias da semana
+        days_frame = tk.Frame(config_frame, bg=self.colors['white'])
+        days_frame.pack(fill=tk.X, pady=(0, 5))
+
+        days_label = tk.Label(days_frame, text="Dias da semana:",
+                             font=('Segoe UI', 9, 'bold'), bg=self.colors['white'], fg=self.colors['text'])
+        days_label.pack(anchor=tk.W)
+
+        # Checkboxes para dias da semana
+        self.days_vars = {}
+        days_container = tk.Frame(days_frame, bg=self.colors['white'])
+        days_container.pack(fill=tk.X)
+
+        days = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom']
+        for i, day in enumerate(days):
+            var = tk.BooleanVar(value=True)  # Todos os dias selecionados por padrão
+            self.days_vars[day] = var
+            cb = tk.Checkbutton(days_container, text=day, variable=var,
+                               bg=self.colors['white'], font=('Segoe UI', 8))
+            cb.pack(side=tk.LEFT, padx=(0, 5))
+
+        # Repetição
+        repeat_frame = tk.Frame(config_frame, bg=self.colors['white'])
+        repeat_frame.pack(fill=tk.X, pady=(0, 10))
+
+        repeat_label = tk.Label(repeat_frame, text="Repetição:",
+                               font=('Segoe UI', 9, 'bold'), bg=self.colors['white'], fg=self.colors['text'])
+        repeat_label.pack(anchor=tk.W)
+
+        self.repeat_var = tk.StringVar(value="diariamente")
+        repeat_combo = ttk.Combobox(repeat_frame, textvariable=self.repeat_var,
+                                   values=["diariamente", "semanalmente", "mensalmente"],
+                                   state="readonly", font=('Segoe UI', 9))
+        repeat_combo.pack(fill=tk.X, pady=(2, 0))
 
         # Botões
         buttons_frame = tk.Frame(content, bg=self.colors['white'])
@@ -433,7 +513,7 @@ class ModernLoginAutomatorGUI:
         header_label.pack(pady=10)
 
         # Conteúdo
-        content = tk.Frame(card, bg=self.colors['white'], padx=15, pady=(15, 0))
+        content = tk.Frame(card, bg=self.colors['white'], padx=15, pady=15)
         content.pack(fill=tk.BOTH, expand=True)
 
         # Área de log
@@ -663,6 +743,7 @@ class ModernLoginAutomatorGUI:
                 self.log("=" * 80)
                 self.log("[MAPPING] INICIANDO MAPEAMENTO INTELIGENTE DE CAMPOS")
                 self.log("=" * 80)
+                self.log("[DEBUG] Método map_fields foi chamado")
 
                 # Verificar URL
                 url = self.url_entry.get().strip()
@@ -685,9 +766,12 @@ class ModernLoginAutomatorGUI:
 
                 # Abrir navegador
                 self.log("[BROWSER] Abrindo navegador...")
+                self.log(f"[DEBUG] Configuração headless: {self.automator.headless}")
                 try:
                     driver = self.automator.setup_driver()
                     self.log("[OK] Navegador aberto")
+                    self.log(f"[DEBUG] URL atual: {driver.current_url}")
+                    self.log(f"[DEBUG] Título da página: {driver.title}")
                 except Exception as e:
                     self.log(f"[ERROR] Falha ao abrir navegador: {e}")
                     self.show_error_message("Erro ao abrir o navegador")
@@ -791,6 +875,7 @@ class ModernLoginAutomatorGUI:
                 self.log("=" * 80)
                 self.log("[LOGIN] INICIANDO PROCESSO DE LOGIN AUTOMATIZADO")
                 self.log("=" * 80)
+                self.log("[DEBUG] Método run_login foi chamado")
 
                 # Validações iniciais
                 self.log("\n[VALIDATION] VERIFICANDO CONFIGURAÇÃO")
@@ -844,12 +929,15 @@ class ModernLoginAutomatorGUI:
                     self.log("[OK] Sistema pronto para operações")
                     self.show_success_message("Login executado com sucesso!")
                 else:
-                    self.log("[FAILURE] LOGIN FALHOU!")
-                    self.log("[INFO] Verifique os logs acima para detalhes")
-                    self.log("[TIP] Possíveis causas:")
-                    self.log("   • Credenciais incorretas")
-                    self.log("   • Site com mudanças estruturais")
-                    self.log("   • Problemas de conectividade")
+                    self.log("[HYBRID] MODO HIBRIDO ATIVADO")
+                    self.log("[INFO] O login foi parcialmente automatizado")
+                    self.log("[ACTION] Complete o processo manualmente no navegador")
+                    self.log("[TIP] Possíveis motivos do modo híbrido:")
+                    self.log("   • Site usa autenticação de dois fatores (2FA)")
+                    self.log("   • Formulário não tradicional detectado")
+                    self.log("   • CAPTCHA ou verificação de segurança")
+                    self.log("   • Seletores precisam ser configurados manualmente")
+                    self.log("[NEXT] Use 'Mapear Campos' para detectar seletores automaticamente")
                     self.log("   • Seletores desatualizados")
                     self.show_error_message("Login falhou - verifique os logs")
 
@@ -888,18 +976,28 @@ class ModernLoginAutomatorGUI:
                     self.show_warning_message("Agendador já está ativo")
                     return
 
-                # Carregar horários
+                # Carregar horários da interface
                 self.log("[CONFIG] Carregando configuração de horários...")
                 try:
-                    horarios_str = self.config.get('SCHEDULE', 'horarios', fallback='')
+                    horarios_str = self.schedule_times_var.get().strip()
                     if not horarios_str:
                         self.log("[ERROR] Nenhum horário configurado!")
-                        self.log("[TIP] Configure horários na seção [SCHEDULE] do config.ini")
+                        self.log("[TIP] Configure horários no campo acima")
                         self.show_error_message("Configure horários primeiro")
                         return
 
                     horarios = [h.strip() for h in horarios_str.split(',') if h.strip()]
                     self.log(f"[OK] {len(horarios)} horário(s) configurado(s)")
+
+                    # Verificar dias selecionados
+                    dias_selecionados = [dia for dia, var in self.days_vars.items() if var.get()]
+                    if not dias_selecionados:
+                        self.log("[ERROR] Nenhum dia da semana selecionado!")
+                        self.show_error_message("Selecione pelo menos um dia da semana")
+                        return
+
+                    self.log(f"[OK] Dias selecionados: {', '.join(dias_selecionados)}")
+                    self.log(f"[OK] Modo de repetição: {self.repeat_var.get()}")
 
                     # Validar horários
                     horarios_validos = []
@@ -1206,7 +1304,10 @@ Desenvolvido com tecnologia Python e Selenium."""
     def run(self):
         """Executar a aplicação"""
         self.log("=" * 80)
-        self.log("🚀 AUTOMATIZADOR DE LOGIN v3.0 INICIADO")
+        self.log("[START] AUTOMATIZADOR DE LOGIN v3.0 INICIADO")
+        self.log("[READY] Sistema pronto para uso")
+        self.log("[TIP] Use 'Testar Configuração' para validar suas credenciais")
+        self.log("[TIP] Use 'Mapear Campos' para detectar automaticamente os seletores do site")
         self.log("=" * 80)
         self.log("[READY] Sistema pronto para uso")
         self.log("[TIP] Configure suas credenciais e comece a automatizar!")

@@ -14,6 +14,7 @@ Versão: 2.0 - Validação Avançada
 
 import time
 import configparser
+import re
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -39,6 +40,16 @@ class LoginAutomator:
     4. Executa login com múltiplas estratégias
     5. Fornece feedback detalhado de todas as operações
     """
+
+    def _clean_log_text(self, text):
+        """Remove caracteres especiais que podem causar problemas de codificação nos logs"""
+        if not isinstance(text, str):
+            text = str(text)
+        # Remove caracteres unicode problemáticos (emojis, símbolos especiais)
+        text = re.sub(r'[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF\U0001F680-\U0001F6FF\U0001F1E0-\U0001F1FF\u2600-\u26FF\u2700-\u27BF\u2700-\u27BF\uFE00-\uFE0F]', '', text)
+        # Remove outros caracteres especiais que podem causar problemas
+        text = re.sub(r'[^\x00-\x7F]+', '', text)
+        return text.strip()
 
     def __init__(self, config_file='config.ini'):
         """
@@ -154,20 +165,57 @@ class LoginAutomator:
 
         for strategy in strategies:
             try:
-                self.logger.info(f"Tentando estratégia: {strategy.__name__}")
+                self.logger.debug(f"Tentando estratégia: {strategy.__name__}")
                 driver = strategy(options)
                 if driver:
                     self.logger.info("Chrome WebDriver configurado com sucesso")
-                    return driver
-            except Exception as e:
-                self.logger.warning(f"Estratégia {strategy.__name__} falhou: {e}")
+            # Verificar se o driver está realmente funcional e visível
+            try:
+                # Teste básico de funcionalidade
+                test_url = driver.current_url
+                test_title = driver.title
+                self.logger.info(f"WebDriver criado com sucesso - URL atual: {test_url}")
+                self.logger.info(f"Título da página: {test_title}")
+
+                # Tentar executar JavaScript para verificar se a janela está ativa
+                try:
+                    is_visible = driver.execute_script("return document.hasFocus();")
+                    self.logger.info(f"Janela tem foco: {is_visible}")
+
+                    # Forçar foco na janela
+                    driver.execute_script("window.focus();")
+                    self.logger.info("Tentativa de focar na janela executada")
+
+                except Exception as js_error:
+                    self.logger.warning(f"Não foi possível verificar foco da janela: {js_error}")
+
+                return driver
+
+            except Exception as test_error:
+                self.logger.warning(f"Driver criado mas falhou no teste: {test_error}")
+                try:
+                    driver.quit()
+                except:
+                    pass
                 continue
 
+        except Exception as e:
+            self.logger.debug(f"Estratégia {strategy.__name__} falhou (tentando próxima): {str(e)[:100]}")
+            continue
+
         # Se todas as estratégias falharam
-        raise Exception(
+        error_msg = (
             "Não foi possível configurar o ChromeDriver. "
-            "Verifique se o Google Chrome está instalado e atualizado."
+            "Verifique se o Google Chrome está instalado e atualizado.\n"
+            "Soluções possíveis:\n"
+            "1. Instale ou atualize o Google Chrome\n"
+            "2. Execute: pip install --upgrade webdriver-manager\n"
+            "3. Reinicie o sistema\n"
+            "4. Verifique se há antivírus bloqueando o ChromeDriver"
         )
+        self.logger.error("FALHA CRÍTICA: ChromeDriver não pôde ser configurado")
+        self.logger.error("DETALHES: " + error_msg)
+        raise Exception(error_msg)
 
     def _configure_chrome_options(self):
         """
@@ -179,9 +227,20 @@ class LoginAutomator:
         options = webdriver.ChromeOptions()
 
         # Modo headless se configurado
+        self.logger.info(f"Configuração headless: {self.headless}")
         if self.headless:
             options.add_argument('--headless')
             self.logger.info("Executando em modo headless")
+        else:
+            self.logger.info("Executando em modo visual (janela visível)")
+            # Garantir que a janela seja visível - múltiplas abordagens
+            options.add_argument('--no-headless')
+            options.add_argument('--disable-background-timer-throttling')
+            options.add_argument('--disable-backgrounding-occluded-windows')
+            options.add_argument('--disable-renderer-backgrounding')
+            options.add_argument('--disable-background-media-download')
+            options.add_argument('--disable-features=VizDisplayCompositor')
+            self.logger.info("Adicionados argumentos para forçar visibilidade da janela")
 
         # Configurações de estabilidade
         options.add_argument('--no-sandbox')
@@ -190,8 +249,16 @@ class LoginAutomator:
         options.add_argument('--disable-web-security')
         options.add_argument('--allow-running-insecure-content')
 
-        # Configurações de interface
+        # Configurações de interface - FORÇAR VISIBILIDADE
         options.add_argument('--window-size=1366,768')
+        options.add_argument('--start-maximized')  # Maximizar janela
+        options.add_argument('--no-default-browser-check')
+        options.add_argument('--disable-web-security')
+        options.add_argument('--disable-features=VizDisplayCompositor')
+        options.add_argument('--disable-ipc-flooding-protection')
+        options.add_argument('--disable-background-timer-throttling')
+        options.add_argument('--disable-backgrounding-occluded-windows')
+        options.add_argument('--disable-renderer-backgrounding')
         options.add_argument('--disable-extensions')
         options.add_argument('--disable-plugins')
         options.add_argument('--disable-images')  # Para velocidade
@@ -307,6 +374,16 @@ class LoginAutomator:
             if not fields:
                 self.logger.warning("Campos não detectados automaticamente, tentando fallback...")
                 fields = self.fallback_field_detection(driver)
+
+            # Verificar se temos campos mínimos para prosseguir
+            if not fields or 'email' not in fields:
+                self.logger.warning("ATENÇÃO: Campo de e-mail não detectado!")
+                self.logger.info("Este site pode usar um sistema de login não tradicional.")
+                self.logger.info("Dicas para configuração manual:")
+                self.logger.info("  1. Use a ferramenta 'Mapear Campos' para detectar seletores")
+                self.logger.info("  2. Configure os seletores manualmente no arquivo config.ini")
+                self.logger.info("  3. Verifique se o site requer autenticação de dois fatores")
+                return self._hybrid_mode(driver)
 
             # FASE 6: Preenchimento dos campos
             self.logger.info("FASE 6: Preenchendo formulário...")
@@ -801,20 +878,32 @@ class LoginAutomator:
         Returns:
             bool: True (sempre retorna True pois é modo híbrido)
         """
-        self.logger.info("[HYBRID] MODO HIBRIDO ATIVADO")
-        self.logger.info("📋 Instruções:")
-        self.logger.info("   1. O navegador foi aberto e o email foi preenchido")
-        self.logger.info("   2. Complete o login manualmente se necessário")
-        self.logger.info("   3. Feche o navegador quando terminar")
+        self.logger.info("=" * 60)
+        self.logger.info("🎯 MODO HÍBRIDO ATIVADO - ASSISTÊNCIA MANUAL")
+        self.logger.info("=" * 60)
+        self.logger.info("📋 O que aconteceu:")
+        self.logger.info("   • O sistema conseguiu acessar a página de login")
+        self.logger.info("   • Alguns campos foram preenchidos automaticamente")
+        self.logger.info("   • O login completo não pôde ser feito automaticamente")
+        self.logger.info("")
+        self.logger.info("🔧 Próximos passos recomendados:")
+        self.logger.info("   1. ✅ Complete o login manualmente no navegador aberto")
+        self.logger.info("   2. 🔍 Use 'Mapear Campos' para detectar seletores automaticamente")
+        self.logger.info("   3. ⚙️ Configure seletores manualmente se necessário")
+        self.logger.info("   4. 📝 Verifique se há CAPTCHA ou autenticação 2FA")
+        self.logger.info("")
+        self.logger.info("⏰ O navegador ficará aberto por 60 segundos para conclusão manual")
 
         try:
             # Mantém navegador aberto por tempo determinado
-            self.logger.info("Mantendo navegador aberto por 60 segundos...")
-            time.sleep(60)
+            for i in range(60, 0, -10):
+                self.logger.info(f"⏳ Navegador aberto - Tempo restante: {i} segundos")
+                time.sleep(10)
 
         except KeyboardInterrupt:
-            self.logger.info("Modo híbrido interrompido pelo usuário")
+            self.logger.info("✅ Modo híbrido interrompido pelo usuário")
 
+        self.logger.info("🔒 Navegador fechado - Processo concluído")
         return True
 
     def analyze_page_elements(self, driver):
@@ -874,9 +963,9 @@ class LoginAutomator:
 
             for inp in input_elements:
                 input_type = inp.get_attribute('type') or 'text'
-                input_name = inp.get_attribute('name') or ''
-                input_id = inp.get_attribute('id') or ''
-                input_placeholder = inp.get_attribute('placeholder') or ''
+                input_name = self._clean_log_text(inp.get_attribute('name') or '')
+                input_id = self._clean_log_text(inp.get_attribute('id') or '')
+                input_placeholder = self._clean_log_text(inp.get_attribute('placeholder') or '')
                 visible = inp.is_displayed()
 
                 if input_type.lower() == 'email':
@@ -915,9 +1004,9 @@ class LoginAutomator:
 
             for btn in button_elements:
                 button_type = btn.get_attribute('type') or 'button'
-                button_text = btn.text.strip()
-                button_id = btn.get_attribute('id') or ''
-                button_name = btn.get_attribute('name') or ''
+                button_text = self._clean_log_text(btn.text.strip())
+                button_id = self._clean_log_text(btn.get_attribute('id') or '')
+                button_name = self._clean_log_text(btn.get_attribute('name') or '')
                 visible = btn.is_displayed()
 
                 # Identificar botões de login

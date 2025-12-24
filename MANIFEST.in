@@ -1,0 +1,21 @@
+# Incluir arquivos de configuração
+include config/*.ini
+include config/*.txt
+
+# Incluir scripts
+include *.bat
+include scripts/*.bat
+include scripts/*.ps1
+
+# Incluir documentação
+include *.md
+include docs/**/*.md
+include docs/**/*.txt
+
+# Excluir arquivos temporários
+exclude *.log
+exclude __pycache__
+exclude .git
+exclude .pytest_cache
+exclude *.pyc
+exclude *.pyo

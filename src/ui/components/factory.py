@@ -399,7 +399,7 @@ class ComponentFactory:
             )
             trend_label.pack()
 
-        return card
+        return card, value_label
 
     def create_status_indicator(
         self, parent, label: str, status: str, icon: str

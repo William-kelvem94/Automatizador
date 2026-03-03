@@ -39,7 +39,7 @@ def run_app():
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
     print("="*50)
-    print("      🚀 AUTOMATIZADOR IA v5.0 - AUTO-LOADER")
+    print("       AUTOMATIZADOR IA v5.0 - AUTO-LOADER")
     print("="*50)
     
     if check_dependencies():

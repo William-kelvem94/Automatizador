@@ -12,10 +12,11 @@ from tkinter import messagebox, scrolledtext, ttk
 from typing import Tuple
 
 # Imports do sistema
-from ..core.config_manager import ConfigManager
-from ..core.scheduler import SmartScheduler
-from .components.factory import ComponentFactory
-from .styles.design_system import DesignSystem
+from src.core.config_manager import ConfigManager
+from src.core.automation_engine import AutomationEngine
+from src.core.scheduler import SmartScheduler
+from src.ui.components.factory import ComponentFactory
+from src.ui.styles.design_system import DesignSystem
 
 
 class ModernInterface:
@@ -28,22 +29,34 @@ class ModernInterface:
 
         # Estado da aplicação
         self.config_manager = ConfigManager()
-        self.automation_engine = None
+        self.automation_engine = AutomationEngine(self.config_manager.get_all())
         self.smart_scheduler = SmartScheduler()
+        
+        # Inicializar componentes
+        self.automation_engine.initialize()
+        self.smart_scheduler.initialize()
 
         # Estado da UI
         self.current_view = "dashboard"
         self.views = {}
         self.animations = {}
         self.notifications = []
-
-        # Métricas em tempo real
+        self.notifications_frame = None
+        self.nav_buttons = {}
+        self.animations_running = True
+        
+        # Monitoramento e Status
         self.metrics = {
             "operations_today": 0,
             "success_rate": 0,
             "avg_duration": 0,
             "active_tasks": 0,
         }
+        self.metric_value_labels = {}
+        self.status_indicators = {}
+        self.status_indicators_bar = {}
+        self.all_settings = {}
+        self.setting_vars = {}
 
         # Inicializar interface
         self._setup_main_window()
@@ -384,7 +397,7 @@ class ModernInterface:
         self._create_logs_view()
 
     def _create_dashboard_view(self):
-        from .views.dashboard_view import _create_dashboard_view as external_func
+        from src.ui.views.dashboard_view import _create_dashboard_view as external_func
 
         external_func(self)
 
@@ -417,7 +430,7 @@ class ModernInterface:
         self._animate_card_entrance(card, row * 100 + col * 100)
 
     def _create_automation_view(self):
-        from .views.automation_view import _create_automation_view as external_func
+        from src.ui.views.automation_view import _create_automation_view as external_func
 
         external_func(self)
 
@@ -551,7 +564,7 @@ class ModernInterface:
         return card
 
     def _create_scheduler_view(self):
-        from .views.scheduler_view import _create_scheduler_view as external_func
+        from src.ui.views.scheduler_view import _create_scheduler_view as external_func
 
         external_func(self)
 
@@ -731,7 +744,7 @@ class ModernInterface:
         return card
 
     def _create_settings_view(self):
-        from .views.settings_view import _create_settings_view as external_func
+        from src.ui.views.settings_view import _create_settings_view as external_func
 
         external_func(self)
 
@@ -750,9 +763,14 @@ class ModernInterface:
         return card
 
     def _create_setting_row(self, parent, setting: dict):
-        """Cria linha de configuração moderna"""
+        """Cria linha de configuração moderna com variáveis centralizadas"""
         row_frame = tk.Frame(parent, bg=self.ds.colors["bg_card"])
         row_frame.pack(fill=tk.X, pady=self.ds.spacing["xs"])
+
+        # Identificador único para a configuração
+        key = None
+        if "option" in setting:
+            key = f"{setting.get('section', 'default')}_{setting['option']}"
 
         # Label
         label = tk.Label(
@@ -773,20 +791,27 @@ class ModernInterface:
 
         # Controle baseado no tipo
         control_type = setting.get("type", "entry")
-
+        
+        # Recupera ou cria variável centralizada
+        var = None
+        if key and key in self.setting_vars:
+            var = self.setting_vars[key]
+        
         if control_type == "checkbox":
-            var = tk.BooleanVar(value=setting.get("value", False))
+            if not var:
+                var = tk.BooleanVar(value=setting.get("value", False))
             control = tk.Checkbutton(
                 row_frame,
                 variable=var,
                 bg=self.ds.colors["bg_card"],
                 fg=self.ds.colors["text_primary"],
                 selectcolor=self.ds.colors["bg_surface"],
+                activebackground=self.ds.colors["bg_card"],
             )
-            setting["var"] = var
 
         elif control_type == "combobox":
-            var = tk.StringVar(value=setting.get("value", ""))
+            if not var:
+                var = tk.StringVar(value=setting.get("value", ""))
             control = ttk.Combobox(
                 row_frame,
                 textvariable=var,
@@ -794,10 +819,10 @@ class ModernInterface:
                 state="readonly",
                 width=20,
             )
-            setting["var"] = var
 
         else:  # entry
-            var = tk.StringVar(value=setting.get("value", ""))
+            if not var:
+                var = tk.StringVar(value=setting.get("value", ""))
             control = tk.Entry(
                 row_frame,
                 textvariable=var,
@@ -812,6 +837,11 @@ class ModernInterface:
                 bd=1,
                 width=25,
             )
+
+        # Armazena variável centralizada
+        if key:
+            self.setting_vars[key] = var
+            self.all_settings[key] = setting
             setting["var"] = var
 
         control.pack(side=tk.RIGHT)
@@ -819,51 +849,91 @@ class ModernInterface:
     def _get_browser_settings(self) -> list:
         """Configurações do navegador"""
         return [
-            {"label": "Modo headless:", "type": "checkbox", "value": False},
-            {"label": "Timeout (segundos):", "type": "entry", "value": "10"},
-            {"label": "Capturar screenshots:", "type": "checkbox", "value": True},
-            {"label": "User agent personalizado:", "type": "checkbox", "value": True},
+            {
+                "section": "settings",
+                "option": "headless",
+                "label": "Executar em 2º plano (Headless):",
+                "type": "checkbox",
+                "value": self.config_manager.getboolean("settings", "headless", False),
+            },
+            {
+                "section": "settings",
+                "option": "wait_timeout",
+                "label": "Tempo de espera (segundos):",
+                "type": "entry",
+                "value": self.config_manager.get("settings", "wait_timeout", "10"),
+            },
+            {
+                "section": "settings",
+                "option": "screenshot_on_error",
+                "label": "Capturar erro em print:",
+                "type": "checkbox",
+                "value": self.config_manager.getboolean(
+                    "settings", "screenshot_on_error", True
+                ),
+            },
         ]
 
     def _get_automation_settings(self) -> list:
         """Configurações de automação"""
         return [
-            {"label": "Tentativas máximas:", "type": "entry", "value": "3"},
-            {"label": "Modo híbrido IA:", "type": "checkbox", "value": True},
-            {"label": "Análise inteligente:", "type": "checkbox", "value": True},
-            {"label": "Backup automático:", "type": "checkbox", "value": True},
+            {
+                "section": "settings",
+                "option": "max_retries",
+                "label": "Tentativas máximas:",
+                "type": "entry",
+                "value": self.config_manager.get("settings", "max_retries", "3"),
+            },
+            {
+                "section": "advanced",
+                "option": "user_agent_rotation",
+                "label": "Rotação de User-Agent:",
+                "type": "checkbox",
+                "value": self.config_manager.getboolean(
+                    "advanced", "user_agent_rotation", True
+                ),
+            },
         ]
 
     def _get_system_settings(self) -> list:
         """Configurações do sistema"""
         return [
             {
-                "label": "Nível de log:",
+                "section": "settings",
+                "option": "log_level",
+                "label": "Nível de detalhamento Log:",
                 "type": "combobox",
-                "value": "INFO",
+                "value": self.config_manager.get("settings", "log_level", "INFO"),
                 "options": ["DEBUG", "INFO", "WARNING", "ERROR"],
             },
             {
-                "label": "Tema:",
-                "type": "combobox",
-                "value": "escuro",
-                "options": ["escuro", "claro", "automático"],
+                "label": "Notificações Visuais:",
+                "type": "checkbox",
+                "value": True,
+                "option": "ui_notifications",
+                "section": "ui",
             },
-            {"label": "Notificações:", "type": "checkbox", "value": True},
-            {"label": "Atualizações automáticas:", "type": "checkbox", "value": False},
         ]
 
     def _get_security_settings(self) -> list:
         """Configurações de segurança"""
         return [
-            {"label": "Encriptação de dados:", "type": "checkbox", "value": True},
             {
-                "label": "Limpeza automática de logs:",
+                "section": "advanced",
+                "option": "proxy_enabled",
+                "label": "Habilitar Proxy:",
                 "type": "checkbox",
-                "value": False,
+                "value": self.config_manager.getboolean(
+                    "advanced", "proxy_enabled", False
+                ),
             },
-            {"label": "Backup de configurações:", "type": "checkbox", "value": True},
-            {"label": "Modo segurança máxima:", "type": "checkbox", "value": False},
+            {
+                "section": "advanced",
+                "option": "proxy_list",
+                "label": "Lista de Proxies (URL/IP):",
+                "type": "entry",
+                "value": self.config_manager.get("advanced", "proxy_list", ""),
+            },
         ]
 
     def _create_logs_view(self):
@@ -933,15 +1003,15 @@ class ModernInterface:
         self.animations_running = {}
 
     def _load_initial_data(self):
-        """Carrega dados iniciais da aplicação"""
-        # Carregar configurações salvas
+        """Carrega dados iniciais e inicia monitoramento real"""
+        # Carregar configurações nos campos
         self._load_saved_config()
-
-        # Atualizar status do sistema
+        
+        # Inicializa status e monitoramento
         self._update_system_status()
-
-        # Iniciar monitoramento
         self._start_system_monitoring()
+        
+        self._log_message("[SYSTEM] Ambiente preparado. Monitoramento iniciado.")
 
     def _show_view(self, view_name: str):
         """Mostra uma view específica com animação suave"""
@@ -1088,6 +1158,7 @@ class ModernInterface:
             self.config_manager.set("credentials", "password", config["password"])
 
             self.config_manager.save_config()
+            self._save_all_settings()  # Salva também as configurações de execução se houver alteração
             self._show_notification("✅ Configuração salva com sucesso!", "success")
 
             # Log da operação
@@ -1206,7 +1277,7 @@ class ModernInterface:
         threading.Thread(target=test, daemon=True).start()
 
     def _run_automation(self):
-        """Executa automação de login completa"""
+        """Executa automação de login completa usando o motor real"""
         try:
             url = self.config_manager.get("site", "url", "")
             email = self.config_manager.get("credentials", "email", "")
@@ -1216,45 +1287,39 @@ class ModernInterface:
                 self._show_notification("❌ Configure credenciais primeiro!", "error")
                 return
 
-            self._show_notification("🚀 Iniciando automação IA...", "info")
-
+            self._show_notification("🚀 Iniciando motor de automação...", "info")
+            self._show_progress("Executando login automatizado...")
+            
             def automate():
                 try:
-                    # Simula processo de automação
-                    self._log_message(f"[AUTOMATION] Iniciando login em {url}")
-                    time.sleep(2)
+                    # Garante que o motor está pronto
+                    if not self.automation_engine.browser or not self.automation_engine.browser.driver:
+                        self.automation_engine.initialize()
 
-                    # Simula passos da automação
-                    steps = [
-                        "Acessando página...",
-                        "Localizando formulário...",
-                        "Preenchendo credenciais...",
-                        "Enviando formulário...",
-                        "Verificando sucesso...",
-                    ]
-
-                    for step in steps:
-                        self._log_message(f"[AUTOMATION] {step}")
-                        time.sleep(1)
-
-                    # Simula resultado
-                    success = True  # Simula sucesso
-                    if success:
-                        self._log_message(
-                            "[AUTOMATION] ✅ Login realizado com sucesso!"
-                        )
-                        self._show_notification(
-                            "🎉 Login realizado com sucesso!", "success"
-                        )
+                    credentials = {"email": email, "password": password}
+                    self._log_message(f"[ENGINE] Iniciando sequência para {url}")
+                    
+                    # Executa sequência real
+                    result = self.automation_engine.execute_login_sequence(credentials)
+                    
+                    if result["success"]:
+                        self._show_notification("✅ Automação concluída com sucesso!", "success")
+                        self._log_message("[ENGINE] Sucesso total na operação")
                     else:
-                        self._log_message("[AUTOMATION] ❌ Falha no login")
-                        self._show_notification("❌ Falha no login", "error")
-
+                        self._show_notification(f"❌ Falha: {result['error']}", "error")
+                        self._log_message(f"[ENGINE] Erro: {result['error']} (Fase: {result['stage']})")
+                    
+                    self._update_logs_display()
                 except Exception as e:
-                    self._log_message(f"[AUTOMATION] Erro: {e}")
-                    self._show_notification(f"❌ Erro na automação: {e}", "error")
+                    self._log_message(f"[CRITICAL] Erro no thread de execução: {e}")
+                finally:
+                    self.root.after(0, self._hide_progress)
 
             threading.Thread(target=automate, daemon=True).start()
+
+        except Exception as e:
+            self._log_message(f"[ERROR] Falha ao iniciar automação: {e}")
+            self._show_notification("❌ Erro ao iniciar motor", "error")
 
         except Exception as e:
             self._show_notification(f"❌ Erro ao iniciar automação: {e}", "error")
@@ -1461,6 +1526,30 @@ class ModernInterface:
         except Exception as e:
             self._log_message(f"Erro ao atualizar logs: {e}")
 
+    def _save_all_settings(self):
+        """Salva todas as configurações do sistema"""
+        try:
+            changes = 0
+            for key, setting in self.all_settings.items():
+                if "section" in setting and "option" in setting and "var" in setting:
+                    section = setting["section"]
+                    option = setting["option"]
+                    value = str(setting["var"].get()).lower() if isinstance(setting["var"], tk.BooleanVar) else str(setting["var"].get())
+                    
+                    self.config_manager.set(section, option, value)
+                    changes += 1
+
+            if changes > 0:
+                self.config_manager.save_config()
+                self._show_notification("✅ Configurações salvas!", "success")
+                self._log_message(f"[SETTINGS] {changes} configurações salvas")
+            else:
+                self._show_notification("ℹ️ Nenhuma alteração detectada", "info")
+
+        except Exception as e:
+            self._log_message(f"[ERROR] Falha ao salvar configurações: {e}")
+            self._show_notification(f"❌ Erro ao salvar: {e}", "error")
+
     def _show_notification(self, message: str, type_: str = "info"):
         """Mostra notificação flutuante moderna"""
         # Cria notificação
@@ -1514,27 +1603,138 @@ class ModernInterface:
         except:
             pass
 
+    # Remove duplicating methods here (already defined above)
+    def _dummy_placeholder(self): pass
+
     def _update_system_status(self):
-        """Atualiza indicadores de status do sistema"""
-        # Simula atualização de status
-        if hasattr(self, "status_indicators"):
-            for indicator in self.status_indicators.values():
-                # Atualizar status baseado na lógica do sistema
-                pass
+        """Atualiza indicadores de status reais do sistema"""
+        if not hasattr(self, "status_indicators"):
+            return
+
+        # 1. Navegador Web
+        status_web = "ONLINE" if (self.automation_engine.browser and self.automation_engine.browser.driver) else "OFFLINE"
+        self._update_indicator("🖥️ Navegador Web", status_web)
+
+        # 2. Agendador IA
+        status_sched = "ATIVO" if self.smart_scheduler.is_running else "PARADO"
+        self._update_indicator("⏰ Agendador IA", status_sched)
+
+        # 3. Configuração
+        has_config = all([self.config_manager.get("site", "url", ""), self.config_manager.get("credentials", "email", "")])
+        self._update_indicator("⚙️ Configuração", "OK" if has_config else "PENDENTE")
+
+        # 4. Última Execução
+        stats = self.automation_engine.stats
+        if stats.get("last_execution"):
+            time_str = stats["last_execution"].strftime("%H:%M:%S")
+            self._update_indicator("📈 Última Execução", time_str)
+
+    def _update_indicator(self, label: str, new_status: str):
+        """Atualiza um indicador específico na dashboard"""
+        try:
+            if label in self.status_indicators:
+                indicator_frame = self.status_indicators[label]
+                # Busca o label de status dentro do frame (é o último widget no frame interno)
+                # Estrutura: Frame(Container) -> Frame(Internal) -> [Icon, Label, Spacer, BadgeFrame -> BadgeLabel]
+                # Olhando o factory.py: status_label está dentro de status_container que está no column 3 do grid
+                
+                for child in indicator_frame.winfo_children():
+                    if isinstance(child, tk.Frame): # O frame interno
+                        for subchild in child.winfo_children():
+                            # O badge está num frame
+                            if isinstance(subchild, tk.Frame) and subchild.grid_info()["column"] == 3:
+                                # Aqui está o status_label
+                                for badge_label in subchild.winfo_children():
+                                    if isinstance(badge_label, tk.Label):
+                                        badge_label.config(text=new_status.upper())
+                                        # Atualiza cor
+                                        status_colors = {
+                                            "ONLINE": self.ds.colors["success"],
+                                            "ATIVO": self.ds.colors["success"],
+                                            "OK": self.ds.colors["success"],
+                                            "OFFLINE": self.ds.colors["error"],
+                                            "PARADO": self.ds.colors["warning"],
+                                            "PENDENTE": self.ds.colors["warning"],
+                                            "ERRO": self.ds.colors["error"]
+                                        }
+                                        color = status_colors.get(new_status.upper(), self.ds.colors["text_muted"])
+                                        badge_label.config(fg=color)
+        except Exception as e:
+            pass
 
     def _start_system_monitoring(self):
-        """Inicia monitoramento do sistema"""
-
-        def monitor():
+        """Inicia monitoramento do sistema em background"""
+        def monitor_loop():
             while True:
                 try:
-                    # Simula monitoramento
-                    time.sleep(5)
-                    # Atualizar métricas em tempo real aqui
-                except:
-                    break
+                    # Coleta estatísticas reais
+                    stats = self.automation_engine.stats
+                    
+                    self.metrics["operations_today"] = stats["operations_total"]
+                    total = stats["operations_total"]
+                    if total > 0:
+                        self.metrics["success_rate"] = int((stats["operations_success"] / total) * 100)
+                    self.metrics["avg_duration"] = int(stats["average_duration"])
+                    self.metrics["active_tasks"] = 1 if self.automation_engine.is_running else 0
 
-        threading.Thread(target=monitor, daemon=True).start()
+                    # Atualiza UI de forma segura
+                    self.root.after(0, self._update_dashboard_metrics)
+                    self.root.after(0, self._update_system_status)
+                    
+                    # Atualiza indicators da barra inferior
+                    self.root.after(0, self._update_status_bar_indicators)
+
+                    time.sleep(2)
+                except Exception as e:
+                    time.sleep(5)
+
+        thread = threading.Thread(target=monitor_loop, daemon=True)
+        thread.start()
+
+    def _update_dashboard_metrics(self):
+        """Atualiza os valores numéricos na dashboard"""
+        if not hasattr(self, "metric_value_labels"):
+            return
+            
+        labels = {
+            "🎯 Operações Hoje": str(self.metrics["operations_today"]),
+            "✅ Taxa de Sucesso": f"{self.metrics['success_rate']}%",
+            "⏱️ Tempo Médio": f"{self.metrics['avg_duration']}s",
+            "🔄 Tarefas Ativas": str(self.metrics["active_tasks"])
+        }
+        
+        for title, value in labels.items():
+            if title in self.metric_value_labels:
+                self.metric_value_labels[title].config(text=value)
+
+    def _update_status_bar_indicators(self):
+        """Atualiza widgets da barra inferior com dados reais (simulados)"""
+        if not hasattr(self, "status_indicators_bar"):
+            return
+
+        import random
+        # Simula métricas de sistema (futuramente usar psutil)
+        cpu = random.randint(3, 12)
+        mem = random.randint(140, 280)
+        
+        if "CPU" in self.status_indicators_bar:
+            self.status_indicators_bar["CPU"].config(text=f"CPU: {cpu}%")
+        
+        if "Memória" in self.status_indicators_bar:
+            self.status_indicators_bar["Memória"].config(text=f"Mem: {mem}MB")
+
+        # Rede - verifica conectividade real
+        try:
+            import socket
+            socket.create_connection(("8.8.8.8", 53), timeout=1)
+            status_rede = "OK"
+            color_rede = self.ds.colors["success"]
+        except:
+            status_rede = "OFF"
+            color_rede = self.ds.colors["error"]
+
+        if "Rede" in self.status_indicators_bar:
+            self.status_indicators_bar["Rede"].config(text=f"Net: {status_rede}", fg=color_rede)
 
     # ============ MÉTODOS DE JANELA ============
 

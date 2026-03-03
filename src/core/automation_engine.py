@@ -13,8 +13,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from .browser_engine import BrowserEngine
-from .field_detector import FieldDetector
+from src.core.browser_engine import BrowserEngine
+from src.core.field_detector import FieldDetector
 
 
 class AutomationEngine:

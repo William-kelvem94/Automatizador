@@ -50,12 +50,26 @@ def _create_automation_view(self):
         pady=(0, self.ds.spacing["xl"]),
     )
 
-    # Painel de configuração
-    config_panel = tk.Frame(main_container, bg=self.ds.colors["bg_primary"])
-    config_panel.pack(fill=tk.X, pady=(0, self.ds.spacing["xl"]))
+    # Painéis de configuração
+    config_container_row = tk.Frame(main_container, bg=self.ds.colors["bg_primary"])
+    config_container_row.pack(fill=tk.X, pady=(0, self.ds.spacing["xl"]))
 
-    config_card = self._create_config_card(config_panel)
-    config_card.pack(fill=tk.X)
+    # Card de Credenciais (Esquerda)
+    credentials_panel = tk.Frame(config_container_row, bg=self.ds.colors["bg_primary"])
+    credentials_panel.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, self.ds.spacing["md"]))
+    config_card = self._create_config_card(credentials_panel)
+    config_card.pack(fill=tk.BOTH, expand=True)
+
+    # Card de Configurações de Execução (Direita)
+    exec_settings_panel = tk.Frame(config_container_row, bg=self.ds.colors["bg_primary"])
+    exec_settings_panel.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(self.ds.spacing["md"], 0))
+    
+    exec_card = self._create_settings_card(
+        exec_settings_panel, 
+        "⚙️ Execução IA", 
+        self._get_browser_settings()[:2] + self._get_automation_settings()[:1]
+    )
+    exec_card.pack(fill=tk.BOTH, expand=True)
 
     # Painel de operações
     operations_panel = tk.Frame(main_container, bg=self.ds.colors["bg_primary"])

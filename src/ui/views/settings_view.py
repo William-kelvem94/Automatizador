@@ -62,4 +62,18 @@ def _create_settings_view(self):
         card = self._create_settings_card(settings_container, title, settings)
         card.pack(fill=tk.X, pady=self.ds.spacing["md"])
 
+    # Footer com botão de salvar
+    footer_frame = tk.Frame(view, bg=self.ds.colors["bg_primary"], height=80)
+    footer_frame.pack(fill=tk.X, side=tk.BOTTOM)
+    footer_frame.pack_propagate(False)
+
+    save_btn = self.factory.create_button(
+        footer_frame,
+        "💾 Salvar Todas as Configurações",
+        self._save_all_settings,
+        variant="primary",
+        size="lg",
+    )
+    save_btn.pack(pady=self.ds.spacing["lg"])
+
     self.views["settings"] = view

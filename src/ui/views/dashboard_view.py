@@ -54,26 +54,43 @@ def _create_dashboard_view(self):
     metrics_frame.grid_columnconfigure(3, weight=1)
 
     # Cards de métricas
-    self._create_metric_card(
+    self.metric_value_labels = {}
+
+    _, lab1 = self._create_metric_card(
         metrics_frame,
         "🎯 Operações Hoje",
         str(self.metrics["operations_today"]),
-        0,
+        "",  # Ícone vazio ou passe um ícone se desejar
         0,
     )
-    self._create_metric_card(
+    self.metric_value_labels["🎯 Operações Hoje"] = lab1
+
+    _, lab2 = self._create_metric_card(
         metrics_frame,
         "✅ Taxa de Sucesso",
         f"{self.metrics['success_rate']}%",
-        0,
+        "",
         1,
     )
-    self._create_metric_card(
-        metrics_frame, "⏱️ Tempo Médio", f"{self.metrics['avg_duration']}s", 0, 2
+    self.metric_value_labels["✅ Taxa de Sucesso"] = lab2
+
+    _, lab3 = self._create_metric_card(
+        metrics_frame,
+        "⏱️ Tempo Médio",
+        f"{self.metrics['avg_duration']}s",
+        "",
+        2,
     )
-    self._create_metric_card(
-        metrics_frame, "🔄 Tarefas Ativas", str(self.metrics["active_tasks"]), 0, 3
+    self.metric_value_labels["⏱️ Tempo Médio"] = lab3
+
+    _, lab4 = self._create_metric_card(
+        metrics_frame,
+        "🔄 Tarefas Ativas",
+        str(self.metrics["active_tasks"]),
+        "",
+        3,
     )
+    self.metric_value_labels["🔄 Tarefas Ativas"] = lab4
 
     # Status do sistema
     status_frame = tk.Frame(view, bg=self.ds.colors["bg_primary"])

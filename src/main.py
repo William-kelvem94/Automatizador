@@ -45,7 +45,7 @@ def main():
 
     try:
         # Importações dinâmicas para melhor performance
-        from .ui.main_window import main as ui_main
+        from src.ui.main_window import main as ui_main
 
         # Executa interface principal
         ui_main()

@@ -1,0 +1,1545 @@
+src\core\automation_engine.py:8:1: F401 'typing.Optional' imported but unused
+src\core\automation_engine.py:9:1: F401 'datetime.timedelta' imported but unused
+src\core\automation_engine.py:13:1: F401 'selenium.common.exceptions.TimeoutException' imported but unused
+src\core\automation_engine.py:13:1: F401 'selenium.common.exceptions.NoSuchElementException' imported but unused
+src\core\automation_engine.py:60:80: E501 line too long (84 > 79 characters)
+src\core\automation_engine.py:121:80: E501 line too long (82 > 79 characters)
+src\core\automation_engine.py:152:80: E501 line too long (92 > 79 characters)
+src\core\automation_engine.py:162:80: E501 line too long (81 > 79 characters)
+src\core\automation_engine.py:172:80: E501 line too long (102 > 79 characters)
+src\core\automation_engine.py:190:80: E501 line too long (81 > 79 characters)
+src\core\automation_engine.py:224:80: E501 line too long (89 > 79 characters)
+src\core\automation_engine.py:273:80: E501 line too long (92 > 79 characters)
+src\core\automation_engine.py:333:80: E501 line too long (91 > 79 characters)
+src\core\automation_engine.py:337:17: E722 do not use bare 'except'
+src\core\automation_engine.py:376:32: E128 continuation line under-indented for visual indent
+src\core\automation_engine.py:376:80: E501 line too long (99 > 79 characters)
+src\core\automation_engine.py:377:80: E501 line too long (80 > 79 characters)
+src\core\automation_engine.py:407:80: E501 line too long (95 > 79 characters)
+src\core\automation_engine.py:416:80: E501 line too long (104 > 79 characters)
+src\core\browser_engine.py:18:80: E501 line too long (88 > 79 characters)
+src\core\browser_engine.py:56:80: E501 line too long (81 > 79 characters)
+src\core\browser_engine.py:66:80: E501 line too long (109 > 79 characters)
+src\core\browser_engine.py:84:80: E501 line too long (81 > 79 characters)
+src\core\browser_engine.py:96:80: E501 line too long (111 > 79 characters)
+src\core\browser_engine.py:136:13: F821 undefined name 'WebDriverWait'
+src\core\browser_engine.py:137:80: E501 line too long (86 > 79 characters)
+src\core\browser_engine.py:176:80: E501 line too long (86 > 79 characters)
+src\core\browser_engine.py:177:80: E501 line too long (119 > 79 characters)
+src\core\config_manager.py:6:1: F401 'os' imported but unused
+src\core\config_manager.py:10:1: F401 'typing.List' imported but unused
+src\core\config_manager.py:70:80: E501 line too long (88 > 79 characters)
+src\core\config_manager.py:81:80: E501 line too long (81 > 79 characters)
+src\core\config_manager.py:84:80: E501 line too long (89 > 79 characters)
+src\core\config_manager.py:107:80: E501 line too long (90 > 79 characters)
+src\core\config_manager.py:128:9: F841 local variable 'e' is assigned to but never used
+src\core\config_manager.py:140:80: E501 line too long (102 > 79 characters)
+src\core\config_manager.py:168:80: E501 line too long (86 > 79 characters)
+src\core\config_manager.py:247:80: E501 line too long (80 > 79 characters)
+src\core\config_manager.py:259:9: E722 do not use bare 'except'
+src\core\config_manager.py:266:9: E722 do not use bare 'except'
+src\core\config_manager.py:269:80: E501 line too long (84 > 79 characters)
+src\core\config_manager.py:273:9: E722 do not use bare 'except'
+src\core\config_manager.py:366:80: E501 line too long (110 > 79 characters)
+src\core\config_manager.py:378:80: E501 line too long (81 > 79 characters)
+src\core\config_manager.py:379:9: E722 do not use bare 'except'
+src\core\field_detector.py:8:1: F401 'typing.Tuple' imported but unused
+src\core\field_detector.py:10:1: F401 'selenium.webdriver.support.ui.WebDriverWait' imported but unused
+src\core\field_detector.py:11:1: F401 'selenium.webdriver.support.expected_conditions as EC' imported but unused
+src\core\field_detector.py:29:80: E501 line too long (80 > 79 characters)
+src\core\field_detector.py:57:80: E501 line too long (93 > 79 characters)
+src\core\field_detector.py:60:80: E501 line too long (80 > 79 characters)
+src\core\field_detector.py:113:80: E501 line too long (83 > 79 characters)
+src\core\field_detector.py:116:80: E501 line too long (87 > 79 characters)
+src\core\field_detector.py:145:80: E501 line too long (92 > 79 characters)
+src\core\field_detector.py:147:80: E501 line too long (99 > 79 characters)
+src\core\field_detector.py:149:80: E501 line too long (107 > 79 characters)
+src\core\field_detector.py:171:80: E501 line too long (80 > 79 characters)
+src\core\field_detector.py:175:80: E501 line too long (96 > 79 characters)
+src\core\field_detector.py:214:80: E501 line too long (87 > 79 characters)
+src\core\field_detector.py:235:80: E501 line too long (80 > 79 characters)
+src\core\field_detector.py:237:17: E722 do not use bare 'except'
+src\core\field_detector.py:275:9: F841 local variable 'found_required' is assigned to but never used
+src\core\field_detector.py:275:80: E501 line too long (80 > 79 characters)
+src\core\scheduler.py:9:1: F401 'typing.List' imported but unused
+src\core\scheduler.py:9:1: F401 'typing.Optional' imported but unused
+src\core\scheduler.py:10:1: F401 'datetime.timedelta' imported but unused
+src\core\scheduler.py:27:80: E501 line too long (80 > 79 characters)
+src\core\scheduler.py:75:33: E128 continuation line under-indented for visual indent
+src\core\scheduler.py:92:80: E501 line too long (97 > 79 characters)
+src\core\scheduler.py:96:80: E501 line too long (81 > 79 characters)
+src\core\scheduler.py:106:27: E128 continuation line under-indented for visual indent
+src\core\scheduler.py:126:21: F841 local variable 'job' is assigned to but never used
+src\core\scheduler.py:147:80: E501 line too long (88 > 79 characters)
+src\core\scheduler.py:153:80: E501 line too long (82 > 79 characters)
+src\core\scheduler.py:163:80: E501 line too long (81 > 79 characters)
+src\core\scheduler.py:172:80: E501 line too long (93 > 79 characters)
+src\core\scheduler.py:179:80: E501 line too long (96 > 79 characters)
+src\core\scheduler.py:187:80: E501 line too long (81 > 79 characters)
+src\core\scheduler.py:189:80: E501 line too long (81 > 79 characters)
+src\core\scheduler.py:206:80: E501 line too long (108 > 79 characters)
+src\core\scheduler.py:212:80: E501 line too long (88 > 79 characters)
+src\core\scheduler.py:213:80: E501 line too long (89 > 79 characters)
+src\core\scheduler.py:214:80: E501 line too long (80 > 79 characters)
+src\core\scheduler.py:220:32: E128 continuation line under-indented for visual indent
+src\core\scheduler.py:250:80: E501 line too long (94 > 79 characters)
+src\core\scheduler.py:253:80: E501 line too long (89 > 79 characters)
+src\core\scheduler.py:256:80: E501 line too long (110 > 79 characters)
+src\core\scheduler.py:272:80: E501 line too long (89 > 79 characters)
+src\core\scheduler.py:305:80: E501 line too long (82 > 79 characters)
+src\core\scheduler.py:338:80: E501 line too long (88 > 79 characters)
+src\legacy\gui.py:9:1: F401 'tkinter.ttk' imported but unused
+src\legacy\gui.py:12:1: F401 'time' imported but unused
+src\legacy\gui.py:17:1: E302 expected 2 blank lines, found 1
+src\legacy\gui.py:39:80: E501 line too long (82 > 79 characters)
+src\legacy\gui.py:46:80: E501 line too long (86 > 79 characters)
+src\legacy\gui.py:47:80: E501 line too long (97 > 79 characters)
+src\legacy\gui.py:70:80: E501 line too long (91 > 79 characters)
+src\legacy\gui.py:71:35: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:71:80: E501 line too long (87 > 79 characters)
+src\legacy\gui.py:77:80: E501 line too long (89 > 79 characters)
+src\legacy\gui.py:78:36: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:78:80: E501 line too long (88 > 79 characters)
+src\legacy\gui.py:92:80: E501 line too long (99 > 79 characters)
+src\legacy\gui.py:99:30: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:99:80: E501 line too long (82 > 79 characters)
+src\legacy\gui.py:103:28: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:109:80: E501 line too long (142 > 79 characters)
+src\legacy\gui.py:110:80: E501 line too long (109 > 79 characters)
+src\legacy\gui.py:114:80: E501 line too long (137 > 79 characters)
+src\legacy\gui.py:115:80: E501 line too long (110 > 79 characters)
+src\legacy\gui.py:119:80: E501 line too long (136 > 79 characters)
+src\legacy\gui.py:120:80: E501 line too long (126 > 79 characters)
+src\legacy\gui.py:121:80: E501 line too long (81 > 79 characters)
+src\legacy\gui.py:127:80: E501 line too long (87 > 79 characters)
+src\legacy\gui.py:128:18: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:128:80: E501 line too long (98 > 79 characters)
+src\legacy\gui.py:130:80: E501 line too long (87 > 79 characters)
+src\legacy\gui.py:131:18: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:131:80: E501 line too long (98 > 79 characters)
+src\legacy\gui.py:133:80: E501 line too long (82 > 79 characters)
+src\legacy\gui.py:134:18: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:134:80: E501 line too long (85 > 79 characters)
+src\legacy\gui.py:141:80: E501 line too long (120 > 79 characters)
+src\legacy\gui.py:144:80: E501 line too long (92 > 79 characters)
+src\legacy\gui.py:145:18: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:145:80: E501 line too long (103 > 79 characters)
+src\legacy\gui.py:147:80: E501 line too long (85 > 79 characters)
+src\legacy\gui.py:148:18: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:148:80: E501 line too long (109 > 79 characters)
+src\legacy\gui.py:151:80: E501 line too long (133 > 79 characters)
+src\legacy\gui.py:154:80: E501 line too long (135 > 79 characters)
+src\legacy\gui.py:157:80: E501 line too long (99 > 79 characters)
+src\legacy\gui.py:158:18: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:158:80: E501 line too long (107 > 79 characters)
+src\legacy\gui.py:160:80: E501 line too long (95 > 79 characters)
+src\legacy\gui.py:161:18: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:161:80: E501 line too long (108 > 79 characters)
+src\legacy\gui.py:164:80: E501 line too long (116 > 79 characters)
+src\legacy\gui.py:167:80: E501 line too long (93 > 79 characters)
+src\legacy\gui.py:168:50: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:172:18: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:172:80: E501 line too long (80 > 79 characters)
+src\legacy\gui.py:180:80: E501 line too long (80 > 79 characters)
+src\legacy\gui.py:181:36: E128 continuation line under-indented for visual indent
+src\legacy\gui.py:181:80: E501 line too long (81 > 79 characters)
+src\legacy\gui.py:189:9: E722 do not use bare 'except'
+src\legacy\gui.py:232:80: E501 line too long (80 > 79 characters)
+src\legacy\gui.py:244:80: E501 line too long (80 > 79 characters)
+src\legacy\gui.py:263:80: E501 line too long (95 > 79 characters)
+src\legacy\gui.py:271:80: E501 line too long (82 > 79 characters)
+src\legacy\gui.py:276:80: E501 line too long (81 > 79 characters)
+src\legacy\gui.py:281:80: E501 line too long (104 > 79 characters)
+src\legacy\gui.py:286:80: E501 line too long (83 > 79 characters)
+src\legacy\gui.py:287:80: E501 line too long (85 > 79 characters)
+src\legacy\gui.py:292:80: E501 line too long (86 > 79 characters)
+src\legacy\gui.py:294:80: E501 line too long (87 > 79 characters)
+src\legacy\gui.py:295:80: E501 line too long (82 > 79 characters)
+src\legacy\gui.py:296:80: E501 line too long (90 > 79 characters)
+src\legacy\gui.py:311:80: E501 line too long (82 > 79 characters)
+src\legacy\gui.py:312:80: E501 line too long (100 > 79 characters)
+src\legacy\gui.py:316:80: E501 line too long (81 > 79 characters)
+src\legacy\gui.py:364:80: E501 line too long (83 > 79 characters)
+src\legacy\gui.py:374:80: E501 line too long (81 > 79 characters)
+src\legacy\gui.py:388:80: E501 line too long (82 > 79 characters)
+src\legacy\gui.py:402:80: E501 line too long (81 > 79 characters)
+src\legacy\gui.py:405:80: E501 line too long (83 > 79 characters)
+src\legacy\gui.py:406:80: E501 line too long (82 > 79 characters)
+src\legacy\gui.py:407:80: E501 line too long (82 > 79 characters)
+src\legacy\gui.py:408:80: E501 line too long (86 > 79 characters)
+src\legacy\gui.py:409:80: E501 line too long (99 > 79 characters)
+src\legacy\gui.py:410:80: E501 line too long (87 > 79 characters)
+src\legacy\gui.py:412:80: E501 line too long (100 > 79 characters)
+src\legacy\gui.py:413:80: E501 line too long (89 > 79 characters)
+src\legacy\gui.py:416:80: E501 line too long (89 > 79 characters)
+src\legacy\gui.py:417:80: E501 line too long (80 > 79 characters)
+src\legacy\gui.py:420:80: E501 line too long (92 > 79 characters)
+src\legacy\gui.py:425:80: E501 line too long (85 > 79 characters)
+src\legacy\gui.py:427:34: F541 f-string is missing placeholders
+src\legacy\gui.py:429:80: E501 line too long (81 > 79 characters)
+src\legacy\gui.py:452:80: E501 line too long (91 > 79 characters)
+src\legacy\gui.py:455:80: E501 line too long (81 > 79 characters)
+src\legacy\gui.py:457:80: E501 line too long (82 > 79 characters)
+src\legacy\gui.py:460:30: F541 f-string is missing placeholders
+src\legacy\gui.py:470:17: F841 local variable 'avisos' is assigned to but never used
+src\legacy\gui.py:481:80: E501 line too long (84 > 79 characters)
+src\legacy\gui.py:599:80: E501 line too long (98 > 79 characters)
+src\legacy\gui.py:601:80: E501 line too long (80 > 79 characters)
+src\legacy\gui.py:608:80: E501 line too long (87 > 79 characters)
+src\legacy\gui.py:611:80: E501 line too long (88 > 79 characters)
+src\legacy\gui.py:617:80: E501 line too long (88 > 79 characters)
+src\legacy\gui.py:618:80: E501 line too long (102 > 79 characters)
+src\legacy\gui.py:629:80: E501 line too long (95 > 79 characters)
+src\legacy\gui.py:631:80: E501 line too long (91 > 79 characters)
+src\legacy\gui.py:638:80: E501 line too long (93 > 79 characters)
+src\legacy\gui.py:665:80: E501 line too long (87 > 79 characters)
+src\legacy\gui.py:668:80: E501 line too long (100 > 79 characters)
+src\legacy\gui.py:708:80: E501 line too long (82 > 79 characters)
+src\legacy\gui_moderna.py:10:1: F401 'tkinter.messagebox' imported but unused
+src\legacy\gui_moderna.py:13:1: F401 'time' imported but unused
+src\legacy\gui_moderna.py:18:1: E302 expected 2 blank lines, found 1
+src\legacy\gui_moderna.py:90:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:91:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:92:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:95:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:96:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:99:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:100:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:103:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:104:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:107:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:108:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:112:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:113:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:116:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:117:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:120:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:121:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:125:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:126:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:127:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:142:80: E501 line too long (82 > 79 characters)
+src\legacy\gui_moderna.py:149:80: E501 line too long (86 > 79 characters)
+src\legacy\gui_moderna.py:150:80: E501 line too long (97 > 79 characters)
+src\legacy\gui_moderna.py:185:80: E501 line too long (80 > 79 characters)
+src\legacy\gui_moderna.py:190:80: E501 line too long (100 > 79 characters)
+src\legacy\gui_moderna.py:198:80: E501 line too long (90 > 79 characters)
+src\legacy\gui_moderna.py:199:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:199:80: E501 line too long (103 > 79 characters)
+src\legacy\gui_moderna.py:207:31: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:207:80: E501 line too long (112 > 79 characters)
+src\legacy\gui_moderna.py:211:34: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:211:80: E501 line too long (95 > 79 characters)
+src\legacy\gui_moderna.py:220:36: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:220:80: E501 line too long (111 > 79 characters)
+src\legacy\gui_moderna.py:224:31: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:224:80: E501 line too long (112 > 79 characters)
+src\legacy\gui_moderna.py:231:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:231:80: E501 line too long (93 > 79 characters)
+src\legacy\gui_moderna.py:235:80: E501 line too long (80 > 79 characters)
+src\legacy\gui_moderna.py:240:32: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:240:80: E501 line too long (113 > 79 characters)
+src\legacy\gui_moderna.py:244:80: E501 line too long (87 > 79 characters)
+src\legacy\gui_moderna.py:252:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:252:80: E501 line too long (108 > 79 characters)
+src\legacy\gui_moderna.py:260:28: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:264:34: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:265:34: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:265:80: E501 line too long (81 > 79 characters)
+src\legacy\gui_moderna.py:266:34: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:274:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:274:80: E501 line too long (108 > 79 characters)
+src\legacy\gui_moderna.py:282:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:282:80: E501 line too long (80 > 79 characters)
+src\legacy\gui_moderna.py:286:36: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:287:36: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:287:80: E501 line too long (83 > 79 characters)
+src\legacy\gui_moderna.py:288:36: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:296:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:299:80: E501 line too long (82 > 79 characters)
+src\legacy\gui_moderna.py:300:39: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:300:80: E501 line too long (86 > 79 characters)
+src\legacy\gui_moderna.py:301:39: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:301:80: E501 line too long (86 > 79 characters)
+src\legacy\gui_moderna.py:302:39: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:310:80: E501 line too long (110 > 79 characters)
+src\legacy\gui_moderna.py:311:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:312:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:313:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:314:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:319:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:320:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:321:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:322:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:326:80: E501 line too long (106 > 79 characters)
+src\legacy\gui_moderna.py:327:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:328:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:329:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:330:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:346:80: E501 line too long (127 > 79 characters)
+src\legacy\gui_moderna.py:350:80: E501 line too long (129 > 79 characters)
+src\legacy\gui_moderna.py:354:80: E501 line too long (110 > 79 characters)
+src\legacy\gui_moderna.py:362:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:362:80: E501 line too long (87 > 79 characters)
+src\legacy\gui_moderna.py:370:32: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:370:80: E501 line too long (115 > 79 characters)
+src\legacy\gui_moderna.py:383:28: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:384:28: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:385:28: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:386:28: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:391:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:392:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:392:80: E501 line too long (80 > 79 characters)
+src\legacy\gui_moderna.py:393:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:394:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:402:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:402:80: E501 line too long (87 > 79 characters)
+src\legacy\gui_moderna.py:410:32: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:410:80: E501 line too long (112 > 79 characters)
+src\legacy\gui_moderna.py:422:32: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:422:80: E501 line too long (109 > 79 characters)
+src\legacy\gui_moderna.py:426:45: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:426:80: E501 line too long (124 > 79 characters)
+src\legacy\gui_moderna.py:438:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:438:80: E501 line too long (107 > 79 characters)
+src\legacy\gui_moderna.py:443:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:451:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:451:80: E501 line too long (107 > 79 characters)
+src\legacy\gui_moderna.py:461:80: E501 line too long (84 > 79 characters)
+src\legacy\gui_moderna.py:464:32: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:472:32: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:472:80: E501 line too long (109 > 79 characters)
+src\legacy\gui_moderna.py:477:36: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:477:80: E501 line too long (89 > 79 characters)
+src\legacy\gui_moderna.py:478:36: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:486:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:487:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:487:80: E501 line too long (80 > 79 characters)
+src\legacy\gui_moderna.py:488:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:489:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:493:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:494:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:495:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:496:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:504:24: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:504:80: E501 line too long (87 > 79 characters)
+src\legacy\gui_moderna.py:512:32: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:512:80: E501 line too long (110 > 79 characters)
+src\legacy\gui_moderna.py:537:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:538:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:539:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:540:30: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:544:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:545:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:546:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:547:29: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:555:32: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:555:80: E501 line too long (95 > 79 characters)
+src\legacy\gui_moderna.py:561:31: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:561:80: E501 line too long (104 > 79 characters)
+src\legacy\gui_moderna.py:564:80: E501 line too long (80 > 79 characters)
+src\legacy\gui_moderna.py:565:36: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:565:80: E501 line too long (105 > 79 characters)
+src\legacy\gui_moderna.py:570:80: E501 line too long (85 > 79 characters)
+src\legacy\gui_moderna.py:571:43: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:571:80: E501 line too long (86 > 79 characters)
+src\legacy\gui_moderna.py:590:80: E501 line too long (84 > 79 characters)
+src\legacy\gui_moderna.py:615:80: E501 line too long (85 > 79 characters)
+src\legacy\gui_moderna.py:677:80: E501 line too long (82 > 79 characters)
+src\legacy\gui_moderna.py:687:80: E501 line too long (81 > 79 characters)
+src\legacy\gui_moderna.py:700:80: E501 line too long (81 > 79 characters)
+src\legacy\gui_moderna.py:702:80: E501 line too long (85 > 79 characters)
+src\legacy\gui_moderna.py:707:21: F401 'tkinter as tk' imported but unused
+src\legacy\gui_moderna.py:708:21: F401 'selenium' imported but unused
+src\legacy\gui_moderna.py:709:21: F401 'configparser' imported but unused
+src\legacy\gui_moderna.py:710:21: F401 'apscheduler' imported but unused
+src\legacy\gui_moderna.py:744:80: E501 line too long (80 > 79 characters)
+src\legacy\gui_moderna.py:769:80: E501 line too long (85 > 79 characters)
+src\legacy\gui_moderna.py:793:80: E501 line too long (86 > 79 characters)
+src\legacy\gui_moderna.py:811:80: E501 line too long (105 > 79 characters)
+src\legacy\gui_moderna.py:819:80: E501 line too long (91 > 79 characters)
+src\legacy\gui_moderna.py:823:80: E501 line too long (109 > 79 characters)
+src\legacy\gui_moderna.py:824:80: E501 line too long (83 > 79 characters)
+src\legacy\gui_moderna.py:826:80: E501 line too long (92 > 79 characters)
+src\legacy\gui_moderna.py:827:80: E501 line too long (84 > 79 characters)
+src\legacy\gui_moderna.py:828:80: E501 line too long (88 > 79 characters)
+src\legacy\gui_moderna.py:842:80: E501 line too long (84 > 79 characters)
+src\legacy\gui_moderna.py:843:80: E501 line too long (85 > 79 characters)
+src\legacy\gui_moderna.py:844:80: E501 line too long (105 > 79 characters)
+src\legacy\gui_moderna.py:847:80: E501 line too long (92 > 79 characters)
+src\legacy\gui_moderna.py:848:80: E501 line too long (86 > 79 characters)
+src\legacy\gui_moderna.py:861:80: E501 line too long (83 > 79 characters)
+src\legacy\gui_moderna.py:920:80: E501 line too long (84 > 79 characters)
+src\legacy\gui_moderna.py:934:80: E501 line too long (85 > 79 characters)
+src\legacy\gui_moderna.py:936:80: E501 line too long (80 > 79 characters)
+src\legacy\gui_moderna.py:939:80: E501 line too long (84 > 79 characters)
+src\legacy\gui_moderna.py:940:80: E501 line too long (98 > 79 characters)
+src\legacy\gui_moderna.py:974:80: E501 line too long (98 > 79 characters)
+src\legacy\gui_moderna.py:989:80: E501 line too long (88 > 79 characters)
+src\legacy\gui_moderna.py:993:80: E501 line too long (97 > 79 characters)
+src\legacy\gui_moderna.py:996:80: E501 line too long (88 > 79 characters)
+src\legacy\gui_moderna.py:999:80: E501 line too long (87 > 79 characters)
+src\legacy\gui_moderna.py:1000:80: E501 line too long (80 > 79 characters)
+src\legacy\gui_moderna.py:1011:80: E501 line too long (84 > 79 characters)
+src\legacy\gui_moderna.py:1012:25: E722 do not use bare 'except'
+src\legacy\gui_moderna.py:1013:80: E501 line too long (80 > 79 characters)
+src\legacy\gui_moderna.py:1020:80: E501 line too long (87 > 79 characters)
+src\legacy\gui_moderna.py:1051:80: E501 line too long (94 > 79 characters)
+src\legacy\gui_moderna.py:1095:80: E501 line too long (90 > 79 characters)
+src\legacy\gui_moderna.py:1131:80: E501 line too long (88 > 79 characters)
+src\legacy\gui_moderna.py:1163:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1163:80: E501 line too long (99 > 79 characters)
+src\legacy\gui_moderna.py:1166:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1166:80: E501 line too long (91 > 79 characters)
+src\legacy\gui_moderna.py:1169:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1170:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1171:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1181:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1181:80: E501 line too long (98 > 79 characters)
+src\legacy\gui_moderna.py:1184:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1185:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1188:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1189:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1190:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1200:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1200:80: E501 line too long (111 > 79 characters)
+src\legacy\gui_moderna.py:1203:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1203:80: E501 line too long (89 > 79 characters)
+src\legacy\gui_moderna.py:1204:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1207:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1208:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1209:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1219:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1219:80: E501 line too long (99 > 79 characters)
+src\legacy\gui_moderna.py:1222:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1223:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1226:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1227:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1228:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1248:80: E501 line too long (83 > 79 characters)
+src\legacy\gui_moderna.py:1284:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1284:80: E501 line too long (112 > 79 characters)
+src\legacy\gui_moderna.py:1287:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1287:80: E501 line too long (100 > 79 characters)
+src\legacy\gui_moderna.py:1290:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1290:80: E501 line too long (86 > 79 characters)
+src\legacy\gui_moderna.py:1291:17: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1294:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1295:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1296:18: E128 continuation line under-indented for visual indent
+src\legacy\gui_moderna.py:1309:80: E501 line too long (81 > 79 characters)
+src\legacy\gui_moderna.py:1310:80: E501 line too long (96 > 79 characters)
+src\legacy\login_automator.py:173:14: E999 SyntaxError: expected 'except' or 'finally' block
+src\legacy\run.py:8:1: F401 'sys' imported but unused
+src\legacy\run.py:11:1: E302 expected 2 blank lines, found 1
+src\legacy\run.py:43:1: E305 expected 2 blank lines after class or function definition, found 1
+src\main.py:10:1: F401 'os' imported but unused
+src\main.py:18:1: E302 expected 2 blank lines, found 1
+src\main.py:41:1: E305 expected 2 blank lines after class or function definition, found 1
+src\main.py:42:11: W292 no newline at end of file
+src\ui\modern_interface.py:8:1: F401 'tkinter.filedialog' imported but unused
+src\ui\modern_interface.py:8:1: F401 'tkinter.font' imported but unused
+src\ui\modern_interface.py:11:1: F401 'os' imported but unused
+src\ui\modern_interface.py:12:1: F401 'json' imported but unused
+src\ui\modern_interface.py:14:1: F401 'typing.Optional' imported but unused
+src\ui\modern_interface.py:14:1: F401 'typing.List' imported but unused
+src\ui\modern_interface.py:15:1: F401 'pathlib.Path' imported but unused
+src\ui\modern_interface.py:16:1: F401 'math' imported but unused
+src\ui\modern_interface.py:20:1: F401 '..core.automation_engine.AutomationEngine' imported but unused
+src\ui\modern_interface.py:40:43: E261 at least two spaces before inline comment
+src\ui\modern_interface.py:41:43: E261 at least two spaces before inline comment
+src\ui\modern_interface.py:56:42: E261 at least two spaces before inline comment
+src\ui\modern_interface.py:57:42: E261 at least two spaces before inline comment
+src\ui\modern_interface.py:104:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:109:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:114:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:119:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:124:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:147:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:148:80: E501 line too long (90 > 79 characters)
+src\ui\modern_interface.py:149:80: E501 line too long (92 > 79 characters)
+src\ui\modern_interface.py:150:80: E501 line too long (94 > 79 characters)
+src\ui\modern_interface.py:171:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:172:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:173:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:173:80: E501 line too long (110 > 79 characters)
+src\ui\modern_interface.py:178:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:178:80: E501 line too long (120 > 79 characters)
+src\ui\modern_interface.py:179:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:180:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:181:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:182:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:185:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:186:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:187:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:188:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:192:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:192:80: E501 line too long (120 > 79 characters)
+src\ui\modern_interface.py:193:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:194:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:195:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:196:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:199:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:200:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:201:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:205:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:205:80: E501 line too long (120 > 79 characters)
+src\ui\modern_interface.py:206:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:207:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:208:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:209:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:213:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:214:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:215:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:219:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:219:80: E501 line too long (110 > 79 characters)
+src\ui\modern_interface.py:220:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:221:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:222:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:223:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:224:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:225:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:228:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:229:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:233:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:233:80: E501 line too long (110 > 79 characters)
+src\ui\modern_interface.py:234:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:235:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:236:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:237:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:238:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:241:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:242:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:243:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:247:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:248:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:249:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:250:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:251:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:254:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:254:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:293:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:294:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:294:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:295:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:296:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:297:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:312:20: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:322:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:323:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:324:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:325:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:332:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:336:37: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:336:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:337:42: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:337:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:338:37: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:339:37: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:344:38: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:344:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:345:43: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:345:80: E501 line too long (96 > 79 characters)
+src\ui\modern_interface.py:346:38: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:347:38: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:348:38: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:353:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:354:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:354:80: E501 line too long (91 > 79 characters)
+src\ui\modern_interface.py:361:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:362:33: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:363:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:364:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:365:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:370:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:371:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:372:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:373:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:379:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:380:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:381:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:382:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:383:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:384:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:385:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:408:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:414:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:415:35: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:415:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:416:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:417:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:422:80: E501 line too long (96 > 79 characters)
+src\ui\modern_interface.py:424:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:425:39: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:425:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:426:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:427:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:433:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:439:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:446:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:447:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:448:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:449:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:450:80: E501 line too long (93 > 79 characters)
+src\ui\modern_interface.py:451:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:455:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:456:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:456:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:457:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:458:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:459:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:480:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:482:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:483:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:483:80: E501 line too long (89 > 79 characters)
+src\ui\modern_interface.py:484:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:485:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:485:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:486:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:491:80: E501 line too long (89 > 79 characters)
+src\ui\modern_interface.py:495:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:496:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:515:21: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:526:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:527:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:528:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:533:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:534:37: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:535:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:536:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:537:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:580:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:590:13: E306 expected 1 blank line before a nested definition, found 0
+src\ui\modern_interface.py:598:9: E722 do not use bare 'except'
+src\ui\modern_interface.py:604:9: E722 do not use bare 'except'
+src\ui\modern_interface.py:628:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:635:80: E501 line too long (90 > 79 characters)
+src\ui\modern_interface.py:643:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:661:26: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:670:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:671:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:679:35: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:679:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:680:40: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:680:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:681:35: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:682:35: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:693:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:694:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:695:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:696:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:700:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:701:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:702:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:703:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:706:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:710:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:711:44: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:715:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:716:46: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:721:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:722:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:727:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:736:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:737:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:738:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:739:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:743:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:744:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:745:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:746:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:746:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:750:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:765:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface.py:766:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:769:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:774:80: E501 line too long (95 > 79 characters)
+src\ui\modern_interface.py:782:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:783:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:784:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:785:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:786:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:787:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:788:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:789:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:790:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:795:80: E501 line too long (92 > 79 characters)
+src\ui\modern_interface.py:807:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:813:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:819:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:824:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:855:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface.py:859:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:860:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:861:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:864:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:865:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:866:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:867:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:869:80: E501 line too long (91 > 79 characters)
+src\ui\modern_interface.py:870:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:871:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:872:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:873:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:874:57: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:874:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:879:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:889:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:891:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:893:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:895:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:899:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:900:26: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:902:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:903:46: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:918:80: E501 line too long (94 > 79 characters)
+src\ui\modern_interface.py:924:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:928:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:932:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:933:35: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:933:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:934:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:935:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:946:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:950:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:951:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:952:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:955:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:956:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:957:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:958:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:960:80: E501 line too long (97 > 79 characters)
+src\ui\modern_interface.py:961:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:962:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:963:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:964:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:965:57: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:965:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:969:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:970:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:973:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:980:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:990:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:995:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1005:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:1007:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:1021:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1023:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:1024:45: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1024:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1027:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:1028:45: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1028:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:1035:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1039:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:1040:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1044:80: E501 line too long (91 > 79 characters)
+src\ui\modern_interface.py:1045:80: E501 line too long (102 > 79 characters)
+src\ui\modern_interface.py:1046:80: E501 line too long (92 > 79 characters)
+src\ui\modern_interface.py:1047:80: E501 line too long (97 > 79 characters)
+src\ui\modern_interface.py:1051:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1055:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1056:47: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1061:33: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1062:38: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1062:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:1063:33: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1064:33: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1065:33: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1070:49: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1070:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:1071:49: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1072:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:1082:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1086:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1087:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:1088:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1091:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1092:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1093:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1094:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1096:80: E501 line too long (92 > 79 characters)
+src\ui\modern_interface.py:1097:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1098:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1099:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1100:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1101:57: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1101:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:1105:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:1106:26: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1115:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:1120:26: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1122:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1126:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1127:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1128:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1129:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1130:55: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1130:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface.py:1131:55: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1131:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface.py:1134:46: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1134:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:1135:51: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1135:80: E501 line too long (101 > 79 characters)
+src\ui\modern_interface.py:1136:46: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1137:46: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1138:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1139:40: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1144:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1151:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1152:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1153:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1154:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1155:55: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1155:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1158:44: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1158:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1159:49: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1159:80: E501 line too long (91 > 79 characters)
+src\ui\modern_interface.py:1160:44: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1161:44: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1162:44: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1162:80: E501 line too long (91 > 79 characters)
+src\ui\modern_interface.py:1163:44: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1172:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1173:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1174:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1175:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1176:55: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1176:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1189:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1190:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1191:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1192:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1193:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1194:80: E501 line too long (92 > 79 characters)
+src\ui\modern_interface.py:1201:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1202:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1203:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1204:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1205:55: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1205:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1209:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1209:80: E501 line too long (89 > 79 characters)
+src\ui\modern_interface.py:1210:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1211:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1212:41: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1212:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1219:80: E501 line too long (90 > 79 characters)
+src\ui\modern_interface.py:1220:46: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1220:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1223:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:1224:45: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1224:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1234:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1238:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1239:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:1240:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1243:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1244:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1245:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1246:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1248:80: E501 line too long (93 > 79 characters)
+src\ui\modern_interface.py:1249:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1250:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1251:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1252:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1253:57: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1253:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:1257:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1258:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1269:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1274:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:1280:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1294:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1295:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1296:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1297:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1310:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1311:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1312:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1318:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1319:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1325:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1326:35: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1327:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1328:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1329:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1330:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1340:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1341:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:1349:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface.py:1357:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:1361:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1367:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1368:80: E501 line too long (89 > 79 characters)
+src\ui\modern_interface.py:1369:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:1370:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1378:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1382:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1383:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:1384:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1387:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1388:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1389:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1390:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1392:80: E501 line too long (92 > 79 characters)
+src\ui\modern_interface.py:1393:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1394:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1395:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1396:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1397:57: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1397:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:1401:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1402:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1405:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1410:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:1411:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1414:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:1418:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1419:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1420:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1421:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1422:55: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1422:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1425:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1426:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1426:80: E501 line too long (91 > 79 characters)
+src\ui\modern_interface.py:1427:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1428:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1429:41: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1429:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1430:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1435:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface.py:1439:46: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1439:80: E501 line too long (94 > 79 characters)
+src\ui\modern_interface.py:1443:45: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1443:80: E501 line too long (92 > 79 characters)
+src\ui\modern_interface.py:1447:48: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1447:80: E501 line too long (96 > 79 characters)
+src\ui\modern_interface.py:1452:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1469:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface.py:1470:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:1471:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:1472:80: E501 line too long (89 > 79 characters)
+src\ui\modern_interface.py:1478:80: E501 line too long (89 > 79 characters)
+src\ui\modern_interface.py:1483:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:1484:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:1485:29: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1488:80: E501 line too long (96 > 79 characters)
+src\ui\modern_interface.py:1489:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1490:41: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1490:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1491:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1492:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1496:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1508:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1509:37: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1509:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1510:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1511:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1517:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:1559:80: E501 line too long (129 > 79 characters)
+src\ui\modern_interface.py:1572:13: E722 do not use bare 'except'
+src\ui\modern_interface.py:1593:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1593:80: E501 line too long (94 > 79 characters)
+src\ui\modern_interface.py:1594:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface.py:1635:80: E501 line too long (96 > 79 characters)
+src\ui\modern_interface.py:1653:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1654:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:1660:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1663:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1666:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:1685:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:1702:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:1737:17: F401 'time' imported but unused
+src\ui\modern_interface.py:1743:80: E501 line too long (93 > 79 characters)
+src\ui\modern_interface.py:1745:80: E501 line too long (100 > 79 characters)
+src\ui\modern_interface.py:1747:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface.py:1749:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1751:80: E501 line too long (98 > 79 characters)
+src\ui\modern_interface.py:1754:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1756:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:1758:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface.py:1761:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1763:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:1775:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:1802:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:1803:80: E501 line too long (92 > 79 characters)
+src\ui\modern_interface.py:1810:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface.py:1815:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface.py:1822:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1848:80: E501 line too long (115 > 79 characters)
+src\ui\modern_interface.py:1850:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:1853:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1859:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:1868:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:1902:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:1904:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface.py:1909:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface.py:1920:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:1924:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface.py:1936:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:1940:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:1944:80: E501 line too long (90 > 79 characters)
+src\ui\modern_interface.py:1945:80: E501 line too long (94 > 79 characters)
+src\ui\modern_interface.py:1946:80: E501 line too long (99 > 79 characters)
+src\ui\modern_interface.py:1953:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:1960:13: F841 local variable 'filter_type' is assigned to but never used
+src\ui\modern_interface.py:1987:13: F811 redefinition of unused 'filedialog' from line 8
+src\ui\modern_interface.py:1990:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface.py:1996:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:2011:80: E501 line too long (97 > 79 characters)
+src\ui\modern_interface.py:2052:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface.py:2056:9: E722 do not use bare 'except'
+src\ui\modern_interface.py:2075:17: E722 do not use bare 'except'
+src\ui\modern_interface.py:2084:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:2104:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface.py:2117:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface.py:2142:11: W292 no newline at end of file
+src\ui\modern_interface_backup.py:8:1: F401 'tkinter.filedialog' imported but unused
+src\ui\modern_interface_backup.py:11:1: F401 'os' imported but unused
+src\ui\modern_interface_backup.py:14:1: F401 'typing.Any' imported but unused
+src\ui\modern_interface_backup.py:14:1: F401 'typing.Optional' imported but unused
+src\ui\modern_interface_backup.py:14:1: F401 'typing.List' imported but unused
+src\ui\modern_interface_backup.py:15:1: F401 'pathlib.Path' imported but unused
+src\ui\modern_interface_backup.py:19:1: F401 '..core.automation_engine.AutomationEngine' imported but unused
+src\ui\modern_interface_backup.py:32:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:32:80: E501 line too long (91 > 79 characters)
+src\ui\modern_interface_backup.py:46:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:46:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface_backup.py:49:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:50:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:50:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:54:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:77:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:78:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:79:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:80:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:85:9: E306 expected 1 blank line before a nested definition, found 0
+src\ui\modern_interface_backup.py:93:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:94:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:100:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:100:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface_backup.py:105:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:105:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:106:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:107:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:129:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface_backup.py:146:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface_backup.py:176:42: E261 at least two spaces before inline comment
+src\ui\modern_interface_backup.py:177:42: E261 at least two spaces before inline comment
+src\ui\modern_interface_backup.py:185:43: E261 at least two spaces before inline comment
+src\ui\modern_interface_backup.py:196:41: E261 at least two spaces before inline comment
+src\ui\modern_interface_backup.py:220:40: E261 at least two spaces before inline comment
+src\ui\modern_interface_backup.py:231:41: E261 at least two spaces before inline comment
+src\ui\modern_interface_backup.py:232:43: E261 at least two spaces before inline comment
+src\ui\modern_interface_backup.py:236:41: E261 at least two spaces before inline comment
+src\ui\modern_interface_backup.py:241:51: E261 at least two spaces before inline comment
+src\ui\modern_interface_backup.py:285:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface_backup.py:286:9: E722 do not use bare 'except'
+src\ui\modern_interface_backup.py:292:9: E722 do not use bare 'except'
+src\ui\modern_interface_backup.py:307:32: E261 at least two spaces before inline comment
+src\ui\modern_interface_backup.py:309:80: E501 line too long (103 > 79 characters)
+src\ui\modern_interface_backup.py:317:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:318:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:319:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:324:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:325:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:326:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:327:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:328:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:331:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:332:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:333:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:334:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:338:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:339:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:340:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:341:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:342:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:345:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:346:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:347:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:351:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:352:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:353:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:354:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:355:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:358:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:359:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:360:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:364:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:365:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:366:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:367:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:368:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:371:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:372:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:373:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:377:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:378:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:379:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:380:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:381:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:384:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:385:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:386:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:390:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:391:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:392:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:395:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:396:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:399:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:400:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:404:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:405:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:406:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:409:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:410:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:411:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:414:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:415:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:416:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:419:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:420:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:421:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:425:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:426:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:427:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:428:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:429:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:432:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:433:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:436:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:437:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:438:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:439:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:442:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:443:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:444:18: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:448:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:449:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:452:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:453:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:456:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:457:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:460:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:461:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:464:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:465:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:469:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:470:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:471:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:472:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:473:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:488:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:510:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface_backup.py:523:35: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:523:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface_backup.py:524:35: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:532:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:533:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:537:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:538:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:545:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface_backup.py:546:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:546:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:547:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:551:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:552:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:552:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:553:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:558:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface_backup.py:559:80: E501 line too long (130 > 79 characters)
+src\ui\modern_interface_backup.py:563:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface_backup.py:568:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface_backup.py:577:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:578:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:582:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:583:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:606:80: E501 line too long (95 > 79 characters)
+src\ui\modern_interface_backup.py:614:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:615:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:615:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface_backup.py:616:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:617:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:618:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:619:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:620:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:625:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface_backup.py:636:80: E501 line too long (92 > 79 characters)
+src\ui\modern_interface_backup.py:641:80: E501 line too long (91 > 79 characters)
+src\ui\modern_interface_backup.py:648:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:653:80: E501 line too long (91 > 79 characters)
+src\ui\modern_interface_backup.py:687:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:688:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:706:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:706:80: E501 line too long (93 > 79 characters)
+src\ui\modern_interface_backup.py:710:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:710:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface_backup.py:711:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:728:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:736:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:737:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:738:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:739:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:752:80: E501 line too long (90 > 79 characters)
+src\ui\modern_interface_backup.py:761:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:762:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:767:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:768:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:768:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface_backup.py:769:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:774:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:775:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:775:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:776:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:782:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:790:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:798:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:798:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface_backup.py:802:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:803:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:803:80: E501 line too long (93 > 79 characters)
+src\ui\modern_interface_backup.py:804:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:816:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:817:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:817:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface_backup.py:818:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:851:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:852:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:879:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:880:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:894:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface_backup.py:915:19: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:916:19: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:916:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface_backup.py:919:19: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:920:19: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:927:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:927:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:935:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:936:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:944:80: E501 line too long (100 > 79 characters)
+src\ui\modern_interface_backup.py:945:80: E501 line too long (94 > 79 characters)
+src\ui\modern_interface_backup.py:946:80: E501 line too long (89 > 79 characters)
+src\ui\modern_interface_backup.py:947:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface_backup.py:955:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:956:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:956:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:957:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:958:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:962:33: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:963:33: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:967:80: E501 line too long (89 > 79 characters)
+src\ui\modern_interface_backup.py:968:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface_backup.py:972:49: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:972:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface_backup.py:973:49: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:989:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:990:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:998:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:998:80: E501 line too long (94 > 79 characters)
+src\ui\modern_interface_backup.py:1007:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1008:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1012:46: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1013:46: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1013:80: E501 line too long (96 > 79 characters)
+src\ui\modern_interface_backup.py:1025:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1026:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1029:44: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1029:80: E501 line too long (99 > 79 characters)
+src\ui\modern_interface_backup.py:1030:44: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1030:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface_backup.py:1031:44: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1040:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1041:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1054:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1054:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:1055:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1055:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:1063:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1064:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1068:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1068:80: E501 line too long (89 > 79 characters)
+src\ui\modern_interface_backup.py:1069:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1077:19: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1078:19: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1078:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:1081:19: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1082:19: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1096:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1097:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1101:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:1105:49: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1106:49: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1111:52: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1112:52: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1112:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1117:48: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1118:48: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1123:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface_backup.py:1126:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1126:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:1134:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1153:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1154:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1163:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1164:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1170:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1171:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1177:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1178:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1178:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface_backup.py:1179:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1180:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1190:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface_backup.py:1191:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface_backup.py:1198:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface_backup.py:1199:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:1207:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface_backup.py:1211:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:1224:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1225:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1241:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1242:17: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1245:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1246:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1246:80: E501 line too long (91 > 79 characters)
+src\ui\modern_interface_backup.py:1247:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1247:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface_backup.py:1256:19: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1259:19: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1262:19: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1284:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:1285:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:1286:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface_backup.py:1292:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface_backup.py:1298:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1298:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface_backup.py:1299:36: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1304:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface_backup.py:1305:43: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1306:43: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1306:80: E501 line too long (93 > 79 characters)
+src\ui\modern_interface_backup.py:1323:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1324:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1330:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1351:5: E303 too many blank lines (2)
+src\ui\modern_interface_backup.py:1373:13: F841 local variable 'filter_type' is assigned to but never used
+src\ui\modern_interface_backup.py:1401:13: F811 redefinition of unused 'filedialog' from line 8
+src\ui\modern_interface_backup.py:1404:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface_backup.py:1427:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface_backup.py:1430:13: E722 do not use bare 'except'
+src\ui\modern_interface_backup.py:1451:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1451:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1452:28: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1492:80: E501 line too long (96 > 79 characters)
+src\ui\modern_interface_backup.py:1502:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface_backup.py:1510:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface_backup.py:1511:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface_backup.py:1517:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface_backup.py:1520:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1523:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface_backup.py:1549:17: F401 'time' imported but unused
+src\ui\modern_interface_backup.py:1555:80: E501 line too long (93 > 79 characters)
+src\ui\modern_interface_backup.py:1557:80: E501 line too long (100 > 79 characters)
+src\ui\modern_interface_backup.py:1559:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:1561:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1563:80: E501 line too long (98 > 79 characters)
+src\ui\modern_interface_backup.py:1566:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1568:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface_backup.py:1570:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface_backup.py:1573:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1575:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface_backup.py:1587:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface_backup.py:1601:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface_backup.py:1603:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:1605:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface_backup.py:1610:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface_backup.py:1611:80: E501 line too long (92 > 79 characters)
+src\ui\modern_interface_backup.py:1618:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:1623:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:1630:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1657:80: E501 line too long (115 > 79 characters)
+src\ui\modern_interface_backup.py:1659:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface_backup.py:1662:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:1668:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface_backup.py:1672:5: F811 redefinition of unused '_run_automation' from line 1579
+src\ui\modern_interface_backup.py:1685:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface_backup.py:1699:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1734:80: E501 line too long (87 > 79 characters)
+src\ui\modern_interface_backup.py:1736:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:1741:80: E501 line too long (85 > 79 characters)
+src\ui\modern_interface_backup.py:1768:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:1772:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:1776:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:1777:80: E501 line too long (89 > 79 characters)
+src\ui\modern_interface_backup.py:1778:80: E501 line too long (99 > 79 characters)
+src\ui\modern_interface_backup.py:1785:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1793:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:1794:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1794:80: E501 line too long (94 > 79 characters)
+src\ui\modern_interface_backup.py:1805:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1806:30: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1810:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1811:32: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1851:21: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1853:21: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1855:9: E722 do not use bare 'except'
+src\ui\modern_interface_backup.py:1874:17: E722 do not use bare 'except'
+src\ui\modern_interface_backup.py:1882:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface_backup.py:1902:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface_backup.py:1918:9: E303 too many blank lines (2)
+src\ui\modern_interface_backup.py:1918:80: E501 line too long (80 > 79 characters)
+src\ui\modern_interface_backup.py:1924:9: F841 local variable 'e' is assigned to but never used
+src\ui\modern_interface_backup.py:1929:1: E303 too many blank lines (3)
+src\ui\modern_interface_backup.py:1930:1: E302 expected 2 blank lines, found 3
+src\ui\modern_interface_backup.py:1946:1: F811 redefinition of unused 'UIComponents' from line 23
+src\ui\modern_interface_backup.py:1955:24: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1955:80: E501 line too long (91 > 79 characters)
+src\ui\modern_interface_backup.py:1969:34: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1969:80: E501 line too long (84 > 79 characters)
+src\ui\modern_interface_backup.py:1972:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:1973:31: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:1973:80: E501 line too long (86 > 79 characters)
+src\ui\modern_interface_backup.py:1977:22: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:2000:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:2001:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:2002:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:2003:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:2008:9: E306 expected 1 blank line before a nested definition, found 0
+src\ui\modern_interface_backup.py:2016:80: E501 line too long (83 > 79 characters)
+src\ui\modern_interface_backup.py:2017:27: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:2023:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:2023:80: E501 line too long (82 > 79 characters)
+src\ui\modern_interface_backup.py:2028:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:2028:80: E501 line too long (81 > 79 characters)
+src\ui\modern_interface_backup.py:2029:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:2030:25: E128 continuation line under-indented for visual indent
+src\ui\modern_interface_backup.py:2036:1: F811 redefinition of unused 'ValidationUtils' from line 113
+src\ui\modern_interface_backup.py:2052:80: E501 line too long (88 > 79 characters)
+src\ui\modern_interface_backup.py:2069:80: E501 line too long (87 > 79 characters)
+src\utils\inspecionar_site.py:14:1: E302 expected 2 blank lines, found 1
+src\utils\inspecionar_site.py:60:20: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:61:23: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:62:27: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:63:26: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:64:80: E501 line too long (102 > 79 characters)
+src\utils\inspecionar_site.py:68:80: E501 line too long (85 > 79 characters)
+src\utils\inspecionar_site.py:80:20: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:81:23: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:82:27: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:83:26: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:86:80: E501 line too long (99 > 79 characters)
+src\utils\inspecionar_site.py:91:80: E501 line too long (90 > 79 characters)
+src\utils\inspecionar_site.py:108:20: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:109:23: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:110:26: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:111:20: E701 multiple statements on one line (colon)
+src\utils\inspecionar_site.py:141:1: E302 expected 2 blank lines, found 1
+src\utils\inspecionar_site.py:160:1: E305 expected 2 blank lines after class or function definition, found 1
+tests\test_completo_sistema.py:12:1: F401 'configparser' imported but unused
+tests\test_completo_sistema.py:20:1: E402 module level import not at top of file
+tests\test_completo_sistema.py:22:1: E302 expected 2 blank lines, found 1
+tests\test_completo_sistema.py:67:80: E501 line too long (92 > 79 characters)
+tests\test_completo_sistema.py:85:80: E501 line too long (139 > 79 characters)
+tests\test_completo_sistema.py:115:80: E501 line too long (90 > 79 characters)
+tests\test_completo_sistema.py:147:80: E501 line too long (92 > 79 characters)
+tests\test_completo_sistema.py:149:80: E501 line too long (96 > 79 characters)
+tests\test_completo_sistema.py:180:80: E501 line too long (104 > 79 characters)
+tests\test_completo_sistema.py:184:80: E501 line too long (96 > 79 characters)
+tests\test_completo_sistema.py:187:80: E501 line too long (105 > 79 characters)
+tests\test_completo_sistema.py:189:80: E501 line too long (82 > 79 characters)
+tests\test_completo_sistema.py:215:80: E501 line too long (101 > 79 characters)
+tests\test_completo_sistema.py:216:80: E501 line too long (88 > 79 characters)
+tests\test_completo_sistema.py:238:80: E501 line too long (90 > 79 characters)
+tests\test_completo_sistema.py:275:80: E501 line too long (87 > 79 characters)
+tests\test_completo_sistema.py:293:80: E501 line too long (106 > 79 characters)
+tests\test_completo_sistema.py:306:1: E302 expected 2 blank lines, found 1
+tests\test_completo_sistema.py:325:80: E501 line too long (96 > 79 characters)
+tests\test_completo_sistema.py:339:1: E305 expected 2 blank lines after class or function definition, found 1
+tests\teste_caminho_config.py:8:1: F401 'sys' imported but unused
+tests\teste_caminho_config.py:11:1: E302 expected 2 blank lines, found 1
+tests\teste_caminho_config.py:66:1: E305 expected 2 blank lines after class or function definition, found 1
+tests\teste_caminhos_completos.py:8:1: F401 'sys' imported but unused
+tests\teste_caminhos_completos.py:11:1: E302 expected 2 blank lines, found 1
+tests\teste_caminhos_completos.py:40:80: E501 line too long (86 > 79 characters)
+tests\teste_caminhos_completos.py:49:80: E501 line too long (80 > 79 characters)
+tests\teste_caminhos_completos.py:62:80: E501 line too long (101 > 79 characters)
+tests\teste_caminhos_completos.py:93:1: E305 expected 2 blank lines after class or function definition, found 1
+tests\teste_completo_moderno.py:11:1: F401 'time' imported but unused
+tests\teste_completo_moderno.py:13:1: F401 'unittest.mock.Mock' imported but unused
+tests\teste_completo_moderno.py:13:1: F401 'unittest.mock.patch' imported but unused
+tests\teste_completo_moderno.py:33:5: F401 'gui_moderna.ModernLoginAutomatorGUI' imported but unused
+tests\teste_completo_moderno.py:45:80: E501 line too long (85 > 79 characters)
+tests\teste_completo_moderno.py:73:9: E722 do not use bare 'except'
+tests\teste_completo_moderno.py:84:13: F401 'tkinter as tk' imported but unused
+tests\teste_completo_moderno.py:90:13: F401 'selenium' imported but unused
+tests\teste_completo_moderno.py:96:13: F401 'configparser' imported but unused
+tests\teste_completo_moderno.py:102:13: F401 'apscheduler' imported but unused
+tests\teste_completo_moderno.py:119:80: E501 line too long (84 > 79 characters)
+tests\teste_completo_moderno.py:134:80: E501 line too long (85 > 79 characters)
+tests\teste_completo_moderno.py:150:80: E501 line too long (83 > 79 characters)
+tests\teste_completo_moderno.py:158:13: F811 redefinition of unused 'ModernLoginAutomatorGUI' from line 33
+tests\teste_completo_moderno.py:170:80: E501 line too long (132 > 79 characters)
+tests\teste_completo_moderno.py:191:80: E501 line too long (82 > 79 characters)
+tests\teste_completo_moderno.py:193:80: E501 line too long (84 > 79 characters)
+tests\teste_completo_moderno.py:206:80: E501 line too long (90 > 79 characters)
+tests\teste_completo_moderno.py:207:80: E501 line too long (100 > 79 characters)
+tests\teste_completo_moderno.py:212:80: E501 line too long (88 > 79 characters)
+tests\teste_completo_moderno.py:228:80: E501 line too long (80 > 79 characters)
+tests\teste_completo_moderno.py:229:80: E501 line too long (94 > 79 characters)
+tests\teste_completo_moderno.py:230:80: E501 line too long (88 > 79 characters)
+tests\teste_completo_moderno.py:231:80: E501 line too long (88 > 79 characters)
+tests\teste_completo_moderno.py:235:80: E501 line too long (92 > 79 characters)
+tests\teste_completo_moderno.py:264:80: E501 line too long (109 > 79 characters)
+tests\teste_completo_moderno.py:287:80: E501 line too long (83 > 79 characters)
+tests\teste_completo_moderno.py:295:13: F811 redefinition of unused 'ModernLoginAutomatorGUI' from line 33
+tests\teste_completo_moderno.py:299:80: E501 line too long (83 > 79 characters)
+tests\teste_completo_moderno.py:312:80: E501 line too long (111 > 79 characters)
+tests\teste_config_interface.py:8:1: F401 'sys' imported but unused
+tests\teste_config_interface.py:9:1: F401 'os' imported but unused
+tests\teste_config_interface.py:11:1: E302 expected 2 blank lines, found 1
+tests\teste_config_interface.py:63:1: E305 expected 2 blank lines after class or function definition, found 1
+tests\teste_funcionalidades.py:10:1: F401 'time' imported but unused
+tests\teste_funcionalidades.py:12:1: E302 expected 2 blank lines, found 1
+tests\teste_funcionalidades.py:34:9: F401 'gui.LoginAutomatorGUI' imported but unused
+tests\teste_funcionalidades.py:49:13: F841 local variable 'automator' is assigned to but never used
+tests\teste_funcionalidades.py:54:80: E501 line too long (93 > 79 characters)
+tests\teste_funcionalidades.py:86:80: E501 line too long (81 > 79 characters)
+tests\teste_funcionalidades.py:87:80: E501 line too long (87 > 79 characters)
+tests\teste_funcionalidades.py:106:80: E501 line too long (81 > 79 characters)
+tests\teste_funcionalidades.py:152:80: E501 line too long (93 > 79 characters)
+tests\teste_funcionalidades.py:170:17: F401 'tkinter' imported but unused
+tests\teste_funcionalidades.py:183:80: E501 line too long (80 > 79 characters)
+tests\teste_funcionalidades.py:193:13: F841 local variable 'temp_automator' is assigned to but never used
+tests\teste_funcionalidades.py:237:80: E501 line too long (82 > 79 characters)
+tests\teste_funcionalidades.py:250:1: E305 expected 2 blank lines after class or function definition, found 1
+tests\teste_gui_config.py:8:1: F401 'sys' imported but unused
+tests\teste_gui_config.py:11:1: E302 expected 2 blank lines, found 1
+tests\teste_gui_config.py:76:1: E305 expected 2 blank lines after class or function definition, found 1
+tests\teste_logica_gui.py:9:1: F401 'sys' imported but unused
+tests\teste_logica_gui.py:11:1: E302 expected 2 blank lines, found 1
+tests\teste_logica_gui.py:29:80: E501 line too long (82 > 79 characters)
+tests\teste_logica_gui.py:34:80: E501 line too long (86 > 79 characters)
+tests\teste_logica_gui.py:54:1: E305 expected 2 blank lines after class or function definition, found 1
+tests\teste_mapeamento.py:11:1: E302 expected 2 blank lines, found 1
+tests\teste_mapeamento.py:34:13: F841 local variable 'options' is assigned to but never used
+tests\teste_mapeamento.py:70:80: E501 line too long (85 > 79 characters)
+tests\teste_mapeamento.py:72:80: E501 line too long (83 > 79 characters)
+tests\teste_mapeamento.py:75:80: E501 line too long (85 > 79 characters)
+tests\teste_mapeamento.py:77:80: E501 line too long (91 > 79 characters)
+tests\teste_mapeamento.py:80:80: E501 line too long (85 > 79 characters)
+tests\teste_mapeamento.py:95:1: E305 expected 2 blank lines after class or function definition, found 1
+tests\teste_navegador_visivel.py:9:1: F401 'sys' imported but unused
+tests\teste_navegador_visivel.py:13:1: E302 expected 2 blank lines, found 1
+tests\teste_navegador_visivel.py:36:80: E501 line too long (86 > 79 characters)
+tests\teste_navegador_visivel.py:37:80: E501 line too long (80 > 79 characters)
+tests\teste_navegador_visivel.py:49:1: E305 expected 2 blank lines after class or function definition, found 1
+tests\teste_rapido.py:11:1: E302 expected 2 blank lines, found 1
+tests\teste_rapido.py:30:9: F401 'gui.LoginAutomatorGUI' imported but unused
+tests\teste_rapido.py:40:13: F841 local variable 'automator' is assigned to but never used
+tests\teste_rapido.py:69:1: E305 expected 2 blank lines after class or function definition, found 1

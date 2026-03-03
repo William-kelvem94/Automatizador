@@ -1,0 +1,2 @@
+src\legacy\login_automator.py:173: error: Expected 'except' or 'finally' block  [syntax]
+Found 1 error in 1 file (errors prevented further checking)

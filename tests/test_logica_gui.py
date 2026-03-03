@@ -8,6 +8,7 @@ TESTE DA LÓGICA DA GUI
 import os
 import sys
 
+
 def testar_logica_gui():
     print("TESTE DA LÓGICA DA GUI")
     print("=" * 50)
@@ -22,13 +23,13 @@ def testar_logica_gui():
     print(f"'src' in current_dir: {'src' in current_dir}")
 
     # Lógica da GUI
-    if 'src' in current_dir:
+    if "src" in current_dir:
         # Estamos dentro de src/, voltar para a raiz do projeto
         project_root = current_dir
         print(f"project_root inicial: {project_root}")
         print(f"os.path.basename(project_root): {os.path.basename(project_root)}")
 
-        while os.path.basename(project_root) != 'src':
+        while os.path.basename(project_root) != "src":
             project_root = os.path.dirname(project_root)
             print(f"project_root no loop: {project_root}")
             print(f"os.path.basename(project_root): {os.path.basename(project_root)}")
@@ -40,7 +41,7 @@ def testar_logica_gui():
         project_root = current_dir
         print(f"project_root (not from src): {project_root}")
 
-    config_path = os.path.join(project_root, 'config', 'config.ini')
+    config_path = os.path.join(project_root, "config", "config.ini")
     print(f"config_path final: {config_path}")
     print(f"Arquivo existe: {os.path.exists(config_path)}")
 
@@ -51,5 +52,6 @@ def testar_logica_gui():
 
     print("=" * 50)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     testar_logica_gui()

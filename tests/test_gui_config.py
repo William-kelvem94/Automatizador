@@ -5,8 +5,9 @@
 TESTE DA GUI - Caminho da Configuração
 """
 
-import sys
 import os
+import sys
+
 
 def testar_gui_config():
     print("TESTE DA GUI - CAMINHO DA CONFIGURAÇÃO")
@@ -21,7 +22,7 @@ def testar_gui_config():
 
     # Se estamos em src/, o current_dir será src
     # Então project_root deve ser o diretório pai
-    if os.path.basename(current_dir) == 'src':
+    if os.path.basename(current_dir) == "src":
         project_root = os.path.dirname(current_dir)
         print("[INFO] Estamos em src/, project_root = dirname(current_dir)")
     else:
@@ -29,7 +30,7 @@ def testar_gui_config():
         print("[INFO] Não estamos em src/, project_root = current_dir")
 
     print(f"project_root calculado: {project_root}")
-    config_path = os.path.join(project_root, 'config', 'config.ini')
+    config_path = os.path.join(project_root, "config", "config.ini")
     print(f"config_path calculado: {config_path}")
 
     # Verificar se existe
@@ -39,6 +40,7 @@ def testar_gui_config():
         # Tentar ler como a GUI faz
         try:
             import configparser
+
             config = configparser.ConfigParser()
             config.read(config_path)
 
@@ -47,7 +49,7 @@ def testar_gui_config():
 
             # Testar escrita (como no save_config)
             print("\nTestando escrita...")
-            with open(config_path, 'w') as f:
+            with open(config_path, "w") as f:
                 config.write(f)
             print("[OK] Escrita realizada com sucesso!")
 
@@ -63,7 +65,7 @@ def testar_gui_config():
         print(f"current_dir existe: {os.path.exists(current_dir)}")
         print(f"project_root existe: {os.path.exists(project_root)}")
 
-        config_dir = os.path.join(project_root, 'config')
+        config_dir = os.path.join(project_root, "config")
         print(f"config_dir: {config_dir}")
         print(f"config_dir existe: {os.path.exists(config_dir)}")
 
@@ -73,5 +75,6 @@ def testar_gui_config():
 
     print("=" * 50)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     testar_gui_config()

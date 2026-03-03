@@ -5,8 +5,9 @@
 TESTE DO CAMINHO DA CONFIGURAÇÃO
 """
 
-import sys
 import os
+import sys
+
 
 def testar_caminho_config():
     print("TESTE DO CAMINHO DA CONFIGURAÇÃO")
@@ -17,7 +18,7 @@ def testar_caminho_config():
     print(f"Diretório atual: {current_dir}")
 
     # Simular cálculo do caminho da config como na GUI
-    if 'src' in current_dir:
+    if "src" in current_dir:
         # Se estamos em src/, voltar um nível
         project_root = os.path.dirname(current_dir)
     else:
@@ -26,7 +27,7 @@ def testar_caminho_config():
 
     print(f"Raiz do projeto: {project_root}")
 
-    config_path = os.path.join(project_root, 'config', 'config.ini')
+    config_path = os.path.join(project_root, "config", "config.ini")
     print(f"Caminho da config: {config_path}")
 
     # Verificar se o arquivo existe
@@ -37,6 +38,7 @@ def testar_caminho_config():
         # Tentar ler
         try:
             import configparser
+
             config = configparser.ConfigParser()
             config.read(config_path)
             print("[OK] Configuração lida com sucesso!")
@@ -53,7 +55,7 @@ def testar_caminho_config():
         print("Verificando estrutura de pastas...")
 
         # Verificar estrutura
-        config_dir = os.path.join(project_root, 'config')
+        config_dir = os.path.join(project_root, "config")
         if os.path.exists(config_dir):
             print(f"[OK] Pasta config existe: {config_dir}")
             files_in_config = os.listdir(config_dir)
@@ -63,5 +65,6 @@ def testar_caminho_config():
 
     print("=" * 50)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     testar_caminho_config()

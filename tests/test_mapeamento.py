@@ -5,8 +5,9 @@
 TESTE DE MAPEAMENTO - Simula a detecção de campos do site
 """
 
-import sys
 import os
+import sys
+
 
 def testar_mapeamento():
     """Testa a funcionalidade de mapeamento de campos"""
@@ -15,15 +16,16 @@ def testar_mapeamento():
 
     # Configurar path
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    src_dir = os.path.join(current_dir, 'src')
+    src_dir = os.path.join(current_dir, "src")
     sys.path.insert(0, src_dir)
 
     try:
         from login_automator import LoginAutomator
+
         print("[OK] Sistema de automacao carregado")
 
         # Carregar configuração
-        config_path = os.path.join(current_dir, 'config', 'config.ini')
+        config_path = os.path.join(current_dir, "config", "config.ini")
         automator = LoginAutomator(config_path)
         print("[OK] Automatizador inicializado")
 
@@ -38,7 +40,7 @@ def testar_mapeamento():
             strategies = [
                 automator._try_chromedriver_manager,
                 automator._try_system_chromedriver,
-                automator._try_fallback_driver
+                automator._try_fallback_driver,
             ]
             print(f"[OK] {len(strategies)} estrategias de driver disponiveis")
 
@@ -49,10 +51,10 @@ def testar_mapeamento():
         # Testar métodos de detecção
         print("\n[TESTANDO] Metodos de deteccao...")
         metodos_necessarios = [
-            'validate_page',
-            'smart_field_detection',
-            'fallback_field_detection',
-            'analyze_page_elements'
+            "validate_page",
+            "smart_field_detection",
+            "fallback_field_detection",
+            "analyze_page_elements",
         ]
 
         for metodo in metodos_necessarios:
@@ -64,17 +66,20 @@ def testar_mapeamento():
 
         # Verificar configuração dos seletores
         print("\n[VERIFICANDO] Seletores configurados...")
-        if hasattr(automator, 'email_selector') and automator.email_selector:
+        if hasattr(automator, "email_selector") and automator.email_selector:
             print(f"[OK] Seletor email: {automator.email_selector}")
         else:
             print("[INFO] Seletor email nao configurado (usara deteccao automatica)")
 
-        if hasattr(automator, 'password_selector') and automator.password_selector:
+        if hasattr(automator, "password_selector") and automator.password_selector:
             print(f"[OK] Seletor senha: {automator.password_selector}")
         else:
             print("[INFO] Seletor senha nao configurado (usara deteccao automatica)")
 
-        if hasattr(automator, 'login_button_selector') and automator.login_button_selector:
+        if (
+            hasattr(automator, "login_button_selector")
+            and automator.login_button_selector
+        ):
             print(f"[OK] Seletor botao: {automator.login_button_selector}")
         else:
             print("[INFO] Seletor botao nao configurado (usara deteccao automatica)")
@@ -92,5 +97,6 @@ def testar_mapeamento():
         print(f"[ERRO] Falha no teste de mapeamento: {e}")
         return False
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     testar_mapeamento()

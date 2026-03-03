@@ -5,9 +5,10 @@
 TESTE FUNCIONALIDADES - Teste completo das funcionalidades do sistema
 """
 
-import sys
 import os
+import sys
 import time
+
 
 def testar_funcionalidades():
     """Testa todas as funcionalidades principais do sistema"""
@@ -17,7 +18,7 @@ def testar_funcionalidades():
 
     # Adicionar src ao path
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    src_dir = os.path.join(current_dir, 'src')
+    src_dir = os.path.join(current_dir, "src")
     sys.path.insert(0, src_dir)
 
     testes_executados = []
@@ -27,11 +28,13 @@ def testar_funcionalidades():
     print("\n[TESTE 1] Importando módulos principais...")
     try:
         from login_automator import LoginAutomator
+
         print("[OK] LoginAutomator importado com sucesso")
         testes_executados.append("Import LoginAutomator")
         testes_aprovados.append("Import LoginAutomator")
 
         from gui import LoginAutomatorGUI
+
         print("[OK] Interface gráfica importada com sucesso")
         testes_executados.append("Import Interface")
         testes_aprovados.append("Import Interface")
@@ -44,14 +47,16 @@ def testar_funcionalidades():
     # Teste 2: Instanciação do automatizador
     print("\n[TESTE 2] Testando instanciação do LoginAutomator...")
     try:
-        config_path = os.path.join(current_dir, 'config', 'config.ini')
+        config_path = os.path.join(current_dir, "config", "config.ini")
         if os.path.exists(config_path):
             automator = LoginAutomator(config_path)
             print("[OK] LoginAutomator instanciado com sucesso")
             testes_executados.append("Instanciação Automator")
             testes_aprovados.append("Instanciação Automator")
         else:
-            print("[AVISO] Arquivo config.ini não encontrado, pulando teste de instanciação")
+            print(
+                "[AVISO] Arquivo config.ini não encontrado, pulando teste de instanciação"
+            )
             testes_executados.append("Instanciação Automator")
             testes_aprovados.append("Instanciação Automator")
 
@@ -63,14 +68,15 @@ def testar_funcionalidades():
     print("\n[TESTE 3] Verificando configuração...")
     try:
         import configparser
+
         config = configparser.ConfigParser()
 
-        config_path = os.path.join(current_dir, 'config', 'config.ini')
+        config_path = os.path.join(current_dir, "config", "config.ini")
         if os.path.exists(config_path):
             config.read(config_path)
 
             # Verificar seções
-            secoes_necessarias = ['SITE', 'CREDENTIALS', 'SETTINGS']
+            secoes_necessarias = ["SITE", "CREDENTIALS", "SETTINGS"]
             secoes_presentes = config.sections()
 
             for secao in secoes_necessarias:
@@ -80,8 +86,8 @@ def testar_funcionalidades():
                     print(f"[AVISO] Seção {secao} não encontrada")
 
             # Verificar valores básicos
-            url = config.get('SITE', 'url', fallback='')
-            email = config.get('CREDENTIALS', 'email', fallback='')
+            url = config.get("SITE", "url", fallback="")
+            email = config.get("CREDENTIALS", "email", fallback="")
 
             print(f"[INFO] URL configurada: {url if url else 'Não configurada'}")
             print(f"[INFO] Email configurado: {email if email else 'Não configurado'}")
@@ -103,7 +109,7 @@ def testar_funcionalidades():
 
         # Testar conexão com Google (serviço básico)
         try:
-            req = urllib.request.Request('https://www.google.com', method='HEAD')
+            req = urllib.request.Request("https://www.google.com", method="HEAD")
             with urllib.request.urlopen(req, timeout=10) as response:
                 if response.status == 200:
                     print("[OK] Conectividade com internet OK")
@@ -125,16 +131,16 @@ def testar_funcionalidades():
     # Teste 5: Verificação de estrutura de arquivos
     print("\n[TESTE 5] Verificando estrutura de arquivos...")
     estrutura_arquivos = [
-        'src/__init__.py',
-        'src/gui.py',
-        'src/login_automator.py',
-        'src/run.py',
-        'config/__init__.py',
-        'config/requirements.txt',
-        'scripts/executar.bat',
-        'scripts/install.bat',
-        'docs/README.md',
-        'README.md'
+        "src/__init__.py",
+        "src/gui.py",
+        "src/login_automator.py",
+        "src/run.py",
+        "config/__init__.py",
+        "config/requirements.txt",
+        "scripts/executar.bat",
+        "scripts/install.bat",
+        "docs/README.md",
+        "README.md",
     ]
 
     arquivos_presentes = 0
@@ -149,24 +155,26 @@ def testar_funcionalidades():
         testes_executados.append("Estrutura Arquivos")
         testes_aprovados.append("Estrutura Arquivos")
     else:
-        print(f"[AVISO] {arquivos_presentes}/{len(estrutura_arquivos)} arquivos encontrados")
+        print(
+            f"[AVISO] {arquivos_presentes}/{len(estrutura_arquivos)} arquivos encontrados"
+        )
         testes_executados.append("Estrutura Arquivos")
         testes_aprovados.append("Estrutura Arquivos")
 
     # Teste 6: Verificação de dependências
     print("\n[TESTE 6] Verificando dependências...")
     dependencias = [
-        ('selenium', 'Selenium WebDriver'),
-        ('tkinter', 'Interface gráfica Tkinter'),
-        ('apscheduler', 'Agendamento de tarefas'),
-        ('webdriver_manager', 'Gerenciador de drivers'),
-        ('configparser', 'Leitor de configurações')
+        ("selenium", "Selenium WebDriver"),
+        ("tkinter", "Interface gráfica Tkinter"),
+        ("apscheduler", "Agendamento de tarefas"),
+        ("webdriver_manager", "Gerenciador de drivers"),
+        ("configparser", "Leitor de configurações"),
     ]
 
     deps_ok = 0
     for modulo, descricao in dependencias:
         try:
-            if modulo == 'tkinter':
+            if modulo == "tkinter":
                 import tkinter
             else:
                 __import__(modulo)
@@ -188,7 +196,7 @@ def testar_funcionalidades():
     print("\n[TESTE 7] Testando configuração de sistema...")
     try:
         # Simular criação de instância sem executar
-        config_path = os.path.join(current_dir, 'config', 'config.ini')
+        config_path = os.path.join(current_dir, "config", "config.ini")
         if os.path.exists(config_path):
             temp_automator = LoginAutomator(config_path)
             print("[OK] Sistema de configuração funcionando")
@@ -247,5 +255,6 @@ def testar_funcionalidades():
         print("[INFO] Execute: scripts/install.bat")
         return False
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     testar_funcionalidades()

@@ -3,14 +3,15 @@ Motor de Automação Principal
 Coordena todas as operações de automação de login
 """
 
-import time
 import logging
-from typing import Dict, Optional, Any, List
+import time
 from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional
+
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
 
 from .browser_engine import BrowserEngine
 from .field_detector import FieldDetector
@@ -31,11 +32,11 @@ class AutomationEngine:
 
         # Estatísticas
         self.stats = {
-            'operations_total': 0,
-            'operations_success': 0,
-            'operations_failed': 0,
-            'last_execution': None,
-            'average_duration': 0
+            "operations_total": 0,
+            "operations_success": 0,
+            "operations_failed": 0,
+            "last_execution": None,
+            "average_duration": 0,
         }
 
     def initialize(self) -> bool:
@@ -44,7 +45,7 @@ class AutomationEngine:
             self.logger.info("Inicializando motor de automação...")
 
             # Cria instância do navegador
-            headless = self.config.get('headless', False)
+            headless = self.config.get("headless", False)
             self.browser = BrowserEngine(headless=headless, config=self.config)
 
             # Cria driver
@@ -64,38 +65,38 @@ class AutomationEngine:
         """
         start_time = time.time()
         result = {
-            'success': False,
-            'stage': 'initialization',
-            'duration': 0,
-            'error': None,
-            'details': {},
-            'screenshots': []
+            "success": False,
+            "stage": "initialization",
+            "duration": 0,
+            "error": None,
+            "details": {},
+            "screenshots": [],
         }
 
         try:
             self.is_running = True
-            self.current_operation = 'login_sequence'
+            self.current_operation = "login_sequence"
             self.logger.info("Iniciando sequência de login automatizado")
 
             # Fase 1: Acesso à página
-            result['stage'] = 'navigation'
-            url = self.config.get('site_url', '')
+            result["stage"] = "navigation"
+            url = self.config.get("site_url", "")
             if not self.browser.navigate_to(url):
                 raise Exception("Falha ao acessar página de login")
 
-            result['details']['navigation'] = {
-                'url': url,
-                'title': self.browser.driver.title,
-                'success': True
+            result["details"]["navigation"] = {
+                "url": url,
+                "title": self.browser.driver.title,
+                "success": True,
             }
 
             # Captura screenshot inicial
             screenshot_path = f"screenshot_{int(time.time())}_initial.png"
             if self.browser.capture_screenshot(screenshot_path):
-                result['screenshots'].append(screenshot_path)
+                result["screenshots"].append(screenshot_path)
 
             # Fase 2: Detecção de campos
-            result['stage'] = 'field_detection'
+            result["stage"] = "field_detection"
             self.logger.info("Detectando campos do formulário...")
 
             detector = FieldDetector(self.browser.driver, self.config)
@@ -104,63 +105,65 @@ class AutomationEngine:
             if not fields:
                 raise Exception("Nenhum campo de formulário detectado")
 
-            result['details']['field_detection'] = {
-                'fields_found': list(fields.keys()),
-                'selectors': fields,
-                'page_analysis': detector.analyze_page_structure()
+            result["details"]["field_detection"] = {
+                "fields_found": list(fields.keys()),
+                "selectors": fields,
+                "page_analysis": detector.analyze_page_structure(),
             }
 
             # Fase 3: Preenchimento do formulário
-            result['stage'] = 'form_filling'
+            result["stage"] = "form_filling"
             self.logger.info("Preenchendo formulário de login...")
 
             fill_result = self._fill_login_form(fields, credentials)
-            result['details']['form_filling'] = fill_result
+            result["details"]["form_filling"] = fill_result
 
-            if not fill_result['success']:
+            if not fill_result["success"]:
                 raise Exception(f"Falha no preenchimento: {fill_result['error']}")
 
             # Captura screenshot após preenchimento
             screenshot_path = f"screenshot_{int(time.time())}_filled.png"
             if self.browser.capture_screenshot(screenshot_path):
-                result['screenshots'].append(screenshot_path)
+                result["screenshots"].append(screenshot_path)
 
             # Fase 4: Submissão e verificação
-            result['stage'] = 'submission'
+            result["stage"] = "submission"
             self.logger.info("Enviando formulário...")
 
             submit_result = self._submit_and_verify(fields)
-            result['details']['submission'] = submit_result
+            result["details"]["submission"] = submit_result
 
             # Determina sucesso final
-            result['success'] = submit_result['login_success']
-            result['stage'] = 'completed'
+            result["success"] = submit_result["login_success"]
+            result["stage"] = "completed"
 
             # Captura screenshot final
             screenshot_path = f"screenshot_{int(time.time())}_final.png"
             if self.browser.capture_screenshot(screenshot_path):
-                result['screenshots'].append(screenshot_path)
+                result["screenshots"].append(screenshot_path)
 
             # Estatísticas
             duration = time.time() - start_time
-            result['duration'] = duration
-            self._update_statistics(result['success'], duration)
+            result["duration"] = duration
+            self._update_statistics(result["success"], duration)
 
-            if result['success']:
+            if result["success"]:
                 self.logger.info("Sequência de login concluída com SUCESSO")
             else:
-                self.logger.warning("Sequência de login concluída com AVISO (modo híbrido)")
+                self.logger.warning(
+                    "Sequência de login concluída com AVISO (modo híbrido)"
+                )
 
         except Exception as e:
-            result['success'] = False
-            result['error'] = str(e)
-            result['duration'] = time.time() - start_time
+            result["success"] = False
+            result["error"] = str(e)
+            result["duration"] = time.time() - start_time
             self.logger.error(f"Erro na sequência de login: {e}")
 
             # Captura screenshot de erro
             screenshot_path = f"screenshot_{int(time.time())}_error.png"
             if self.browser and self.browser.capture_screenshot(screenshot_path):
-                result['screenshots'].append(screenshot_path)
+                result["screenshots"].append(screenshot_path)
 
         finally:
             self.is_running = False
@@ -169,15 +172,17 @@ class AutomationEngine:
 
         return result
 
-    def _fill_login_form(self, fields: Dict[str, str], credentials: Dict[str, str]) -> Dict[str, Any]:
+    def _fill_login_form(
+        self, fields: Dict[str, str], credentials: Dict[str, str]
+    ) -> Dict[str, Any]:
         """Preenche o formulário de login"""
-        result = {'success': False, 'error': None, 'fields_filled': []}
+        result = {"success": False, "error": None, "fields_filled": []}
 
         try:
             # Preenche email
-            if 'email' in fields and 'email' in credentials:
-                if self._fill_field(fields['email'], credentials['email']):
-                    result['fields_filled'].append('email')
+            if "email" in fields and "email" in credentials:
+                if self._fill_field(fields["email"], credentials["email"]):
+                    result["fields_filled"].append("email")
                     self.logger.info("Campo email preenchido")
                 else:
                     raise Exception("Falha ao preencher campo email")
@@ -186,9 +191,9 @@ class AutomationEngine:
             time.sleep(1)
 
             # Preenche senha
-            if 'password' in fields and 'password' in credentials:
-                if self._fill_field(fields['password'], credentials['password']):
-                    result['fields_filled'].append('password')
+            if "password" in fields and "password" in credentials:
+                if self._fill_field(fields["password"], credentials["password"]):
+                    result["fields_filled"].append("password")
                     self.logger.info("Campo senha preenchido")
                 else:
                     raise Exception("Falha ao preencher campo senha")
@@ -196,10 +201,10 @@ class AutomationEngine:
             # Aguarda carregamento dinâmico
             time.sleep(2)
 
-            result['success'] = True
+            result["success"] = True
 
         except Exception as e:
-            result['error'] = str(e)
+            result["error"] = str(e)
             self.logger.error(f"Erro no preenchimento do formulário: {e}")
 
         return result
@@ -217,11 +222,13 @@ class AutomationEngine:
             element.send_keys(value)
 
             # Verifica se foi preenchido
-            current_value = element.get_attribute('value')
+            current_value = element.get_attribute("value")
             if current_value and len(current_value) > 0:
                 return True
             else:
-                self.logger.warning(f"Campo não foi preenchido corretamente: {selector}")
+                self.logger.warning(
+                    f"Campo não foi preenchido corretamente: {selector}"
+                )
                 return False
 
         except Exception as e:
@@ -231,46 +238,49 @@ class AutomationEngine:
     def _submit_and_verify(self, fields: Dict[str, str]) -> Dict[str, Any]:
         """Submete formulário e verifica resultado"""
         result = {
-            'submit_success': False,
-            'login_success': False,
-            'current_url': None,
-            'page_title': None,
-            'error_indicators': [],
-            'success_indicators': []
+            "submit_success": False,
+            "login_success": False,
+            "current_url": None,
+            "page_title": None,
+            "error_indicators": [],
+            "success_indicators": [],
         }
 
         try:
             initial_url = self.browser.driver.current_url
 
             # Tenta submissão
-            if 'submit' in fields:
+            if "submit" in fields:
                 # Usa botão específico
-                submit_success = self._click_submit_button(fields['submit'])
+                submit_success = self._click_submit_button(fields["submit"])
             else:
                 # Tenta submit automático
                 submit_success = self._try_auto_submit()
 
-            result['submit_success'] = submit_success
+            result["submit_success"] = submit_success
 
             if submit_success:
                 # Aguarda mudança
                 time.sleep(3)
 
                 # Verifica resultado
-                result['current_url'] = self.browser.driver.current_url
-                result['page_title'] = self.browser.driver.title
+                result["current_url"] = self.browser.driver.current_url
+                result["page_title"] = self.browser.driver.title
 
                 # Verifica indicadores de erro
                 error_indicators = self._check_error_indicators()
-                result['error_indicators'] = error_indicators
+                result["error_indicators"] = error_indicators
 
                 # Verifica indicadores de sucesso
                 success_indicators = self._check_success_indicators()
-                result['success_indicators'] = success_indicators
+                result["success_indicators"] = success_indicators
 
                 # Determina se login foi bem-sucedido
-                result['login_success'] = self._determine_login_success(
-                    initial_url, result['current_url'], error_indicators, success_indicators
+                result["login_success"] = self._determine_login_success(
+                    initial_url,
+                    result["current_url"],
+                    error_indicators,
+                    success_indicators,
                 )
 
             else:
@@ -323,14 +333,21 @@ class AutomationEngine:
         try:
             # Busca por elementos de erro comuns
             error_selectors = [
-                "[class*='error']", "[class*='erro']", "[class*='alert']",
-                "[id*='error']", "[id*='erro']", "[class*='invalid']",
-                "[class*='danger']", "[class*='warning']"
+                "[class*='error']",
+                "[class*='erro']",
+                "[class*='alert']",
+                "[id*='error']",
+                "[id*='erro']",
+                "[class*='invalid']",
+                "[class*='danger']",
+                "[class*='warning']",
             ]
 
             for selector in error_selectors:
                 try:
-                    elements = self.browser.driver.find_elements(By.CSS_SELECTOR, selector)
+                    elements = self.browser.driver.find_elements(
+                        By.CSS_SELECTOR, selector
+                    )
                     for element in elements:
                         if element.is_displayed() and element.text.strip():
                             error_indicators.append(element.text.strip()[:100])
@@ -341,7 +358,7 @@ class AutomationEngine:
             current_url = self.browser.driver.current_url.lower()
             page_title = self.browser.driver.title.lower()
 
-            if 'login' in current_url or 'login' in page_title:
+            if "login" in current_url or "login" in page_title:
                 error_indicators.append("Ainda na página de login")
 
         except Exception as e:
@@ -355,9 +372,21 @@ class AutomationEngine:
 
         try:
             success_keywords = [
-                'dashboard', 'painel', 'home', 'principal', 'conta', 'perfil',
-                'logout', 'sair', 'welcome', 'bem-vindo', 'success', 'sucesso',
-                'logado', 'authenticated', 'signed in'
+                "dashboard",
+                "painel",
+                "home",
+                "principal",
+                "conta",
+                "perfil",
+                "logout",
+                "sair",
+                "welcome",
+                "bem-vindo",
+                "success",
+                "sucesso",
+                "logado",
+                "authenticated",
+                "signed in",
             ]
 
             page_text = self.browser.driver.page_source.lower()
@@ -372,8 +401,13 @@ class AutomationEngine:
 
         return success_indicators
 
-    def _determine_login_success(self, initial_url: str, current_url: str,
-                               error_indicators: List[str], success_indicators: List[str]) -> bool:
+    def _determine_login_success(
+        self,
+        initial_url: str,
+        current_url: str,
+        error_indicators: List[str],
+        success_indicators: List[str],
+    ) -> bool:
         """Determina se o login foi bem-sucedido baseado em múltiplos fatores"""
 
         # Se há indicadores de erro claros, falhou
@@ -385,7 +419,7 @@ class AutomationEngine:
             return True
 
         # Verifica se a URL mudou (saiu da página de login)
-        if current_url != initial_url and 'login' not in current_url.lower():
+        if current_url != initial_url and "login" not in current_url.lower():
             return True
 
         # Por padrão, assume sucesso se não há erros claros
@@ -393,27 +427,33 @@ class AutomationEngine:
 
     def _update_statistics(self, success: bool, duration: float):
         """Atualiza estatísticas da automação"""
-        self.stats['operations_total'] += 1
-        self.stats['last_execution'] = datetime.now()
+        self.stats["operations_total"] += 1
+        self.stats["last_execution"] = datetime.now()
 
         if success:
-            self.stats['operations_success'] += 1
+            self.stats["operations_success"] += 1
         else:
-            self.stats['operations_failed'] += 1
+            self.stats["operations_failed"] += 1
 
         # Atualiza duração média
-        total_ops = self.stats['operations_total']
-        current_avg = self.stats['average_duration']
-        self.stats['average_duration'] = (current_avg * (total_ops - 1) + duration) / total_ops
+        total_ops = self.stats["operations_total"]
+        current_avg = self.stats["average_duration"]
+        self.stats["average_duration"] = (
+            current_avg * (total_ops - 1) + duration
+        ) / total_ops
 
     def get_status(self) -> Dict[str, Any]:
         """Retorna status atual do motor"""
         return {
-            'is_running': self.is_running,
-            'current_operation': self.current_operation,
-            'last_result': self.last_result,
-            'stats': self.stats.copy(),
-            'browser_info': self.browser.get_page_info() if self.browser and self.browser.driver else {}
+            "is_running": self.is_running,
+            "current_operation": self.current_operation,
+            "last_result": self.last_result,
+            "stats": self.stats.copy(),
+            "browser_info": (
+                self.browser.get_page_info()
+                if self.browser and self.browser.driver
+                else {}
+            ),
         }
 
     def cleanup(self):

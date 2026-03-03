@@ -5,8 +5,9 @@
 TESTE RÁPIDO - Verificação básica do sistema
 """
 
-import sys
 import os
+import sys
+
 
 def teste_rapido():
     """Teste rápido das funcionalidades essenciais"""
@@ -15,12 +16,13 @@ def teste_rapido():
 
     # Configurar path
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    src_dir = os.path.join(current_dir, 'src')
+    src_dir = os.path.join(current_dir, "src")
     sys.path.insert(0, src_dir)
 
     print("\n[1/3] Testando imports...")
     try:
         from login_automator import LoginAutomator
+
         print("[OK] Core importado")
     except Exception as e:
         print(f"[ERRO] Core falhou: {e}")
@@ -28,6 +30,7 @@ def teste_rapido():
 
     try:
         from gui import LoginAutomatorGUI
+
         print("[OK] Interface importada")
     except Exception as e:
         print(f"[ERRO] Interface falhou: {e}")
@@ -35,7 +38,7 @@ def teste_rapido():
 
     print("\n[2/3] Testando configuracao...")
     try:
-        config_path = os.path.join(current_dir, 'config', 'config.ini')
+        config_path = os.path.join(current_dir, "config", "config.ini")
         if os.path.exists(config_path):
             automator = LoginAutomator(config_path)
             print("[OK] Configuracao carregada")
@@ -47,10 +50,10 @@ def teste_rapido():
 
     print("\n[3/3] Testando estrutura...")
     arquivos_essenciais = [
-        'src/gui.py',
-        'src/login_automator.py',
-        'config/config.ini',
-        'scripts/executar.bat'
+        "src/gui.py",
+        "src/login_automator.py",
+        "config/config.ini",
+        "scripts/executar.bat",
     ]
 
     for arquivo in arquivos_essenciais:
@@ -66,5 +69,6 @@ def teste_rapido():
 
     return True
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     teste_rapido()

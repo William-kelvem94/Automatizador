@@ -86,13 +86,18 @@
 
 ## 🎮 Como Usar (Super Simples!)
 
-### 1. 🎯 Primeira Execução
-```bash
-# Execute o instalador (primeira vez apenas)
-scripts/install.bat
+### 1. 🎯 Execução Simples (Recomendado)
+Basta dar um duplo-clique no arquivo:
+- `executar.bat`
 
-# Execute a aplicação
-python src/main.py
+O sistema irá automaticamente:
+1. Verificar e instalar dependências faltantes.
+2. Validar suas configurações.
+3. Iniciar a Interface Moderna v5.0.
+
+Alternativamente, via terminal:
+```bash
+python run.py
 ```
 
 ### 2. ⚙️ Configuração Inicial

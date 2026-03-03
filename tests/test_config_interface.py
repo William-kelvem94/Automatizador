@@ -5,8 +5,9 @@
 TESTE DA CONFIGURAÇÃO - Simula o teste de configuração da interface
 """
 
-import sys
 import os
+import sys
+
 
 def testar_configuracao():
     """Testa a configuração como faria a interface gráfica"""
@@ -19,14 +20,14 @@ def testar_configuracao():
     senha_test = "***SENHA CONFIGURADA***"
 
     print("\n[VALIDANDO] URL...")
-    if url_test and url_test.startswith(('http://', 'https://')):
+    if url_test and url_test.startswith(("http://", "https://")):
         print(f"[OK] URL valida: {url_test}")
     else:
         print("[ERRO] URL invalida")
         return False
 
     print("\n[VALIDANDO] Email...")
-    if email_test and '@' in email_test and '.' in email_test:
+    if email_test and "@" in email_test and "." in email_test:
         print(f"[OK] Email valido: {email_test}")
     else:
         print("[ERRO] Email invalido")
@@ -42,7 +43,8 @@ def testar_configuracao():
     print("\n[VALIDANDO] Conectividade...")
     try:
         import urllib.request
-        req = urllib.request.Request(url_test, method='HEAD')
+
+        req = urllib.request.Request(url_test, method="HEAD")
         with urllib.request.urlopen(req, timeout=10) as response:
             if response.status == 200:
                 print("[OK] Site acessivel")
@@ -60,5 +62,6 @@ def testar_configuracao():
 
     return True
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     testar_configuracao()

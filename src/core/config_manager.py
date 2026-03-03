@@ -3,13 +3,53 @@ Gerenciador de Configuração Inteligente
 Sistema avançado para gerenciar configurações com validação e backup
 """
 
-import os
+import configparser
 import json
 import logging
-import configparser
-from typing import Dict, Any, Optional, List
+import os
+import re
 from datetime import datetime
 from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, Field, ValidationError, field_validator
+
+
+class ConfigSchema(BaseModel):
+    url: str = ""
+    email: str = ""
+    password: str = ""
+    wait_timeout: int = Field(default=10, ge=1, le=60)
+    times: str = ""
+
+    @field_validator("url")
+    @classmethod
+    def validate_url(cls, v):
+        if v and not (v.startswith("http://") or v.startswith("https://")):
+            raise ValueError("URL inválida")
+        return v
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, v):
+        if v and not re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", v):
+            raise ValueError("Email inválido")
+        return v
+
+    @field_validator("times")
+    @classmethod
+    def validate_times(cls, v):
+        if v:
+            for time_str in v.split(","):
+                ts = time_str.strip()
+                if ts:
+                    try:
+                        hour, minute = map(int, ts.split(":"))
+                        if not (0 <= hour <= 23 and 0 <= minute <= 59):
+                            raise ValueError()
+                    except ValueError:
+                        raise ValueError(f"Horário inválido: {ts}")
+        return v
 
 
 class ConfigManager:
@@ -27,36 +67,33 @@ class ConfigManager:
 
         # Configurações padrão
         self.default_config = {
-            'site': {
-                'url': '',
-                'email_selector': 'input[type="email"]',
-                'password_selector': 'input[type="password"]',
-                'submit_selector': 'button[type="submit"]'
+            "site": {
+                "url": "",
+                "email_selector": 'input[type="email"]',
+                "password_selector": 'input[type="password"]',
+                "submit_selector": 'button[type="submit"]',
             },
-            'credentials': {
-                'email': '',
-                'password': ''
+            "credentials": {"email": "", "password": ""},
+            "schedule": {
+                "enabled": "false",
+                "times": "08:00,12:00,18:00,22:00",
+                "days": "seg,ter,qua,qui,sex",
+                "timezone": "America/Sao_Paulo",
             },
-            'schedule': {
-                'enabled': 'false',
-                'times': '08:00,12:00,18:00,22:00',
-                'days': 'seg,ter,qua,qui,sex',
-                'timezone': 'America/Sao_Paulo'
+            "settings": {
+                "headless": "false",
+                "wait_timeout": "10",
+                "max_retries": "3",
+                "screenshot_on_error": "true",
+                "log_level": "INFO",
             },
-            'settings': {
-                'headless': 'false',
-                'wait_timeout': '10',
-                'max_retries': '3',
-                'screenshot_on_error': 'true',
-                'log_level': 'INFO'
+            "advanced": {
+                "user_agent_rotation": "true",
+                "proxy_enabled": "false",
+                "proxy_list": "",
+                "captcha_solver": "none",
+                "two_factor_auth": "none",
             },
-            'advanced': {
-                'user_agent_rotation': 'true',
-                'proxy_enabled': 'false',
-                'proxy_list': '',
-                'captcha_solver': 'none',
-                'two_factor_auth': 'none'
-            }
         }
 
         self.config = configparser.ConfigParser()
@@ -71,7 +108,7 @@ class ConfigManager:
                 self.create_default_config()
 
             # Carrega configuração
-            self.config.read(self.config_file, encoding='utf-8')
+            self.config.read(self.config_file, encoding="utf-8")
 
             # Aplica configurações padrão para seções faltantes
             self._apply_defaults()
@@ -81,7 +118,9 @@ class ConfigManager:
                 self.logger.info("Configuração carregada e validada com sucesso")
                 return True
             else:
-                self.logger.warning("Configuração carregada mas com avisos de validação")
+                self.logger.warning(
+                    "Configuração carregada mas com avisos de validação"
+                )
                 return True
 
         except Exception as e:
@@ -101,10 +140,12 @@ class ConfigManager:
                     self.config.set(section, option, value)
 
             # Salva arquivo
-            with open(self.config_file, 'w', encoding='utf-8') as f:
+            with open(self.config_file, "w", encoding="utf-8") as f:
                 self.config.write(f)
 
-            self.logger.info(f"Arquivo de configuração padrão criado: {self.config_file}")
+            self.logger.info(
+                f"Arquivo de configuração padrão criado: {self.config_file}"
+            )
 
         except Exception as e:
             self.logger.error(f"Erro ao criar configuração padrão: {e}")
@@ -114,13 +155,13 @@ class ConfigManager:
         try:
             # Configuração mínima
             emergency_config = configparser.ConfigParser()
-            emergency_config.add_section('site')
-            emergency_config.set('site', 'url', '')
-            emergency_config.add_section('credentials')
-            emergency_config.set('credentials', 'email', '')
-            emergency_config.set('credentials', 'password', '')
-            emergency_config.add_section('settings')
-            emergency_config.set('settings', 'headless', 'false')
+            emergency_config.add_section("site")
+            emergency_config.set("site", "url", "")
+            emergency_config.add_section("credentials")
+            emergency_config.set("credentials", "email", "")
+            emergency_config.set("credentials", "password", "")
+            emergency_config.add_section("settings")
+            emergency_config.set("settings", "headless", "false")
 
             self.config = emergency_config
             self.logger.warning("Configuração de emergência criada")
@@ -137,72 +178,31 @@ class ConfigManager:
             for option, default_value in options.items():
                 if not self.config.has_option(section, option):
                     self.config.set(section, option, default_value)
-                    self.logger.debug(f"Valor padrão aplicado: [{section}]{option} = {default_value}")
+                    self.logger.debug(
+                        f"Valor padrão aplicado: [{section}]{option} = {default_value}"
+                    )
 
     def validate_config(self) -> bool:
         """Valida configuração carregada"""
-        warnings = []
-        errors = []
-
         try:
-            # Valida URL
-            url = self.get('site', 'url', '')
-            if url and not self._is_valid_url(url):
-                warnings.append("URL pode não ser válida")
-
-            # Valida email
-            email = self.get('credentials', 'email', '')
-            if email and not self._is_valid_email(email):
-                warnings.append("Formato de email pode ser inválido")
-
-            # Valida horários
-            times_str = self.get('schedule', 'times', '')
-            if times_str:
-                invalid_times = []
-                for time_str in times_str.split(','):
-                    time_str = time_str.strip()
-                    if time_str and not self._is_valid_time(time_str):
-                        invalid_times.append(time_str)
-
-                if invalid_times:
-                    warnings.append(f"Horários inválidos: {', '.join(invalid_times)}")
-
-            # Valida timeout
-            timeout = self.getint('settings', 'wait_timeout', 10)
-            if timeout < 1 or timeout > 60:
-                warnings.append("Timeout deve estar entre 1 e 60 segundos")
-
-            # Log dos resultados
-            if errors:
-                for error in errors:
-                    self.logger.error(f"Erro de configuração: {error}")
-
-            if warnings:
-                for warning in warnings:
-                    self.logger.warning(f"Aviso de configuração: {warning}")
-
-            return len(errors) == 0
-
+            # Coleta dados para validação Pydantic
+            data = {
+                "url": self.get("site", "url", ""),
+                "email": self.get("credentials", "email", ""),
+                "password": self.get("credentials", "password", ""),
+                "wait_timeout": self.getint("settings", "wait_timeout", 10),
+                "times": self.get("schedule", "times", ""),
+            }
+            ConfigSchema(**data)
+            return True
+        except ValidationError as e:
+            for error in e.errors():
+                self.logger.warning(
+                    f"Aviso de configuração ({error['loc'][0]}): {error['msg']}"
+                )
+            return True
         except Exception as e:
             self.logger.error(f"Erro na validação da configuração: {e}")
-            return False
-
-    def _is_valid_url(self, url: str) -> bool:
-        """Valida formato básico de URL"""
-        return url.startswith(('http://', 'https://')) and len(url) > 10
-
-    def _is_valid_email(self, email: str) -> bool:
-        """Valida formato básico de email"""
-        import re
-        pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-        return re.match(pattern, email) is not None
-
-    def _is_valid_time(self, time_str: str) -> bool:
-        """Valida formato de horário HH:MM"""
-        try:
-            hour, minute = map(int, time_str.split(':'))
-            return 0 <= hour <= 23 and 0 <= minute <= 59
-        except ValueError:
             return False
 
     def save_config(self) -> bool:
@@ -212,7 +212,7 @@ class ConfigManager:
             self._create_backup()
 
             # Salva nova configuração
-            with open(self.config_file, 'w', encoding='utf-8') as f:
+            with open(self.config_file, "w", encoding="utf-8") as f:
                 self.config.write(f)
 
             self.logger.info("Configuração salva com sucesso")
@@ -231,6 +231,7 @@ class ConfigManager:
 
                 # Copia arquivo atual
                 import shutil
+
                 shutil.copy2(self.config_file, backup_file)
 
                 # Mantém apenas os 10 backups mais recentes
@@ -292,15 +293,12 @@ class ConfigManager:
         """Exporta configuração para arquivo JSON"""
         try:
             config_data = {
-                'exported_at': datetime.now().isoformat(),
-                'config': self.get_all_config(),
-                'metadata': {
-                    'version': '4.0.0',
-                    'type': 'automation_config'
-                }
+                "exported_at": datetime.now().isoformat(),
+                "config": self.get_all_config(),
+                "metadata": {"version": "4.0.0", "type": "automation_config"},
             }
 
-            with open(filepath, 'w', encoding='utf-8') as f:
+            with open(filepath, "w", encoding="utf-8") as f:
                 json.dump(config_data, f, indent=2, ensure_ascii=False)
 
             self.logger.info(f"Configuração exportada para: {filepath}")
@@ -313,17 +311,17 @@ class ConfigManager:
     def import_config(self, filepath: str) -> bool:
         """Importa configuração de arquivo JSON"""
         try:
-            with open(filepath, 'r', encoding='utf-8') as f:
+            with open(filepath, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-            if 'config' not in data:
+            if "config" not in data:
                 raise ValueError("Arquivo de importação inválido")
 
             # Cria backup antes de importar
             self._create_backup()
 
             # Aplica configuração importada
-            for section, options in data['config'].items():
+            for section, options in data["config"].items():
                 if not self.config.has_section(section):
                     self.config.add_section(section)
                 for option, value in options.items():
@@ -359,14 +357,16 @@ class ConfigManager:
     def get_config_summary(self) -> Dict[str, Any]:
         """Retorna resumo da configuração atual"""
         return {
-            'config_file': str(self.config_file),
-            'backup_dir': str(self.backup_dir),
-            'sections_count': len(self.config.sections()),
-            'sections': list(self.config.sections()),
-            'has_credentials': bool(self.get('credentials', 'email') and self.get('credentials', 'password')),
-            'has_schedule': self.getboolean('schedule', 'enabled', False),
-            'headless_mode': self.getboolean('settings', 'headless', False),
-            'last_backup': self._get_last_backup_time()
+            "config_file": str(self.config_file),
+            "backup_dir": str(self.backup_dir),
+            "sections_count": len(self.config.sections()),
+            "sections": list(self.config.sections()),
+            "has_credentials": bool(
+                self.get("credentials", "email") and self.get("credentials", "password")
+            ),
+            "has_schedule": self.getboolean("schedule", "enabled", False),
+            "headless_mode": self.getboolean("settings", "headless", False),
+            "last_backup": self._get_last_backup_time(),
         }
 
     def _get_last_backup_time(self) -> Optional[str]:

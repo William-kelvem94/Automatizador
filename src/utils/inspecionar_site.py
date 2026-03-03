@@ -5,11 +5,13 @@
 Ferramenta para inspecionar elementos do site de login
 """
 
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 import time
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 def inspecionar_site(url):
     """Abre o site e mostra informações sobre os campos de formulário"""
@@ -19,15 +21,14 @@ def inspecionar_site(url):
 
     # Configurar driver
     options = webdriver.ChromeOptions()
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument('--window-size=1920,1080')
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1920,1080")
 
     try:
         # Primeiro tentar com ChromeDriverManager
         driver = webdriver.Chrome(
-            service=Service(ChromeDriverManager().install()),
-            options=options
+            service=Service(ChromeDriverManager().install()), options=options
         )
     except Exception as e:
         print(f"Erro com ChromeDriverManager: {e}")
@@ -57,11 +58,18 @@ def inspecionar_site(url):
             class_attr = inp.get_attribute("class") or ""
 
             print(f"  [{i+1}] Tipo: {input_type}")
-            if name: print(f"      Name: {name}")
-            if id_attr: print(f"      ID: {id_attr}")
-            if placeholder: print(f"      Placeholder: {placeholder}")
-            if class_attr: print(f"      Class: {class_attr}")
-            print(f"      Seletor: input[type='{input_type}']" + (f"[name='{name}']" if name else ""))
+            if name:
+                print(f"      Name: {name}")
+            if id_attr:
+                print(f"      ID: {id_attr}")
+            if placeholder:
+                print(f"      Placeholder: {placeholder}")
+            if class_attr:
+                print(f"      Class: {class_attr}")
+            print(
+                f"      Seletor: input[type='{input_type}']"
+                + (f"[name='{name}']" if name else "")
+            )
             print()
 
         # Procurar todos os inputs (incluindo hidden)
@@ -77,18 +85,28 @@ def inspecionar_site(url):
             class_attr = inp.get_attribute("class") or ""
 
             print(f"  [{i+1}] {tag_name.upper()}[type='{input_type}']")
-            if name: print(f"      Name: {name}")
-            if id_attr: print(f"      ID: {id_attr}")
-            if placeholder: print(f"      Placeholder: {placeholder}")
-            if class_attr: print(f"      Class: {class_attr}")
+            if name:
+                print(f"      Name: {name}")
+            if id_attr:
+                print(f"      ID: {id_attr}")
+            if placeholder:
+                print(f"      Placeholder: {placeholder}")
+            if class_attr:
+                print(f"      Class: {class_attr}")
 
             # Sugestão de seletor
-            selector = f"{tag_name}[name='{name}']" if name else f"{tag_name}[type='{input_type}']"
+            selector = (
+                f"{tag_name}[name='{name}']"
+                if name
+                else f"{tag_name}[type='{input_type}']"
+            )
             print(f"      Seletor sugerido: {selector}")
             print()
 
         # Procurar botões e links clicáveis
-        buttons = driver.find_elements(By.CSS_SELECTOR, "button, input[type='submit'], a")
+        buttons = driver.find_elements(
+            By.CSS_SELECTOR, "button, input[type='submit'], a"
+        )
         print(f"Encontrados {len(buttons)} elementos clicaveis:")
 
         for i, btn in enumerate(buttons):
@@ -105,10 +123,14 @@ def inspecionar_site(url):
             class_attr = btn.get_attribute("class") or ""
 
             print(f"  [{i+1}] {tag_name.upper()}: '{text}'")
-            if name: print(f"      Name: {name}")
-            if id_attr: print(f"      ID: {id_attr}")
-            if class_attr: print(f"      Class: {class_attr}")
-            if href: print(f"      Link: {href}")
+            if name:
+                print(f"      Name: {name}")
+            if id_attr:
+                print(f"      ID: {id_attr}")
+            if class_attr:
+                print(f"      Class: {class_attr}")
+            if href:
+                print(f"      Link: {href}")
 
             # Sugestão de seletor
             if name:
@@ -138,6 +160,7 @@ def inspecionar_site(url):
         driver.quit()
         print("[OK] Analise concluida!")
 
+
 def main():
     """Função principal"""
     print("[INSPECTOR] INSPECIONADOR DE CAMPOS DE LOGIN")
@@ -145,10 +168,11 @@ def main():
 
     # Ler URL do config
     import configparser
-    config = configparser.ConfigParser()
-    config.read('config.ini')
 
-    url = config.get('SITE', 'url', fallback='')
+    config = configparser.ConfigParser()
+    config.read("config.ini")
+
+    url = config.get("SITE", "url", fallback="")
     if not url:
         print("[ERRO] URL nao configurada no config.ini")
         print("[INFO] Configure a URL na secao [SITE] do arquivo config.ini")
@@ -157,5 +181,6 @@ def main():
     print(f"[INFO] Analisando URL: {url}")
     inspecionar_site(url)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

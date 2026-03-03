@@ -3,9 +3,10 @@ Motor de Navegação Inteligente
 Gerencia instâncias do navegador com configurações otimizadas
 """
 
-import time
 import logging
-from typing import Optional, Dict, Any
+import time
+from typing import Any, Dict, Optional
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -43,46 +44,48 @@ class BrowserEngine:
 
         # Modo de execução
         if self.headless:
-            options.add_argument('--headless=new')  # Novo modo headless
+            options.add_argument("--headless=new")  # Novo modo headless
             self.logger.info("Executando em modo headless")
         else:
             # Configurações para máxima visibilidade
-            options.add_argument('--start-maximized')
-            options.add_argument('--no-sandbox')
-            options.add_argument('--disable-dev-shm-usage')
-            options.add_argument('--disable-background-timer-throttling')
-            options.add_argument('--disable-backgrounding-occluded-windows')
-            options.add_argument('--disable-renderer-backgrounding')
+            options.add_argument("--start-maximized")
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--disable-background-timer-throttling")
+            options.add_argument("--disable-backgrounding-occluded-windows")
+            options.add_argument("--disable-renderer-backgrounding")
             self.logger.info("Executando em modo visual com máxima visibilidade")
 
         # Configurações de performance e estabilidade
-        options.add_argument('--no-default-browser-check')
-        options.add_argument('--disable-web-security')
-        options.add_argument('--disable-features=VizDisplayCompositor')
-        options.add_argument('--disable-ipc-flooding-protection')
-        options.add_argument('--disable-extensions')
-        options.add_argument('--disable-plugins')
-        options.add_argument('--disable-images')  # Para velocidade
-        options.add_argument('--disable-javascript')  # Desabilitado por padrão, habilitado quando necessário
+        options.add_argument("--no-default-browser-check")
+        options.add_argument("--disable-web-security")
+        options.add_argument("--disable-features=VizDisplayCompositor")
+        options.add_argument("--disable-ipc-flooding-protection")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--disable-plugins")
+        options.add_argument("--disable-images")  # Para velocidade
+        options.add_argument(
+            "--disable-javascript"
+        )  # Desabilitado por padrão, habilitado quando necessário
 
         # User agent moderno
         options.add_argument(
-            '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-            'AppleWebKit/537.36 (KHTML, like Gecko) '
-            'Chrome/120.0.0.0 Safari/537.36'
+            "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
         )
 
         # Janela otimizada
-        options.add_argument('--window-size=1366,768')
+        options.add_argument("--window-size=1366,768")
 
         # Perfis e privacidade
-        options.add_argument('--disable-notifications')
-        options.add_argument('--disable-popup-blocking')
-        options.add_argument('--disable-blink-features=AutomationControlled')
+        options.add_argument("--disable-notifications")
+        options.add_argument("--disable-popup-blocking")
+        options.add_argument("--disable-blink-features=AutomationControlled")
 
         # Remover flag de automação
         options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        options.add_experimental_option('useAutomationExtension', False)
+        options.add_experimental_option("useAutomationExtension", False)
 
         return options
 
@@ -93,7 +96,9 @@ class BrowserEngine:
 
         try:
             # Remove webdriver property
-            self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+            self.driver.execute_script(
+                "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+            )
 
             # Configura timeouts
             self.driver.implicitly_wait(10)
@@ -171,14 +176,16 @@ class BrowserEngine:
 
         try:
             return {
-                'url': self.driver.current_url,
-                'title': self.driver.title,
-                'user_agent': self.execute_script_safe("return navigator.userAgent;"),
-                'viewport': self.execute_script_safe("return {width: window.innerWidth, height: window.innerHeight};"),
-                'cookies': len(self.driver.get_cookies()),
-                'forms': len(self.driver.find_elements("tag name", "form")),
-                'links': len(self.driver.find_elements("tag name", "a")),
-                'images': len(self.driver.find_elements("tag name", "img")),
+                "url": self.driver.current_url,
+                "title": self.driver.title,
+                "user_agent": self.execute_script_safe("return navigator.userAgent;"),
+                "viewport": self.execute_script_safe(
+                    "return {width: window.innerWidth, height: window.innerHeight};"
+                ),
+                "cookies": len(self.driver.get_cookies()),
+                "forms": len(self.driver.find_elements("tag name", "form")),
+                "links": len(self.driver.find_elements("tag name", "a")),
+                "images": len(self.driver.find_elements("tag name", "img")),
             }
         except Exception as e:
             self.logger.error(f"Erro ao coletar informações da página: {e}")
